@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>container</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>container</name>
+
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>eu.mf2c-project.cimi</groupId>
+    <artifactId>server-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <installation.dir>/opt/slipstream/cimi</installation.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>eu.mf2c-project.cimi</groupId>
+      <artifactId>server</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>cimi-resources-container</id>
+      <activation>
+        <property>
+          <name>!skipContainers</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.24.0</version>
+            <configuration>
+              <images>
+                <image>
+                  <alias>cimi-server</alias>
+                  <name>mf2c/cimi-server:${project.version}</name>
+                  <build>
+                    <from>sixsq/cimi:${slipstream.version}</from>
+                    <optimise>true</optimise>
+                    <assembly>
+                      <targetDir>/</targetDir>
+                      <inline>
+                        <fileSets>
+                          <fileSet>
+                            <directory>target/dependency/lib</directory>
+                            <outputDirectory>${installation.dir}/lib</outputDirectory>
+                            <includes>
+                              <include>*</include>
+                            </includes>
+                          </fileSet>
+                        </fileSets>
+                      </inline>
+                    </assembly>
+                    <workdir>${installation.dir}</workdir>
+                    <cmd>tail -f /dev/null</cmd>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <id>docker-build</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+
+        <executions>
+
+          <execution>
+            <id>copy-dependencies</id>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
+              <stripVersion>false</stripVersion>
+              <stripClassifier>true</stripClassifier>
+              <excludeTypes>pom</excludeTypes>
+              <includeScope>runtime</includeScope>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>
