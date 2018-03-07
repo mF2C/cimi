@@ -28,13 +28,16 @@ in the top-level directory.
 You can turn off the tests or container build by adding the options
 `-DskipTests` and `-DskipContainers`, respectively.
 
+### Push to the mF2C Docker Registry
+
+Once the project has been successfully built, you'll be able to push 
+the created Docker image into the public mF2C Docker Registry:
+
+
+
 ## Running
 
-[Information on running the
-container](https://github.com/slipstream/SlipStreamServer/blob/master/README.md)
-can be found in the
-[slipstream/SlipStreamServer](https://github.com/slipstream/SlipStreamServer)
-repository.
+Have a look at the `_demo` folder for an example on how to run the CIMI server.
 
 ## Contributors
 
