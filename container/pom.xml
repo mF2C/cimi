@@ -21,8 +21,9 @@
   <dependencies>
     <dependency>
       <groupId>eu.mf2c-project.cimi</groupId>
-      <artifactId>server</artifactId>
+      <artifactId>server-dep</artifactId>
       <version>${project.version}</version>
+      <type>pom</type>
     </dependency>
   </dependencies>
 
@@ -94,7 +95,7 @@
           <execution>
             <id>copy-dependencies</id>
             <goals>
-              <goal>copy-dependencies</goal>
+              <goal>copy</goal>
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
@@ -102,6 +103,13 @@
               <stripClassifier>true</stripClassifier>
               <excludeTypes>pom</excludeTypes>
               <includeScope>runtime</includeScope>
+              <artifactItems>
+                <artifact>
+                  <groupId>eu.mf2c-project.cimi</groupId>
+                  <artifactId>server</artifactId>
+                  <version>${project.version}</version>
+                </artifact>
+              </artifactItems>
             </configuration>
           </execution>
 
