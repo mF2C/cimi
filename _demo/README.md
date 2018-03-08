@@ -51,8 +51,49 @@ curl -XPOST -k https://localhost/api/session -d @regularUser.json -H 'content-ty
 ```
 
 
+## Testing new changes
 
+If you've added new resources to CIMI and want to test them:
 
+1. build the project - go to the root folder and
+
+`mvn clean install`
+
+on the ouput you should see something like 
+
+```
+[INFO] DOCKER> [mf2c/cimi-server:1.0.0-SNAPSHOT] "cimi-server": Created docker-build.tar in 171 milliseconds
+[INFO] DOCKER> [mf2c/cimi-server:1.0.0-SNAPSHOT] "cimi-server": Built image sha256:596b0
+[INFO] DOCKER> [mf2c/cimi-server:1.0.0-SNAPSHOT] "cimi-server": Removed old image sha256:d245c
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] server parent ...................................... SUCCESS [  0.762 s]
+[INFO] server dep ......................................... SUCCESS [ 15.424 s]
+[INFO] container .......................................... SUCCESS [  4.195 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+```
+
+2. find the docker-compose file
+
+`cd _demo`
+
+3. run it
+
+`docker-compose up`
+
+4. after a while you can find your new resources listed at `https://localhost/api/cloud-entry-point`
+
+5. make a PR to merge your new changes to master
+
+6. re-build everything in master, and push the generated Docker Image into the mF2C Registry
+
+```bash
+cd container
+mvn -Ddocker.username=YOUR_DOCKER_USERNAME -Ddocker.password=YOUR_DOCKER_PWD docker:push
+```
 
 
 
