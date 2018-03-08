@@ -39,7 +39,10 @@ You can turn off the tests or container build by adding the options
 Once the project has been successfully built, you'll be able to push 
 the created Docker image into the public mF2C Docker Registry:
 
-
+```bash
+cd container
+mvn -Ddocker.username=YOUR_DOCKER_USERNAME -Ddocker.password=YOUR_DOCKER_PWD docker:push
+```
 
 ## Running
 
