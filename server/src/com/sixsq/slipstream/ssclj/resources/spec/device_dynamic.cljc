@@ -20,17 +20,17 @@
 (s/def :cimi.device_dynamic/throughput_info_wifi #{})
 (s/def :cimi.device_dynamic/category (su/only-keys :req-un [:cimi.device_dynamic/device_id
 						     :cimi.device_dynamic/isLeader
-                 :cimi.device_dynamic/created_on
+                 				     :cimi.device_dynamic/created_on
 						     :cimi.device_dynamic/available_RAM_size_in_MBs
 						     :cimi.device_dynamic/available_RAM_in_percentage
-                 :cimi.device_dynamic/available_Storage_size_in_MBs
-                 :cimi.device_dynamic/available_Storage_in_percentage
-                 :cimi.device_dynamic/power_remaining_status
-                 :cimi.device_dynamic/remaining_power_info_in_seconds
+                 				     :cimi.device_dynamic/available_Storage_size_in_MBs
+                 				     :cimi.device_dynamic/available_Storage_in_percentage
+                 				     :cimi.device_dynamic/power_remaining_status
+                 				     :cimi.device_dynamic/remaining_power_info_in_seconds
 						     :cimi.device_dynamic/ethernet_address
 						     :cimi.device_dynamic/ethernet_address
-                 :cimi.device_dynamic/throughput_info_ethernet
-                 :cimi.device_dynamic/throughput_info_wifi]))
+                 				     :cimi.device_dynamic/throughput_info_ethernet
+                 				     :cimi.device_dynamic/throughput_info_wifi]))
 (s/def :cimi/device_dynamic
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
