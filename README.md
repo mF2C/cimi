@@ -1,3 +1,9 @@
+# General Documentation
+ - http://ssapi.sixsq.com/#cimi-api
+ - https://repository.atosresearch.eu/owncloud/index.php/apps/files/?dir=%2FmF2C%2FWorking%20Folders%2FWP4%20mF2C%20Gearbox%20block%20design%2FD4.7%2FCIMI_UserGuide_Demo
+
+*Environment setup for building*: http://ssdocs.sixsq.com/en/latest/developer_guide/dependencies.html
+
 # mF2C CIMI Server
 
 The CIMI server for the mF2C project.  This project compiles the mF2C
@@ -33,7 +39,10 @@ You can turn off the tests or container build by adding the options
 Once the project has been successfully built, you'll be able to push 
 the created Docker image into the public mF2C Docker Registry:
 
-
+```bash
+cd container
+mvn -Ddocker.username=YOUR_DOCKER_USERNAME -Ddocker.password=YOUR_DOCKER_PWD docker:push
+```
 
 ## Running
 

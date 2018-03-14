@@ -40,4 +40,4 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
         
       # build
-      - run: mvn clean install
+      - run: mvn clean install -DskipContainers

@@ -9,24 +9,6 @@
         "state": "ACTIVE",
         "organization": "mF2C",
         "lastName": "User",
-        "acl": {
-            "owner": {
-                "principal": "ADMIN",
-                "type": "ROLE"
-            },
-            "rules": [
-                {
-                    "principal": "super",
-                    "right": "MODIFY",
-                    "type": "USER"
-                },
-                {
-                    "principal": "ADMIN",
-                    "right": "ALL",
-                    "type": "ROLE"
-                }
-            ]
-        },
         "resourceURI": "http://sixsq.com/slipstream/1/User",
         "isSuperUser": false
     }
