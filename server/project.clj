@@ -1,5 +1,5 @@
 (def +version+ "1.0.0-SNAPSHOT")
-(def +slipstream-version+ "3.47-SNAPSHOT")
+(def +slipstream-version+ "3.48-SNAPSHOT")
 
 (defproject eu.mf2c-project.cimi/server "1.0.0-SNAPSHOT"
 
