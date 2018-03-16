@@ -22,10 +22,10 @@
 (s/def :cimi/service
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
-                         :cimi.common/acl
                          :cimi.service/category]
                 :opt-un [:cimi.common/created
                          :cimi.common/updated
+                         :cimi.common/acl
                          :cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
