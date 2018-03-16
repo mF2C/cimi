@@ -1,16 +1,17 @@
-(ns com.sixsq.slipstream.ssclj.resources.profile
+(ns
+  com.sixsq.slipstream.ssclj.resources.service-instance
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.profile]
+    [com.sixsq.slipstream.ssclj.resources.spec.service-instance]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-tag :profiles)
-(def ^:const resource-name "Profile")
+(def ^:const resource-name "ServiceInstance")    
+(def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "ProfileCollection")
+(def ^:const collection-name "ServiceInstanceCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))
@@ -31,7 +32,7 @@
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/profile))
+(def validate-fn (u/create-spec-validation-fn :cimi/service-instance))
 (defmethod crud/validate
   resource-uri
   [resource]

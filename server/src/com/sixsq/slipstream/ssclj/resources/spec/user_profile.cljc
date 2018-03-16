@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.profile
+(ns com.sixsq.slipstream.ssclj.resources.spec.user-profile
   (:require
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
@@ -19,23 +19,23 @@
 ; }
 
 
-(s/def :cimi.profile/user_id :cimi.core/nonblank-string)      ; user
-(s/def :cimi.profile/id_key :cimi.core/nonblank-string)
-(s/def :cimi.profile/email :cimi.core/email)
-(s/def :cimi.profile/service_consumer boolean?)
-(s/def :cimi.profile/resource_contributor boolean?)
+(s/def :cimi.user-profile/user_id :cimi.core/nonblank-string)      ; user
+(s/def :cimi.user-profile/id_key :cimi.core/nonblank-string)
+(s/def :cimi.user-profile/email :cimi.core/email)
+(s/def :cimi.user-profile/service_consumer boolean?)
+(s/def :cimi.user-profile/resource_contributor boolean?)
 
 
-(s/def :cimi/profile
+(s/def :cimi/user-profile
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.common/acl
-                         ; profile
-                         :cimi.profile/user_id
-                         :cimi.profile/id_key
-                         :cimi.profile/email
-                         :cimi.profile/service_consumer
-                         :cimi.profile/resource_contributor]
+                         ; user-profile
+                         :cimi.user-profile/user_id
+                         :cimi.user-profile/id_key
+                         :cimi.user-profile/email
+                         :cimi.user-profile/service_consumer
+                         :cimi.user-profile/resource_contributor]
                 :opt-un [:cimi.common/created               ;; FIXME: should be required
                          :cimi.common/updated               ;; FIXME: should be required
                          :cimi.common/name

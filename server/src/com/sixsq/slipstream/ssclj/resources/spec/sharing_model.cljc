@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.sharingmodel
+(ns com.sixsq.slipstream.ssclj.resources.spec.sharing-model
   (:require
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
@@ -22,29 +22,29 @@
 ; }
 
 
-(s/def :cimi.sharingmodel/user_id :cimi.core/nonblank-string)      ; user
-(s/def :cimi.sharingmodel/max_apps pos-int?)
-(s/def :cimi.sharingmodel/gps_allowed boolean?)
-(s/def :cimi.sharingmodel/max_cpu_usage pos-int?)
-(s/def :cimi.sharingmodel/max_memory_usage pos-int?)
-(s/def :cimi.sharingmodel/max_storage_usage pos-int?)
-(s/def :cimi.sharingmodel/max_bandwidth_usage pos-int?)
-(s/def :cimi.sharingmodel/battery_limit pos-int?)
+(s/def :cimi.sharing-model/user_id :cimi.core/nonblank-string)      ; user
+(s/def :cimi.sharing-model/max_apps pos-int?)
+(s/def :cimi.sharing-model/gps_allowed boolean?)
+(s/def :cimi.sharing-model/max_cpu_usage pos-int?)
+(s/def :cimi.sharing-model/max_memory_usage pos-int?)
+(s/def :cimi.sharing-model/max_storage_usage pos-int?)
+(s/def :cimi.sharing-model/max_bandwidth_usage pos-int?)
+(s/def :cimi.sharing-model/battery_limit pos-int?)
 
 
-(s/def :cimi/sharingmodel
+(s/def :cimi/sharing-model
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.common/acl
-                         ; sharingmodel
-                         :cimi.sharingmodel/user_id
-                         :cimi.sharingmodel/max_apps
-                         :cimi.sharingmodel/gps_allowed
-                         :cimi.sharingmodel/max_cpu_usage
-                         :cimi.sharingmodel/max_memory_usage
-                         :cimi.sharingmodel/max_storage_usage
-                         :cimi.sharingmodel/max_bandwidth_usage
-                         :cimi.sharingmodel/battery_limit]
+                         ; sharing-model
+                         :cimi.sharing-model/user_id
+                         :cimi.sharing-model/max_apps
+                         :cimi.sharing-model/gps_allowed
+                         :cimi.sharing-model/max_cpu_usage
+                         :cimi.sharing-model/max_memory_usage
+                         :cimi.sharing-model/max_storage_usage
+                         :cimi.sharing-model/max_bandwidth_usage
+                         :cimi.sharing-model/battery_limit]
                 :opt-un [:cimi.common/created               ;; FIXME: should be required
                          :cimi.common/updated               ;; FIXME: should be required
                          :cimi.common/name

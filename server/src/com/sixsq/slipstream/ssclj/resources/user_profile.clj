@@ -1,16 +1,16 @@
-(ns com.sixsq.slipstream.ssclj.resources.sharingmodel
+(ns com.sixsq.slipstream.ssclj.resources.user-profile
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.sharingmodel]
+    [com.sixsq.slipstream.ssclj.resources.spec.user-profile]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-tag :sharingmodels)
-(def ^:const resource-name "SharingModel")
+(def ^:const resource-name "UserProfile")
+(def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "SharingModelCollection")
+(def ^:const collection-name "UserProfileCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))
@@ -31,7 +31,7 @@
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/sharingmodel))
+(def validate-fn (u/create-spec-validation-fn :cimi/user-profile))
 (defmethod crud/validate
   resource-uri
   [resource]
