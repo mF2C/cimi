@@ -11,7 +11,6 @@ services:
     ports:
      - "80:80"
      - "443:443"
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
     container_name: elasticsearch
@@ -31,25 +30,11 @@ services:
     restart: always
     ports:
      - "5601:5601"
-  rc:
-    image: sixsq/ring-container:3.47-SNAPSHOT
-    expose:
-     - "5000"
-    volumes:
-     - ringcontainer:/opt/slipstream/ring-container
-     - ringcontainerexample:/opt/slipstream/ring-example
   cimi:
-    image: mf2c/cimi-server:1.0.0-SNAPSHOT
+    image: mf2c/cimi-server:1.0.0
     expose:
      - "8201"
     labels:
      - "traefik.enable=true"
      - "traefik.backend=cimi"
      - "traefik.frontend.rule=PathPrefix:/,/"
-    volumes:
-     - ringcontainer:/opt/slipstream/ring-container
-     - ringcontainerexample:/opt/slipstream/ring-example
-
-volumes:
-  ringcontainer: {}
-  ringcontainerexample: {}
