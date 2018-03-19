@@ -20,21 +20,11 @@
                              :type      "ROLE"}
                      :rules [{:principal "USER"
                               :type      "ROLE"
-                              :right     "ALL"}]})
-
-(defn create-acl []
-  {:owner {:principal "ADMIN"
-           :type      "ROLE"}
-   :rules [{:principal "USER"
-            :type      "ROLE"
-            :right     "ALL"}]})
+                              :right     "MODIFY"}]})
 
 (defmethod crud/add-acl resource-uri
-  [{:keys [acl] :as resource} request]
-  (assoc
-   resource
-   :acl
-   (or acl (create-acl))))
+  [resource request]
+  (a/add-acl resource request))
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
