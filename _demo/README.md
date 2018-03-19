@@ -95,5 +95,129 @@ cd container
 mvn -Ddocker.username=YOUR_DOCKER_USERNAME -Ddocker.password=YOUR_DOCKER_PWD docker:push
 ```
 
+# Examples
+
+## The "service" resource
+
+After creating a session, the user can submit a **service** like this:
+
+```bash
+cat >>service.json <<EOF
+{
+    "name": "EMS",
+    "description": "Emergency Management System",
+    "category": {
+        "cpu": "low",
+        "memory": "low",
+        "storage": "low",
+        "inclinometer": true,
+        "temperature": true,
+        "jammer": true,
+        "location": true
+    }
+}
+EOF
+```
+
+Nothing is there yet:
+`curl -XGET -k https://localhost/api/service --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "count" : 0,
+  "acl" : {
+    "owner" : {
+      "principal" : "ADMIN",
+      "type" : "ROLE"
+    },
+    "rules" : [ {
+      "principal" : "USER",
+      "type" : "ROLE",
+      "right" : "MODIFY"
+    } ]
+  },
+  "resourceURI" : "http://schemas.dmtf.org/cimi/2/ServiceCollection",
+  "id" : "service",
+  "operations" : [ {
+    "rel" : "add",
+    "href" : "service"
+  } ],
+  "services" : [ ]
+}
+```
+
+Let's submit the above service:
+`curl -XPOST -k https://localhost/api/service -d @service.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "status" : 201,
+  "message" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d created",
+  "resource-id" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+}
+```
+Double check it is there, and it is owned by the user:
+`curl -XGET -k https://localhost/api/service --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "count" : 1,
+  "acl" : {
+    "owner" : {
+      "principal" : "ADMIN",
+      "type" : "ROLE"
+    },
+    "rules" : [ {
+      "principal" : "USER",
+      "type" : "ROLE",
+      "right" : "MODIFY"
+    } ]
+  },
+  "resourceURI" : "http://schemas.dmtf.org/cimi/2/ServiceCollection",
+  "id" : "service",
+  "operations" : [ {
+    "rel" : "add",
+    "href" : "service"
+  } ],
+  "services" : [ {
+    "description" : "Emergency Management System",
+    "category" : {
+      "cpu" : "low",
+      "memory" : "low",
+      "storage" : "low",
+      "inclinometer" : true,
+      "temperature" : true,
+      "jammer" : true,
+      "location" : true
+    },
+    "updated" : "2018-03-19T10:17:26.487Z",
+    "name" : "EMS",
+    "created" : "2018-03-19T10:17:26.487Z",
+    "id" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d",
+    "acl" : {
+      "owner" : {
+        "principal" : "testuser",
+        "type" : "USER"
+      },
+      "rules" : [ {
+        "type" : "ROLE",
+        "principal" : "ADMIN",
+        "right" : "ALL"
+      } ]
+    },
+    "operations" : [ {
+      "rel" : "edit",
+      "href" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+    }, {
+      "rel" : "delete",
+      "href" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+    } ],
+    "resourceURI" : "http://schemas.dmtf.org/cimi/2/Service"
+  } ]
+}
+```
+
+Finally, the above service can be inspected at `curl -XGET -k https://localhost/api/service/95e6eb84-b77a-42c1-822f-bf3523bdec2d --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
 
 
