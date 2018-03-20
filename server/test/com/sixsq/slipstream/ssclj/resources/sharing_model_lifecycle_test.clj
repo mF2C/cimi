@@ -46,7 +46,7 @@
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
-        ;(ltu/is-status 403)
+        (ltu/is-status 403)
     )
 
     ;; create a callback as an admin
@@ -54,16 +54,16 @@
           resource-url          (u/de-camelcase resource-name)
           create-test-callback  {:id                    (str resource-url "/sharing-model-resource")
                                  :resourceURI           base-uri
-                                 :acl                   {:owner {:principal "ADMIN"
-                                                                 :type      "ROLE"}
-                                                         :rules [{:principal "ADMIN"
-                                                                  :type      "ROLE"
-                                                                  :right     "ALL"}]}
+                                ;  :acl                   {:owner {:principal "ADMIN"
+                                ;                                  :type      "ROLE"}
+                                ;                          :rules [{:principal "ADMIN"
+                                ;                                   :type      "ROLE"
+                                ;                                   :right     "ALL"}]}
                                                                  ;{:principal "ANON"
                                                                   ;:type      "ROLE"
                                                                   ;:right     "MODIFY"}]}
                                  ;; sharing model fields
-                                 :user_id              "user/1230958abdef"
+                                ;  :user_id              "user/1230958abdef"
                                  :max_apps             2
                                  :gps_allowed          false
                                  :max_cpu_usage        50
