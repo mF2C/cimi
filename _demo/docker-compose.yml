@@ -39,7 +39,7 @@ services:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
   cimi:
-    image: mf2c/cimi-server:1.0.0
+    image: mf2c/cimi-server:1.0.2-SNAPSHOT
     expose:
      - "8201"
     labels:

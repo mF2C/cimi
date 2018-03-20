@@ -220,4 +220,63 @@ Double check it is there, and it is owned by the user:
 Finally, the above service can be inspected at `curl -XGET -k https://localhost/api/service/95e6eb84-b77a-42c1-822f-bf3523bdec2d --cookie-jar ~/cookies -b ~/cookies -sS -k`
 
 
+## The "sharing-model" resource
+
+After creating a session,
+```bash
+cat >>sharingModel.json <<EOF
+{
+    "description": "example of a sharing model resource instance",
+    "max_apps": 3,
+    "gps_allowed": false,
+    "max_cpu_usage": 1,
+    "max_memory_usage": 1024,
+    "max_storage_usage": 500,
+    "max_bandwidth_usage": 20,
+    "battery_limit": 10
+}
+EOF
+```
+
+Let's submit the above:
+`curl -XPOST -k https://localhost/api/sharing-model -d @sharingModel.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+Double check it is there:
+`curl -XGET -k https://localhost/api/sharing-model --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+
+## The "service-instance" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>serviceInstance.json <<EOF
+{
+    "service_id": {"href": "service/asasdasd"},
+    "agreement_id": {"href": "sla/asdasdasd"},
+    "status": "running",
+    "agents": [
+        {
+          "agent": {"href": "device/testdevice"}, 
+          "port": 8081, 
+          "container_id": "0938afd12323", 
+          "status": "running", 
+          "num_cpus": 3, 
+          "allow": true
+        }
+    ]
+}
+EOF
+```
+
+## The "user-profile" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>userProfile.json <<EOF
+{
+      "service_consumer": true,
+      "resource_contributor": false
+}
+EOF
+```
 
