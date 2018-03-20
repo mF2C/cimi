@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.serviceinstance-test
+(ns com.sixsq.slipstream.ssclj.resources.spec.service-instance-test
   (:require [clojure.test :refer [deftest are is]]
             [clojure.spec.alpha :as s]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
@@ -6,7 +6,7 @@
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
-(deftest check-serviceinstance-resource-schema
+(deftest check-service-instance-resource-schema
   (let [resource-name             "ServiceInstanceResource"
         resource-url              (u/de-camelcase resource-name)
         resource-uri              (str schema/slipstream-schema-uri resource-name)
@@ -16,7 +16,7 @@
                                    :rules [{:principal "ADMIN"
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
-        serviceinstance-resource  {:id            (str resource-url "/serviceinstance-resource")
+        service-instance-resource  {:id            (str resource-url "/service-instance-resource")
                                   :resourceURI    resource-uri
                                   :created        timestamp
                                   :updated        timestamp
@@ -30,5 +30,5 @@
                                                     :status "running", :container_id "asdasd-asdasda"}
                                                    {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
                                                     :status "running", :container_id "asdasd-hasdagsa"}]}]
-    (is (s/valid? :cimi/serviceinstance serviceinstance-resource))
-    (is (not (s/valid? :cimi/serviceinstance (assoc serviceinstance-resource :bad-field "bla bla bla"))))))
+    (is (s/valid? :cimi/service-instance service-instance-resource))
+    (is (not (s/valid? :cimi/service-instance (assoc service-instance-resource :bad-field "bla bla bla"))))))

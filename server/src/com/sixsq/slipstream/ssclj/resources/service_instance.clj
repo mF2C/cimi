@@ -3,6 +3,7 @@
   (:require
     [com.sixsq.slipstream.ssclj.resources.spec.service-instance]
     [com.sixsq.slipstream.auth.acl :as a]
+    [superstring.core :as str]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]

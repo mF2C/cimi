@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.sharingmodel-test
+(ns com.sixsq.slipstream.ssclj.resources.spec.sharing-model-test
   (:require [clojure.test :refer [deftest are is]]
             [clojure.spec.alpha :as s]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
@@ -6,7 +6,7 @@
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
-(deftest check-sharingmodel-resource-schema
+(deftest check-sharing-model-resource-schema
   (let [resource-name             "SharingModelResource"
         resource-url              (u/de-camelcase resource-name)
         resource-uri              (str schema/slipstream-schema-uri resource-name)
@@ -16,7 +16,7 @@
                                    :rules [{:principal "ADMIN"
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
-        sharingmodel-resource     {:id            (str resource-url "/sharingmodel-resource")
+        sharing-model-resource     {:id            (str resource-url "/sharing-model-resource")
                                   :resourceURI    resource-uri
                                   :created        timestamp
                                   :updated        timestamp
@@ -30,5 +30,5 @@
                                   :max_storage_usage    50
                                   :max_bandwidth_usage  50
                                   :battery_limit        50}]
-    (is (s/valid? :cimi/sharingmodel sharingmodel-resource))
-    (is (not (s/valid? :cimi/sharingmodel (assoc sharingmodel-resource :bad-field "bla bla bla"))))))
+    (is (s/valid? :cimi/sharing-model sharing-model-resource))
+    (is (not (s/valid? :cimi/sharing-model (assoc sharing-model-resource :bad-field "bla bla bla"))))))

@@ -1,11 +1,11 @@
-(ns com.sixsq.slipstream.ssclj.resources.sharingmodel-lifecycle-test
+(ns com.sixsq.slipstream.ssclj.resources.user-profile-lifecycle-test
   (:require
     [clojure.test :refer :all]
     [clojure.data.json :as json]
     [peridot.core :refer :all]
     [com.sixsq.slipstream.ssclj.app.params :as p]
     [com.sixsq.slipstream.ssclj.middleware.authn-info-header :refer [authn-info-header]]
-    [com.sixsq.slipstream.ssclj.resources.sharingmodel :as sharingmodel]
+    [com.sixsq.slipstream.ssclj.resources.user-profile :as user-profile]
     [com.sixsq.slipstream.ssclj.resources.lifecycle-test-utils :as ltu]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
@@ -13,7 +13,7 @@
 
 (use-fixtures :each ltu/with-test-server-fixture)
 
-(def base-uri (str p/service-context (u/de-camelcase sharingmodel/resource-url)))
+(def base-uri (str p/service-context (u/de-camelcase user-profile/resource-url)))
 
 (deftest lifecycle
   (let [session (-> (ltu/ring-app)
@@ -50,9 +50,9 @@
     )
 
     ;; create a callback as an admin
-    (let [resource-name         "SharingModelResource"
+    (let [resource-name         "UserProfileResource"
           resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id                    (str resource-url "/sharingmodel-resource")
+          create-test-callback  {:id                    (str resource-url "/user-profile-resource")
                                  :resourceURI           base-uri
                                  :acl                   {:owner {:principal "ADMIN"
                                                                  :type      "ROLE"}
@@ -62,15 +62,11 @@
                                                                  ;{:principal "ANON"
                                                                   ;:type      "ROLE"
                                                                   ;:right     "MODIFY"}]}
-                                 ;; sharing model fields
-                                 :user_id              "user/1230958abdef"
-                                 :max_apps             2
-                                 :gps_allowed          false
-                                 :max_cpu_usage        50
-                                 :max_memory_usage     50
-                                 :max_storage_usage    50
-                                 :max_bandwidth_usage  50
-                                 :battery_limit        50}
+                                 :user_id               "user/1230958abdef"
+                                 :id_key                "asdasdasdasdasd"
+                                 :email                 "email@gmail.com"
+                                 :service_consumer      false
+                                 :resource_contributor  false}
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post

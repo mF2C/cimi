@@ -1,11 +1,11 @@
-(ns com.sixsq.slipstream.ssclj.resources.serviceinstance-lifecycle-test
+(ns com.sixsq.slipstream.ssclj.resources.service-instance-lifecycle-test
   (:require
     [clojure.test :refer :all]
     [clojure.data.json :as json]
     [peridot.core :refer :all]
     [com.sixsq.slipstream.ssclj.app.params :as p]
     [com.sixsq.slipstream.ssclj.middleware.authn-info-header :refer [authn-info-header]]
-    [com.sixsq.slipstream.ssclj.resources.serviceinstance :as serviceinstance]
+    [com.sixsq.slipstream.ssclj.resources.service-instance :as service-instance]
     [com.sixsq.slipstream.ssclj.resources.lifecycle-test-utils :as ltu]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
@@ -13,7 +13,7 @@
 
 (use-fixtures :each ltu/with-test-server-fixture)
 
-(def base-uri (str p/service-context (u/de-camelcase serviceinstance/resource-url)))
+(def base-uri (str p/service-context (u/de-camelcase service-instance/resource-url)))
 
 (deftest lifecycle
   (let [session (-> (ltu/ring-app)
@@ -52,7 +52,7 @@
     ;; create a callback as an admin
     (let [resource-name         "ServiceInstanceResource"
           resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id                    (str resource-url "/serviceinstance-resource")
+          create-test-callback  {:id                    (str resource-url "/service-instance-resource")
                                  :resourceURI           base-uri
                                  :acl                   {:owner {:principal "ADMIN"
                                                                  :type      "ROLE"}
