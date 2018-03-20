@@ -23,11 +23,12 @@
                               :right     "ALL"}
                              {:principal "USER"
                               :type      "ROLE"
-                              :right     "ALL"}
-                             {:principal "ANON"
-                              :type      "ROLE"
-                              :right     "ALL"}]})
+                              :right     "MODIFY"}]})
 
+
+(defmethod crud/add-acl resource-uri
+  [resource request]
+  (a/add-acl resource request))
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;

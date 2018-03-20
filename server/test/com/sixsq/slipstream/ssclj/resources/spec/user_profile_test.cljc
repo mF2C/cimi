@@ -22,9 +22,6 @@
                               :updated        timestamp
                               :acl            valid-acl
                               ;; profiling fields
-                              :user_id                "user/1230958abdef"
-                              :id_key                 "asdasdasdasdasd"
-                              :email                  "email@gmail.com"
                               :service_consumer       false
                               :resource_contributor   false}]
     (is (s/valid? :cimi/user-profile user-profile-resource))

@@ -46,7 +46,7 @@
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
-        ;(ltu/is-status 403)
+        (ltu/is-status 403)
     )
 
     ;; create a callback as an admin
@@ -54,17 +54,14 @@
           resource-url          (u/de-camelcase resource-name)
           create-test-callback  {:id                    (str resource-url "/user-profile-resource")
                                  :resourceURI           base-uri
-                                 :acl                   {:owner {:principal "ADMIN"
-                                                                 :type      "ROLE"}
-                                                         :rules [{:principal "ADMIN"
-                                                                  :type      "ROLE"
-                                                                  :right     "ALL"}]}
+                                ;  :acl                   {:owner {:principal "ADMIN"
+                                ;                                  :type      "ROLE"}
+                                ;                          :rules [{:principal "ADMIN"
+                                ;                                   :type      "ROLE"
+                                ;                                   :right     "ALL"}]}
                                                                  ;{:principal "ANON"
                                                                   ;:type      "ROLE"
                                                                   ;:right     "MODIFY"}]}
-                                 :user_id               "user/1230958abdef"
-                                 :id_key                "asdasdasdasdasd"
-                                 :email                 "email@gmail.com"
                                  :service_consumer      false
                                  :resource_contributor  false}
           resp-test             (-> session-admin

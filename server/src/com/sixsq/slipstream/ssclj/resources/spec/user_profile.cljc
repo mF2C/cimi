@@ -31,14 +31,11 @@
                          :cimi.common/resourceURI
                          :cimi.common/acl
                          ; user-profile
-                         :cimi.user-profile/user_id
-                         :cimi.user-profile/id_key
-                         :cimi.user-profile/email
                          :cimi.user-profile/service_consumer
-                         :cimi.user-profile/resource_contributor]
-                :opt-un [:cimi.common/created               ;; FIXME: should be required
-                         :cimi.common/updated               ;; FIXME: should be required
-                         :cimi.common/name
+                         :cimi.user-profile/resource_contributor
+                         :cimi.common/created
+                         :cimi.common/updated]
+                :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
                          :cimi.common/operations]))
