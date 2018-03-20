@@ -18,6 +18,14 @@
 (s/def :cimi.device_dynamic/wifi_address #{})
 (s/def :cimi.device_dynamic/throughput_info_ethernet #{})
 (s/def :cimi.device_dynamic/throughput_info_wifi #{})
+(s/def :cimi.device_dynamic/inclinometer? boolean?)
+(s/def :cimi.device_dynamic/temperature? boolean?)
+(s/def :cimi.device_dynamic/jammer? boolean?)
+(s/def :cimi.device_dynamic/location? boolean?)
+(s/def :cimi.device_dynamic/ambulance? boolean?)
+(s/def :cimi.device_dynamic/fire_car? boolean?)
+(s/def :cimi.device_dynamic/traffic_light? boolean?)
+(s/def :cimi.device_dynamic/street_light? boolean?)
 (s/def :cimi.device_dynamic/category (su/only-keys :req-un [:cimi.device_dynamic/device_id
 						     :cimi.device_dynamic/isLeader
                  				     :cimi.device_dynamic/created_on
@@ -30,7 +38,15 @@
 						     :cimi.device_dynamic/ethernet_address
 						     :cimi.device_dynamic/ethernet_address
                  				     :cimi.device_dynamic/throughput_info_ethernet
-                 				     :cimi.device_dynamic/throughput_info_wifi]))
+                 				     :cimi.device_dynamic/throughput_info_wifi
+					             :cimi.device_dynamic/inclinometer
+                                                     :cimi.device_dynamic/temperature
+                                                     :cimi.device_dynamic/jammer
+						     :cimi.devive_dynamic/location
+						     :cimi.devive_dynamic/ambulance
+						     :cimi.devive_dynamic/fire_car
+						     :cimi.devive_dynamic/traffic_light
+                                                     :cimi.devive_dynamic/street_light]))
 (s/def :cimi/device_dynamic
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
