@@ -7,7 +7,7 @@
 
 (s/def :cimi.device_static/device_id #{})   			'''Getting input from Id table'''
 (s/def :cimi.device_static/created_on #{})
-(s/def :cimi.device_static/isLeader? boolean?)			'''Getting input from Leader information table'''
+(s/def :cimi.device_static/isLeader {"False"})			'''Initially the Leader information should remain as False'''
 (s/def :cimi.device_static/os #{})
 (s/def :cimi.device_static/cpu #{})
 (s/def :cimi.device_static/memory #{})
@@ -16,14 +16,6 @@
 (s/def :cimi.device_static/networking_standards #{})
 (s/def :cimi.device_static/ethernet_address #{})
 (s/def :cimi.device_static/wifi_address #{})
-(s/def :cimi.device_static/inclinometer? boolean?)
-(s/def :cimi.device_static/temperature? boolean?)
-(s/def :cimi.device_static/jammer? boolean?)
-(s/def :cimi.device_static/location? boolean?)
-(s/def :cimi.device_static/ambulance? boolean?)
-(s/def :cimi.device_static/fire_car? boolean?)
-(s/def :cimi.device_static/traffic_light? boolean?)
-(s/def :cimi.device_static/street_light? boolean?)
 (s/def :cimi.device_static/category (su/only-keys :req-un [:cimi.device_static/device_id
 						     :cimi.device_static/created_on
 						     :cimi.device_static/isLeader
@@ -34,15 +26,7 @@
 						     :cimi.device_static/power_plugged_information
 						     :cimi.device_static/networking_standards
 						     :cimi.device_static/ethernet_address
-						     :cimi.device_static/ethernet_address
-                                                     :cimi.device_static/inclinometer
-                                                     :cimi.device_static/temperature
-                                                     :cimi.device_static/jammer
-						     :cimi.devive_static/location
-						     :cimi.devive_static/ambulance
-						     :cimi.devive_static/fire_car
-						     :cimi.devive_static/traffic_light
-                                                     :cimi.devive_static/street_light]))
+						     :cimi.device_static/ethernet_address]))
 (s/def :cimi/device_static
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
