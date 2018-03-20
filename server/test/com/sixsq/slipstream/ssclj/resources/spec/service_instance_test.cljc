@@ -24,11 +24,11 @@
                                   ;; service instance fields
                                   :service_id     {:href "service/1230958abdef"}
                                   :agreement_id   {:href "agreement/1230958abdef"}
-                                  :user_id        {:href "user/1230958abdef"}
+                                  ; :user_id        {:href "user/1230958abdef"}
                                   :status         "running"
                                   :agents         [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
-                                                    :status "running", :container_id "asdasd-asdasda"}
+                                                    :status "running", :container_id "asdasd-asdasda", :allow true}
                                                    {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
-                                                    :status "running", :container_id "asdasd-hasdagsa"}]}]
+                                                    :status "running", :container_id "asdasd-hasdagsa", :allow false}]}]
     (is (s/valid? :cimi/service-instance service-instance-resource))
     (is (not (s/valid? :cimi/service-instance (assoc service-instance-resource :bad-field "bla bla bla"))))))

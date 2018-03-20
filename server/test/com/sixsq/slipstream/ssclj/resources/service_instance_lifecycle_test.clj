@@ -46,7 +46,7 @@
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
-        ;(ltu/is-status 403)
+        (ltu/is-status 403)
     )
 
     ;; create a callback as an admin
@@ -54,20 +54,20 @@
           resource-url          (u/de-camelcase resource-name)
           create-test-callback  {:id                    (str resource-url "/service-instance-resource")
                                  :resourceURI           base-uri
-                                 :acl                   {:owner {:principal "ADMIN"
-                                                                 :type      "ROLE"}
-                                                         :rules [{:principal "ADMIN"
-                                                                  :type      "ROLE"
-                                                                  :right     "ALL"}]}
+                                ;  :acl                   {:owner {:principal "ADMIN"
+                                ;                                  :type      "ROLE"}
+                                ;                          :rules [{:principal "ADMIN"
+                                ;                                   :type      "ROLE"
+                                ;                                   :right     "ALL"}]}
                                  ;; service instance fields
                                  :service_id     {:href "service/1230958abdef"}
                                  :agreement_id   {:href "agreement/1230958abdef"}
-                                 :user_id        {:href "user/1230958abdef"}
+                                ;  :user_id        {:href "user/1230958abdef"}
                                  :status         "running"
                                  :agents         [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
-                                                   :status "running", :container_id "asdasd-asdasda"}
+                                                   :status "running", :container_id "asdasd-asdasda", :allow true}
                                                   {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
-                                                   :status "running", :container_id "asdasd-hasdagsa"}]}
+                                                   :status "running", :container_id "asdasd-hasdagsa", :allow false}]}
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post

@@ -23,19 +23,21 @@
 
 (s/def :cimi.service-instance/service_id :cimi.common/resource-link)   ; service
 (s/def :cimi.service-instance/agreement_id :cimi.common/resource-link) ; sla
-(s/def :cimi.service-instance/user_id :cimi.common/resource-link)      ; user
+; (s/def :cimi.service-instance/user_id :cimi.common/resource-link)      ; user
 (s/def :cimi.service-instance/status :cimi.core/nonblank-string)
 ; agent fileds:
 (s/def :cimi.service-instance/agent :cimi.common/resource-link)
 (s/def :cimi.service-instance/port pos-int?)
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
+(s/def :cimi.service-instance/allow? boolean?)
 (s/def :cimi.service-instance/agentinfo (su/only-keys :req-un [:cimi.service-instance/agent
                                                               :cimi.service-instance/port
                                                               :cimi.service-instance/status
                                                               :cimi.service-instance/container_id
                                                               ; resources assigned to agent:
-                                                              :cimi.service-instance/num_cpus]))
+                                                              :cimi.service-instance/num_cpus
+                                                              :cimi.service-instance/allow]))
 (s/def :cimi.service-instance/agents (s/coll-of :cimi.service-instance/agentinfo :kind vector? :distinct true))
 
 
@@ -45,12 +47,12 @@
                          :cimi.common/acl
                          :cimi.service-instance/service_id
                          :cimi.service-instance/agreement_id
-                         :cimi.service-instance/user_id
+                        ;  :cimi.service-instance/user_id
                          :cimi.service-instance/status
+                         :cimi.common/created
+                         :cimi.common/updated
                          :cimi.service-instance/agents]
-                :opt-un [:cimi.common/created               ;; FIXME: should be required
-                         :cimi.common/updated               ;; FIXME: should be required
-                         :cimi.common/name
+                :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
                          :cimi.common/operations]))
