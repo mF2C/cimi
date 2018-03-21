@@ -22,6 +22,9 @@
                               :type      "ROLE"
                               :right     "MODIFY"}]})
 
+(defmethod crud/add-acl resource-uri
+  [resource request]
+  (a/add-acl resource request))
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
