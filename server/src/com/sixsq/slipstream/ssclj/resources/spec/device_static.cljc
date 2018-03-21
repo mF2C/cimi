@@ -8,8 +8,8 @@
 (s/def :cimi.device_static/device_id #{URI})   			'''Getting input from Id table'''
 (s/def :cimi.device_static/created_on #{date})
 (s/def :cimi.device_static/isLeader {"False"})			'''Initially the Leader information should remain as False'''
-(s/def :cimi.device_static/os #{string})
-(s/def :cimi.device_static/cpu_manufacturer #{string})
+(s/def :cimi.device_static/os #{String})
+(s/def :cimi.device_static/cpu_manufacturer #{String})
 (s/def :cimi.device_static/cpu_physical_core #{Int})
 (s/def :cimi.device_static/cpu_logical_core #{Int})
 (s/def :cimi.device_static/memory #{Long})
