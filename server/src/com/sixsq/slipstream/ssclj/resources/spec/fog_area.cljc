@@ -25,7 +25,7 @@
 (s/def :cimi.fog_area/avg_no_of_logical_CPU_cores #{Int})
 (s/def :cimi.fog_area/top_device_CPU_logical_CPU_cores #{Int})
 (s/def :cimi.fog_area/lowest_device_CPU_logical_CPU_cores #{Int})
-(s/def :cimi.fog_area/avg_time_of_power_remaining_in_seconds #{})
+(s/def :cimi.fog_area/avg_time_of_power_remaining_in_seconds #{String})
 (s/def :cimi.fog_area/top_device_with_highest_power_remaining_in_seconds #{String})
 (s/def :cimi.fog_area/lowest_device_with_lowest_power_remaining_in_seconds #{String})
 (s/def :cimi.fog_area/inclinometer? boolean?)
