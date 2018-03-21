@@ -17,7 +17,7 @@
 (s/def :cimi.device_dynamic/ethernet_address #{String})
 (s/def :cimi.device_dynamic/wifi_address #{String})
 (s/def :cimi.device_dynamic/throughput_info_ethernet #{String})
-(s/def :cimi.device_dynamic/throughput_info_wifi #{})
+(s/def :cimi.device_dynamic/throughput_info_wifi #{String})
 (s/def :cimi.device_dynamic/inclinometer? boolean?)
 (s/def :cimi.device_dynamic/temperature? boolean?)
 (s/def :cimi.device_dynamic/jammer? boolean?)
@@ -51,10 +51,10 @@
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.common/acl
-                         :cimi.device/category]
-                :opt-un [:cimi.common/created
-                         :cimi.common/updated
-                         :cimi.common/name
+                         :cimi.device/category
+			 :cimi.common/created
+                         :cimi.common/updated]
+                :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
                          :cimi.common/operations]))
