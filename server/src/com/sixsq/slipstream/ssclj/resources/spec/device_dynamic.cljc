@@ -5,18 +5,18 @@
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
-(s/def :cimi.device_dynamic/device_id #{})   			'''Getting input from Id table'''
-(s/def :cimi.device_dynamic/isLeader? boolean?)			'''Getting input from Leader information table'''
-(s/def :cimi.device_dynamic/updated_on #{})
-(s/def :cimi.device_dynamic/available_RAM_size_in_MBs #{})
-(s/def :cimi.device_dynamic/available_RAM_in_percentage #{})
-(s/def :cimi.device_dynamic/available_Storage_size_in_MBs #{})
-(s/def :cimi.device_dynamic/available_Storage_in_percentage #{})
-(s/def :cimi.device_dynamic/power_remaining_status #{})
-(s/def :cimi.device_dynamic/remaining_power_info_in_seconds #{})
-(s/def :cimi.device_dynamic/ethernet_address #{})
-(s/def :cimi.device_dynamic/wifi_address #{})
-(s/def :cimi.device_dynamic/throughput_info_ethernet #{})
+(s/def :cimi.device_dynamic/device_id #{URI})   			'''Getting input from Id table'''
+(s/def :cimi.device_dynamic/isLeader? #{URI})			'''Getting input from Leader information table'''
+(s/def :cimi.device_dynamic/updated_on #{dateTime})
+(s/def :cimi.device_dynamic/available_RAM_size_in_MBs #{Long})
+(s/def :cimi.device_dynamic/available_RAM_in_percentage #{Float})
+(s/def :cimi.device_dynamic/available_Storage_size_in_MBs #{Long})
+(s/def :cimi.device_dynamic/available_Storage_in_percentage #{Float})
+(s/def :cimi.device_dynamic/power_remaining_status #{String})
+(s/def :cimi.device_dynamic/remaining_power_info_in_seconds #{String})
+(s/def :cimi.device_dynamic/ethernet_address #{String})
+(s/def :cimi.device_dynamic/wifi_address #{String})
+(s/def :cimi.device_dynamic/throughput_info_ethernet #{String})
 (s/def :cimi.device_dynamic/throughput_info_wifi #{})
 (s/def :cimi.device_dynamic/inclinometer? boolean?)
 (s/def :cimi.device_dynamic/temperature? boolean?)
