@@ -5,9 +5,9 @@
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
-(s/def :cimi.device_static/device_id #{URI})   			'''Getting input from Id table'''
+(s/def :cimi.device_static/device_id #{URI})   			
 (s/def :cimi.device_static/created_on #{date})
-(s/def :cimi.device_static/isLeader {"False"})			'''Initially the Leader information should remain as False'''
+(s/def :cimi.device_static/isLeader {"False"})			
 (s/def :cimi.device_static/os #{String})
 (s/def :cimi.device_static/cpu_manufacturer #{String})
 (s/def :cimi.device_static/cpu_physical_core #{Int})
