@@ -12,6 +12,7 @@
 (s/def :cimi.device_dynamic/available_RAM_in_percentage pos-float?)
 (s/def :cimi.device_dynamic/available_Storage_size_in_MBs pos-long?)
 (s/def :cimi.device_dynamic/available_Storage_in_percentage pos-float?)
+(s/def :cimi.device_dynamic/available_CPU_in_percentage pos-float?)
 (s/def :cimi.device_dynamic/power_remaining_status pos-string?)
 (s/def :cimi.device_dynamic/remaining_power_info_in_seconds pos-string?)
 (s/def :cimi.device_dynamic/ethernet_address pos-string?)
@@ -35,6 +36,7 @@
 						     :cimi.device_dynamic/available_RAM_in_percentage
                  				     :cimi.device_dynamic/available_Storage_size_in_MBs
                  				     :cimi.device_dynamic/available_Storage_in_percentage
+			                             :cimi.device_dynamic/available_CPU_in_percentage
                  				     :cimi.device_dynamic/power_remaining_status
                  				     :cimi.device_dynamic/remaining_power_info_in_seconds
 						     :cimi.device_dynamic/ethernet_address
