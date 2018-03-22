@@ -18,7 +18,9 @@
 (s/def :cimi.device_static/networking_standards pos-string?)
 (s/def :cimi.device_static/ethernet_address pos-string?)
 (s/def :cimi.device_static/wifi_address pos-string?)
-(s/def :cimi.device_static/category (su/only-keys :req-un [:cimi.device_static/device_id
+
+(s/def :cimi.device_static/ 
+	(su/only-keys :req-un [:cimi.device_static/device_id
 						     :cimi.device_static/created_on
 						     :cimi.device_static/isLeader
 						     :cimi.device_static/os
@@ -31,13 +33,7 @@
 						     :cimi.device_static/networking_standards
 						     :cimi.device_static/ethernet_address
 						     :cimi.device_static/ethernet_address]))
-(s/def :cimi/device_static
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
-                         :cimi.common/acl
-			 :cimi.common/created
-                         :cimi.common/updated
-                         :cimi.device/category]
+
                 :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
