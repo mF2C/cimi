@@ -5,19 +5,19 @@
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
-(s/def :cimi.device_static/device_id #{URI})   			
-(s/def :cimi.device_static/created_on #{date})
+(s/def :cimi.device_static/device_id pos-string?) ; device_id   			
+(s/def :cimi.device_static/created_on pos-date?)
 (s/def :cimi.device_static/isLeader {"False"})			
-(s/def :cimi.device_static/os #{String})
-(s/def :cimi.device_static/cpu_manufacturer #{String})
-(s/def :cimi.device_static/cpu_physical_core #{Int})
-(s/def :cimi.device_static/cpu_logical_core #{Int})
-(s/def :cimi.device_static/memory #{Long})
-(s/def :cimi.device_static/storage #{Long})
+(s/def :cimi.device_static/os pos-string?)
+(s/def :cimi.device_static/cpu_manufacturer pos-string?)
+(s/def :cimi.device_static/cpu_physical_core pos-int?)
+(s/def :cimi.device_static/cpu_logical_core pos-int?)
+(s/def :cimi.device_static/memory pos-long?)
+(s/def :cimi.device_static/storage pos-long?)
 (s/def :cimi.device_static/power_plugged_information? boolean?)
-(s/def :cimi.device_static/networking_standards #{String})
-(s/def :cimi.device_static/ethernet_address #{String})
-(s/def :cimi.device_static/wifi_address #{String})
+(s/def :cimi.device_static/networking_standards pos-string?)
+(s/def :cimi.device_static/ethernet_address pos-string?)
+(s/def :cimi.device_static/wifi_address pos-string?)
 (s/def :cimi.device_static/category (su/only-keys :req-un [:cimi.device_static/device_id
 						     :cimi.device_static/created_on
 						     :cimi.device_static/isLeader
