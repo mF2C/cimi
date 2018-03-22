@@ -4,8 +4,41 @@
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
-; Before publishing the fog area's information, all the agent's information of the corresponding fog area will be retrieve to the Leader agent 
-; Then making some simple aggregation and publish the total capacity of a fog area 
+; Before publishing the fog area's information, all the agent's information of the corresponding fog area will be retrieve to the Leader agent local device
+; Then making some simple aggregation and publish the total capacity of a fog area as following- 
+;{
+;  "fog_area_id": string
+;  "device_id" : string, 
+;  "created_on": date,
+;  "updated_on": dateTime,
+;  "number_of_devices": int,
+;  "total_RAM_in_MBs": long,
+;  "top_device_RAM_in_MBs": long,
+;  "lowest_device_RAM_in_MBs": long,
+;  "total_storage_storage_in_MBs": long,
+;  "top_device_storage_in_MBs": long,
+;  "lowest_device_storage_in_MBs": long,
+;  "avg_processing_capacity_in_percentage": float,
+;  "top_device_CPU_in_percentage": float,
+;  "lowest_device_CPU_in_percentage": float,
+;  "avg_no_of_physical_CPU_cores": int,
+;  "top_device_CPU_physical_CPU_cores": int,
+;  "lowest_device_CPU_physical_CPU_cores": int,
+;  "avg_no_of_logical_CPU_cores": int,
+;  "top_device_CPU_logical_CPU_cores": int,
+;  "lowest_device_CPU_logical_CPU_cores": int,
+;  "top_device_with_highest_power_remaining_in_seconds": string,
+;  "lowest_device_with_lowest_power_remaining_in_seconds": string,
+;  "inclinometer": boolean,
+;  "temperature": boolean,
+;  "jammer": boolean,
+;  "location": boolean,
+;  "ambulance": boolean,
+;  "fire_car": boolean,
+;  "traffic_light": boolean,
+;  "street_light": boolean
+;}
+;
 
 
 
@@ -29,7 +62,6 @@
 (s/def :cimi.fog_area/avg_no_of_logical_CPU_cores pos-int?)
 (s/def :cimi.fog_area/top_device_CPU_logical_CPU_cores pos-int?)
 (s/def :cimi.fog_area/lowest_device_CPU_logical_CPU_cores pos-int?)
-(s/def :cimi.fog_area/avg_time_of_power_remaining_in_seconds pos-int?)
 (s/def :cimi.fog_area/top_device_with_highest_power_remaining_in_seconds pos-string?)
 (s/def :cimi.fog_area/lowest_device_with_lowest_power_remaining_in_seconds pos-string?)
 (s/def :cimi.fog_area/inclinometer boolean?)
