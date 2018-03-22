@@ -1,15 +1,15 @@
 (ns
-  com.sixsq.slipstream.ssclj.resources.fog_area
+  com.sixsq.slipstream.ssclj.resources.fog-area
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.fog_area]
+    [com.sixsq.slipstream.ssclj.resources.spec.fog-area]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-tag :fog_area)
-(def ^:const resource-name "Fog_area")
+(def ^:const resource-tag :fog-area)
+(def ^:const resource-name "FogArea")
 (def ^:const resource-url (u/de-camelcase resource-name))
 (def ^:const collection-name "FogAreaCollection")
 
@@ -22,11 +22,14 @@
                               :type      "ROLE"
                               :right     "MODIFY"}]})
 
+(defmethod crud/add-acl resource-uri
+  [resource request]
+  (a/add-acl resource request))
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/fog_area))
+(def validate-fn (u/create-spec-validation-fn :cimi/fog-area))
 (defmethod crud/validate
   resource-uri
   [resource]

@@ -1,15 +1,15 @@
 (ns
-  com.sixsq.slipstream.ssclj.resources.device_static
+  com.sixsq.slipstream.ssclj.resources.device
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.device_static]
+    [com.sixsq.slipstream.ssclj.resources.spec.device]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-tag :device_static)
-(def ^:const resource-name "Device_static")
+(def ^:const resource-tag :device)
+(def ^:const resource-name "DeviceStatic")
 (def ^:const resource-url (u/de-camelcase resource-name))
 (def ^:const collection-name "DeviceStaticCollection")
 
@@ -29,7 +29,7 @@
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/device_static))
+(def validate-fn (u/create-spec-validation-fn :cimi/device))
 (defmethod crud/validate
   resource-uri
   [resource]

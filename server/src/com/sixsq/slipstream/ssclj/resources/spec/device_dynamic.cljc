@@ -1,12 +1,12 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.device_dynamic
+(ns com.sixsq.slipstream.ssclj.resources.spec.device-dynamic
   (:require
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 ;{
-;  "device_id":string
-;  "updated_on": dateTime,
+;  "device_id":x
+;  "updated_on": x
 ;  "available_RAM_size_in_MB": long,
 ;  "available_RAM_in_percentage": float,
 ;  "available_Storage_size_in_MB": long,
@@ -18,65 +18,50 @@
 ;  "wifi_address": string,
 ;  "throughput_info_ethernet": string,
 ;  "throughput_info_wifi": string
-;  "inclinometer": boolean,                  The information about the sensors and actuators will be provided   
-;  "temperature": boolean,
-;  "jammer": boolean,
-;  "location": boolean,
-;  "ambulance": boolean,
-;  "fire_car": boolean,
-;  "traffic_light": boolean,
-;  "street_light": boolean
-}
+;  "inclinometer": x,                  The information about the sensors and actuators will be provided   
+;  "temperature": x,
+;  "jammer": x,
+;  "location": x,
+;  "ambulance": x,
+;  "fire_car": x,
+;  "traffic_light": x,
+;  "street_light": x
+; }
 
 
-(s/def :cimi.device_dynamic/device_id pos-string?)   			
-(s/def :cimi.device_dynamic/isLeader :cimi.core/nonblank-boolean)			
-(s/def :cimi.device_dynamic/updated_on pos-dateTime?)
-(s/def :cimi.device_dynamic/available_RAM_size_in_MBs pos-long?)
-(s/def :cimi.device_dynamic/available_RAM_in_percentage pos-float?)
-(s/def :cimi.device_dynamic/available_Storage_size_in_MBs pos-long?)
-(s/def :cimi.device_dynamic/available_Storage_in_percentage pos-float?)
-(s/def :cimi.device_dynamic/available_CPU_in_percentage pos-float?)
-(s/def :cimi.device_dynamic/power_remaining_status pos-string?)
-(s/def :cimi.device_dynamic/remaining_power_info_in_seconds pos-string?)
-(s/def :cimi.device_dynamic/ethernet_address pos-string?)
-(s/def :cimi.device_dynamic/wifi_address pos-string?)
-(s/def :cimi.device_dynamic/throughput_info_ethernet pos-string?)
-(s/def :cimi.device_dynamic/throughput_info_wifi pos-string?)
-(s/def :cimi.device_dynamic/inclinometer boolean?)
-(s/def :cimi.device_dynamic/temperature boolean?)
-(s/def :cimi.device_dynamic/jammer boolean?)
-(s/def :cimi.device_dynamic/location boolean?)
-(s/def :cimi.device_dynamic/ambulance boolean?)
-(s/def :cimi.device_dynamic/fire_car boolean?)
-(s/def :cimi.device_dynamic/traffic_light boolean?)
-(s/def :cimi.device_dynamic/street_light boolean?)
+ 	
+(s/def :cimi.device-dynamic/device :cimi.common/resource-link)	
+(s/def :cimi.device-dynamic/isLeader boolean?)			
+(s/def :cimi.device-dynamic/ramUnits :cimi.core/nonblank-string)	
+(s/def :cimi.device-dynamic/ramFree float?)
+(s/def :cimi.device-dynamic/ramFreePercent float?)
+(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
+(s/def :cimi.device-dynamic/storageFree nat-int?)
+(s/def :cimi.device-dynamic/storageFreePercent float?)
+(s/def :cimi.device-dynamic/cpuFreePercent float?)
+(s/def :cimi.device-dynamic/powerRemainingStatus :cimi.core/nonblank-string)
+(s/def :cimi.device-dynamic/powerRemainingStatusSeconds :cimi.core/nonblank-string)
+(s/def :cimi.device-dynamic/ethernetAddress :cimi.core/nonblank-string)
+(s/def :cimi.device-dynamic/wifiAddress :cimi.core/nonblank-string)
+(s/def :cimi.device-dynamic/ethernetThroughputInfo vector?)
+(s/def :cimi.device-dynamic/wifiThroughputInfo vector?)
 
-(s/def :cimi.device_dynamic
-	(su/only-keys :req-un [:cimi.device_dynamic/device_id
-						     :cimi.device_dynamic/isLeader
-                 				     :cimi.device_dynamic/created_on
-						     :cimi.device_dynamic/available_RAM_size_in_MBs
-						     :cimi.device_dynamic/available_RAM_in_percentage
-                 				     :cimi.device_dynamic/available_Storage_size_in_MBs
-                 				     :cimi.device_dynamic/available_Storage_in_percentage
-			                             :cimi.device_dynamic/available_CPU_in_percentage
-                 				     :cimi.device_dynamic/power_remaining_status
-                 				     :cimi.device_dynamic/remaining_power_info_in_seconds
-						     :cimi.device_dynamic/ethernet_address
-						     :cimi.device_dynamic/ethernet_address
-                 				     :cimi.device_dynamic/throughput_info_ethernet
-                 				     :cimi.device_dynamic/throughput_info_wifi
-					             :cimi.device_dynamic/inclinometer
-                                                     :cimi.device_dynamic/temperature
-                                                     :cimi.device_dynamic/jammer
-						     :cimi.devive_dynamic/location
-						     :cimi.devive_dynamic/ambulance
-						     :cimi.devive_dynamic/fire_car
-						     :cimi.devive_dynamic/traffic_light
-                                                     :cimi.devive_dynamic/street_light]))
 
-                :opt-un [:cimi.common/name
-                         :cimi.common/description
-                         :cimi.common/properties
-                         :cimi.common/operations]))
+(s/def :cimi/device-dynamic
+	(su/only-keys-maps c/common-attrs
+					   {:req-un [:cimi.device-dynamic/device
+								:cimi.device-dynamic/isLeader
+								:cimi.device-dynamic/ramUnits
+								:cimi.device-dynamic/ramFree
+								:cimi.device-dynamic/ramFreePercent
+								:cimi.device-dynamic/storageUnits
+								:cimi.device-dynamic/storageFree
+								:cimi.device-dynamic/storageFreePercent
+								:cimi.device-dynamic/cpuFreePercent
+								:cimi.device-dynamic/powerRemainingStatus
+								:cimi.device-dynamic/powerRemainingStatusSeconds
+								:cimi.device-dynamic/ethernetAddress
+								:cimi.device-dynamic/wifiAddress
+								:cimi.device-dynamic/ethernetThroughputInfo
+								:cimi.device-dynamic/wifiThroughputInfo]
+						:opt-un []}))
