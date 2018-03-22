@@ -26,7 +26,9 @@
 (s/def :cimi.device_dynamic/fire_car boolean?)
 (s/def :cimi.device_dynamic/traffic_light boolean?)
 (s/def :cimi.device_dynamic/street_light boolean?)
-(s/def :cimi.device_dynamic/category (su/only-keys :req-un [:cimi.device_dynamic/device_id
+
+(s/def :cimi.device_dynamic
+	(su/only-keys :req-un [:cimi.device_dynamic/device_id
 						     :cimi.device_dynamic/isLeader
                  				     :cimi.device_dynamic/created_on
 						     :cimi.device_dynamic/available_RAM_size_in_MBs
@@ -47,13 +49,7 @@
 						     :cimi.devive_dynamic/fire_car
 						     :cimi.devive_dynamic/traffic_light
                                                      :cimi.devive_dynamic/street_light]))
-(s/def :cimi/device_dynamic
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
-                         :cimi.common/acl
-                         :cimi.device/category
-			 :cimi.common/created
-                         :cimi.common/updated]
+
                 :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
