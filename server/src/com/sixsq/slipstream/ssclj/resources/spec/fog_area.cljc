@@ -41,7 +41,7 @@
 (s/def :cimi.fog_area/traffic_light boolean?)
 (s/def :cimi.fog_area/street_light boolean?)
 
-(s/def :cimi.fog_area/category 
+(s/def :cimi.fog_area 
 	(su/only-keys :req-un [:cimi.fog_area/id
 			       :cimi.fog_area/device_id
                                :cimi.fog_area/created_on
