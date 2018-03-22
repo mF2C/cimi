@@ -71,13 +71,7 @@
                  :cimi.fog_area/fire_car
                  :cimi.fog_area/traffic_light
                  :cimi.fog_area/street_light]))
-(s/def :cimi/fog_area
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
-                         :cimi.common/acl
-                         :cimi.device/category
-			 :cimi.common/created
-                         :cimi.common/updated]
+
                 
                 :opt-un [:cimi.common/name
                          :cimi.common/description
