@@ -4,6 +4,30 @@
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
+;{
+;  "device_id":string
+;  "updated_on": dateTime,
+;  "available_RAM_size_in_MB": long,
+;  "available_RAM_in_percentage": float,
+;  "available_Storage_size_in_MB": long,
+;  "available_Storage_in_percentage": float,
+;  "available_CPU_percentage": float,
+;  "power_remaining_status": string,
+;  "remaining_power_info_in_seconds": string,
+;  "ethernet_address": string,
+;  "wifi_address": string,
+;  "throughput_info_ethernet": string,
+;  "throughput_info_wifi": string
+;  "inclinometer": boolean,                  The information about the sensors and actuators will be provided   
+;  "temperature": boolean,
+;  "jammer": boolean,
+;  "location": boolean,
+;  "ambulance": boolean,
+;  "fire_car": boolean,
+;  "traffic_light": boolean,
+;  "street_light": boolean
+}
+
 
 (s/def :cimi.device_dynamic/device_id pos-string?)   			
 (s/def :cimi.device_dynamic/isLeader :cimi.core/nonblank-boolean)			
