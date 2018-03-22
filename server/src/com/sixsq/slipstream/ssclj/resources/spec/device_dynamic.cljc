@@ -18,14 +18,14 @@
 (s/def :cimi.device_dynamic/wifi_address pos-string?)
 (s/def :cimi.device_dynamic/throughput_info_ethernet pos-string?)
 (s/def :cimi.device_dynamic/throughput_info_wifi pos-string?)
-(s/def :cimi.device_dynamic/inclinometer pos-boolean?)
-(s/def :cimi.device_dynamic/temperature pos-boolean?)
-(s/def :cimi.device_dynamic/jammer pos-boolean?)
-(s/def :cimi.device_dynamic/location pos-boolean?)
-(s/def :cimi.device_dynamic/ambulance pos-boolean?)
-(s/def :cimi.device_dynamic/fire_car pos-boolean?)
-(s/def :cimi.device_dynamic/traffic_light pos-boolean?)
-(s/def :cimi.device_dynamic/street_light pos-boolean?)
+(s/def :cimi.device_dynamic/inclinometer boolean?)
+(s/def :cimi.device_dynamic/temperature boolean?)
+(s/def :cimi.device_dynamic/jammer boolean?)
+(s/def :cimi.device_dynamic/location boolean?)
+(s/def :cimi.device_dynamic/ambulance boolean?)
+(s/def :cimi.device_dynamic/fire_car boolean?)
+(s/def :cimi.device_dynamic/traffic_light boolean?)
+(s/def :cimi.device_dynamic/street_light boolean?)
 (s/def :cimi.device_dynamic/category (su/only-keys :req-un [:cimi.device_dynamic/device_id
 						     :cimi.device_dynamic/isLeader
                  				     :cimi.device_dynamic/created_on
