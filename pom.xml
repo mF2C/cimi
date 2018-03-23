@@ -3,7 +3,7 @@
 
   <groupId>eu.mf2c-project.cimi</groupId>
   <artifactId>server-parent</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>server parent</name>
   <url>http://www.mf2c-project.eu/</url>
@@ -23,7 +23,7 @@
 
   <properties>
     <!-- must match the version of the parent -->
-    <slipstream.version>3.47-SNAPSHOT</slipstream.version>
+    <slipstream.version>3.48-SNAPSHOT</slipstream.version>
   </properties>
 
   <modules>
