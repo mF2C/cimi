@@ -31,25 +31,11 @@ services:
     restart: always
     ports:
      - "5601:5601"
-  rc:
-    image: sixsq/ring-container:3.47-SNAPSHOT
-    expose:
-     - "5000"
-    volumes:
-     - ringcontainer:/opt/slipstream/ring-container
-     - ringcontainerexample:/opt/slipstream/ring-example
   cimi:
-    image: mf2c/cimi-server:1.0.2-SNAPSHOT
+    image: mf2c/cimi-server:1.0.3-SNAPSHOT
     expose:
      - "8201"
     labels:
      - "traefik.enable=true"
      - "traefik.backend=cimi"
      - "traefik.frontend.rule=PathPrefix:/,/"
-    volumes:
-     - ringcontainer:/opt/slipstream/ring-container
-     - ringcontainerexample:/opt/slipstream/ring-example
-
-volumes:
-  ringcontainer: {}
-  ringcontainerexample: {}
