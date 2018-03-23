@@ -44,7 +44,9 @@ The first thing you'll want to do is to create a user so that you can login and 
 curl -XPOST -k -H "Content-type: application/json" https://localhost/api/user -d @addRegularUser.json
 ```
 
-2. login as `testuser`, using the `regularUser.json` session template in this directory
+2. an email will be sent to you (if you haven't provided a SMTP server to CIMI, then **you might have to check your SPAM folder**). Copy the API address in that email, and paste it in your browser. Ex: `https://localhost/api/CALLBACK_ENDPOINT`.
+
+3. login as `testuser`, using the `regularUser.json` session template in this directory
 
 ```bash
 curl -XPOST -k https://localhost/api/session -d @regularUser.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k
