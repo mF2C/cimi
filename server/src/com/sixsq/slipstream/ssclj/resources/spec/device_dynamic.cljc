@@ -35,7 +35,7 @@
 ;(s/def :cimi.device-dynamic/ramUnits :cimi.core/nonblank-string)	
 (s/def :cimi.device-dynamic/ramFree float?)
 (s/def :cimi.device-dynamic/ramFreePercent float?)
-(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
+;(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
 (s/def :cimi.device-dynamic/storageFree nat-int?)
 (s/def :cimi.device-dynamic/storageFreePercent float?)
 (s/def :cimi.device-dynamic/cpuFreePercent float?)
@@ -54,7 +54,7 @@
 								;:cimi.device-dynamic/ramUnits
 								:cimi.device-dynamic/ramFree
 								:cimi.device-dynamic/ramFreePercent
-								:cimi.device-dynamic/storageUnits
+								;:cimi.device-dynamic/storageUnits
 								:cimi.device-dynamic/storageFree
 								:cimi.device-dynamic/storageFreePercent
 								:cimi.device-dynamic/cpuFreePercent
