@@ -17,18 +17,19 @@
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
         service-instance-resource  {:id            (str resource-url "/service-instance-resource")
-                                  :resourceURI    resource-uri
-                                  :created        timestamp
-                                  :updated        timestamp
-                                  :acl            valid-acl
-                                  ;; service instance fields
-                                  :service_id     {:href "service/1230958abdef"}
-                                  :agreement_id   {:href "agreement/1230958abdef"}
-                                  ; :user_id        {:href "user/1230958abdef"}
-                                  :status         "running"
-                                  :agents         [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
-                                                    :status "running", :container_id "asdasd-asdasda", :allow true}
-                                                   {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
-                                                    :status "running", :container_id "asdasd-hasdagsa", :allow false}]}]
+                                    :resourceURI    resource-uri
+                                    :created        timestamp
+                                    :updated        timestamp
+                                    :acl            valid-acl
+                                    ;; service instance fields
+                                    :service_id     "71230958abdef9" ;{:href "service/1230958abdef"}
+                                    :agreement_id   "a1230958abdef0" ;{:href "agreement/1230958abdef"}
+                                    :status         "running"
+                                    :agents         [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
+                                                      :status "running", :container_id "asdasd-asdasda", :allow true,
+                                                      :url "192.168.1.31"}
+                                                     {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
+                                                      :status "running", :container_id "asdasd-hasdagsa", :allow false,
+                                                      :url "192.168.1.32"}]}]
     (is (s/valid? :cimi/service-instance service-instance-resource))
     (is (not (s/valid? :cimi/service-instance (assoc service-instance-resource :bad-field "bla bla bla"))))))
