@@ -83,6 +83,7 @@
                 :cimi.fog-area/physicalCoresMin
                 :cimi.fog-area/avgLogicalCores
                 :cimi.fog-area/logicalCoresMax
+                :cimi.fog-area/logicalCoresMin					     
                 :cimi.fog-area/powerRemainingMax
                 :cimi.fog-area/powerRemainingMin]
 						:opt-un []}))
