@@ -9,9 +9,9 @@
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
 (def ^:const resource-tag :device)
-(def ^:const resource-name "DeviceStatic")
+(def ^:const resource-name "Device")
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "DeviceStaticCollection")
+(def ^:const collection-name "DeviceCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))

@@ -3,7 +3,7 @@
         "href": "user-template/self-registration",
         "password": "testpassword",
         "passwordRepeat" : "testpassword",
-        "emailAddress": "cris@sixsq.com",
+        "emailAddress": "your_email@",
         "username": "testuser"
     }
 }
