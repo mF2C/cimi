@@ -54,6 +54,7 @@
 								:cimi.device/storage
 								:cimi.device/powerPlugged
 								:cimi.device/networkingStandards
-								:cimi.device/ethernetAddress]
+						     		:cimi.device/ethernetAddress
+								:cimi.device/wifiAddress]
 						:opt-un []}))
 
