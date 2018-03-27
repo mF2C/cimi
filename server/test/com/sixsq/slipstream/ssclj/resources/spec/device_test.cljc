@@ -19,9 +19,9 @@
         device-resource     {:deviceID            "1234567890abcdef"
                                   :created_on        timestamp
                                   :isLeader          "False"
-                                  :os                Linux-4.4.0-116-generic-x86_64-with-debian-8.10
-                                  :arch              x86_64
-                                  :cpuManufacturer   Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+                                  :os                "Linux-4.4.0-116-generic-x86_64-with-debian-8.10"
+                                  :arch              "x86_64"
+                                  :cpuManufacturer   "Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz"
                                   :physicalCores     4
                                   :logicalCore       8 
                                   :cpuClockSpeed     3.6000 GHz
