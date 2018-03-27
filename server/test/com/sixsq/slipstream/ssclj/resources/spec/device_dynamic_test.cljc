@@ -18,7 +18,7 @@
                                             :right     "MODIFY"}]}
         device-resource     {:deviceID                                   "8756450defghte"
                                   :updated_on                            timestamp
-                                  :isLeader                              False
+                                  :isLeader                              false
                                   :ramFree                               5225.359375
                                   :ramFreePercent                        66.4
                                   :storageFree                           211712.4765625
