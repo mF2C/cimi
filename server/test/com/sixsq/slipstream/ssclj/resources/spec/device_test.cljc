@@ -24,7 +24,7 @@
                                   :cpuManufacturer   "Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz"
                                   :physicalCores     4
                                   :logicalCore       8 
-                                  :cpuClockSpeed     3.6000 GHz
+                                  :cpuClockSpeed     "3.6000 GHz"
                                   :memory            32134.5078125
                                   :storage           309646.39453125
                                   :powerPlugged      True
