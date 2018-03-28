@@ -282,3 +282,32 @@ cat >>userProfile.json <<EOF
 EOF
 ```
 
+
+## The "agreement" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>agreement.json <<EOF
+{
+    "id": "a02",
+    "name": "Agreement 02",
+    "state": "stopped",
+    "details":{
+        "id": "a02",
+        "type": "agreement",
+        "name": "Agreement 02",
+        "provider": { "id": "mf2c", "name": "mF2C Platform" },
+        "client": { "id": "c02", "name": "A client" },
+        "creation": "2018-01-16T17:09:45.0Z",
+        "expiration": "2019-01-17T17:09:45.0Z",
+        "guarantees": [
+            {
+                "name": "TestGuarantee",
+                "constraint": "[test_value] < 10"
+            }
+        ]
+    }
+}
+EOF
+```
+
