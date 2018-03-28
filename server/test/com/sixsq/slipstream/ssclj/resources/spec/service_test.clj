@@ -23,6 +23,8 @@
                                       :inclinometer true
                                       :temperature  false
                                       :jammer       true
-                                      :location     true}}]
+                                      :location     true}
+                        :exec         "hello-world"
+                        :exec_type    "docker"}]
 
               (is (s/valid? :cimi/service service))))

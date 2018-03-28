@@ -69,6 +69,8 @@
                                                        :temperature  false
                                                        :jammer       true
                                                        :location     true}
+                                         :exec         "hello-world"
+                                         :exec_type    "docker"
                                          }
 
                    resp-test (-> session-admin

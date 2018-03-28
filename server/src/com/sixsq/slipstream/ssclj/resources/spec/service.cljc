@@ -19,13 +19,17 @@
                                                      :cimi.service/temperature
                                                      :cimi.service/jammer
                                                      :cimi.servive/location]))
+(s/def :cimi.service/exec :cimi.core/nonblank-string)
+(s/def :cimi.service/exec_type :cimi.core/nonblank-string)
 (s/def :cimi/service
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.service/category
                          :cimi.common/created
                          :cimi.common/updated
-                         :cimi.common/acl]
+                         :cimi.common/acl
+                         :cimi.service/exec
+                         :cimi.service/exec_type]
                 :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
