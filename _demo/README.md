@@ -108,6 +108,8 @@ cat >>service.json <<EOF
 {
     "name": "EMS",
     "description": "Emergency Management System",
+    "exec": "hello-world",
+    "exec_type": "docker",
     "category": {
         "cpu": "low",
         "memory": "low",
