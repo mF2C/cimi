@@ -3,6 +3,7 @@
             [clojure.spec.alpha :as s]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
             [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
+            [com.sixsq.slipstream.ssclj.resources.device :as t]
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 
@@ -16,8 +17,12 @@
                                    :rules [{:principal "ADMIN"
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
-        device-resource     {:deviceID            "1234567890abcdef"
-                                  :created_on        timestamp
+        device-resource     {:id          (str t/resource-url "/device-resource")
+                                  :resourceURI t/resource-uri
+                                  :created     timestamp
+                                  :updated     timestamp
+                                  :acl         valid-acl
+                                  :deviceID            "1234567890abcdef"
                                   :isLeader          false
                                   :os                "Linux-4.4.0-116-generic-x86_64-with-debian-8.10"
                                   :arch              "x86_64"
