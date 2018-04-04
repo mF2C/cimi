@@ -52,7 +52,7 @@
     ;; create a callback as an admin
     (let [resource-name         "DeviceStatic"
           resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id                    (str resource-url "/sharing-model-resource")
+          create-test-callback  {:id                    (str resource-url "/device-resource")
                                  :resourceURI           base-uri
                                 ;  :acl                   {:owner {:principal "ADMIN"
                                 ;                                  :type      "ROLE"}
