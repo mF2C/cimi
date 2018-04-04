@@ -64,20 +64,25 @@
                                                                   ;:right     "MODIFY"}]}
                                  ;; sharing model fields
                                 ;  :user_id              "user/1230958abdef"
-                                  :deviceID            "1234567890abcdef"
-                                  :isLeader          false
-                                  :os                "Linux-4.4.0-116-generic-x86_64-with-debian-8.10"
-                                  :arch              "x86_64"
-                                  :cpuManufacturer   "Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz"
-                                  :physicalCores     4
-                                  :logicalCore       8
-                                  :cpuClockSpeed     "3.6000 GHz"
-                                  :memory            32134.5078125
-                                  :storage           309646.39453125
-                                  :powerPlugged      true
-                                  :networkingStandards "['lo', 'enp2s0', 'docker0', 'wlp3s0']"
-                                  :ethernetAddress   "[snic(family=<AddressFamily.AF_INET: 2>, address='147.83.159.199', netmask='255.255.255.224', broadcast='147.83.159.223', ptp=None), snic(family=<AddressFamily.AF_INET6: 10>, address='fe80::16de:c6b7:3dc3:d11c%enp0s31f6', netmask='ffff:ffff:ffff:ffff::', broadcast=None, ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='4c:cc:6a:f5:a3:ea', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]"
-                                  :wifiAddress       "[snic(family=<AddressFamily.AF_INET: 2>, address='192.168.4.71', netmask='255.255.255.0', broadcast='192.168.4.255', ptp=None), snic(family=<AddressFamily.AF_INET6: 10>, address='fe80::e7ec:a09a:36fe:5ad4%wlx001986d03ca6', netmask='ffff:ffff:ffff:ffff::', broadcast=None, ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='00:19:86:d0:3c:a6', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]"}
+                                  :leaderDevice                               {:href "device/887766345qws"}
+                                  :numDevices                                 12
+                                  :ramTotal                                   5225.359375
+                                  :ramMax                                     66.4
+                                  :ramMin                                     211712.4765625
+                                  :storageTotal                               95.1
+                                  :storageMax                                 50.4
+                                  :storageMin                                 50.4
+                                  :avgProcessingCapacityPercent               78.0
+                                  :cpuMaxPercent                              92.8
+                                  :cpuMinPercent                              68.8
+                                  :avgPhysicalCores                           4
+                                  :physicalCoresMax                           8
+                                  :physicalCoresMin                           2
+                                  :avgLogicalCores                            6
+                                  :logicalCoresMax                            8
+                                  :logicalCoresMin                            4
+                                  :powerRemainingMax                       "Device has unlimited power source"
+                                  :powerRemainingMin                       "97.2"}
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post
