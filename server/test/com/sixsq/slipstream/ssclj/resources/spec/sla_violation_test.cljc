@@ -24,5 +24,5 @@
                                 :guarantee      "gt01"
                                 :datetime       timestamp
                                 }]
-    (is (s/valid? :cimi/sla_violation sla-violation-resource))
-    (is (not (s/valid? :cimi/sla_violation (assoc sla-violation-resource :bad-field "bla bla bla"))))))
+    (is (s/valid? :cimi/sla-violation sla-violation-resource))
+    (is (not (s/valid? :cimi/sla-violation (assoc sla-violation-resource :bad-field "bla bla bla"))))))

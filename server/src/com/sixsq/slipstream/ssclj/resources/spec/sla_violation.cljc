@@ -11,17 +11,17 @@
 ;   "datetime": datetime
 ; }
 
-(s/def :cimi.sla_violation/agreement_id string?)
-(s/def :cimi.sla_violation/guarantee string?)
-(s/def :cimi.sla_violation/datetime :cimi.core/timestamp)
+(s/def :cimi.sla-violation/agreement_id string?)
+(s/def :cimi.sla-violation/guarantee string?)
+(s/def :cimi.sla-violation/datetime :cimi.core/timestamp)
 
-(s/def :cimi/sla_violation
+(s/def :cimi/sla-violation
   (su/only-keys :req-un [
                         :cimi.common/id
                         :cimi.common/resourceURI
                         :cimi.common/acl
                         :cimi.common/created
                         :cimi.common/updated
-                        :cimi.sla_violation/agreement_id
-                        :cimi.sla_violation/guarantee
-                        :cimi.sla_violation/datetime]))
+                        :cimi.sla-violation/agreement_id
+                        :cimi.sla-violation/guarantee
+                        :cimi.sla-violation/datetime]))

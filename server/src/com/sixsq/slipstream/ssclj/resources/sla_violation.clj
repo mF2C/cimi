@@ -29,7 +29,7 @@
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/agreement))
+(def validate-fn (u/create-spec-validation-fn :cimi/sla-violation))
 (defmethod crud/validate
   resource-uri
   [resource]
