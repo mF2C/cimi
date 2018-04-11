@@ -313,3 +313,17 @@ cat >>agreement.json <<EOF
 EOF
 ```
 
+## The "sla-violation" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>slaViolation.json <<EOF
+{
+    "guarantee" : "TestGuarantee",
+    "datetime" : "2018-04-11T10:39:51.527008088Z",
+    "agreement_id" : "agreement/4e529393-f659-44d6-9c8b-b0589132599b"
+}
+EOF
+
+```
+
