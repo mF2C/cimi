@@ -11,7 +11,7 @@
 ;   "datetime": datetime
 ; }
 
-(s/def :cimi.sla-violation/agreement_id string?)
+(s/def :cimi.sla-violation/agreement_id :cimi.common/resource-link)
 (s/def :cimi.sla-violation/guarantee string?)
 (s/def :cimi.sla-violation/datetime :cimi.core/timestamp)
 
