@@ -63,7 +63,7 @@
                                         :acl         valid-acl
                                         :created        timestamp
                                         :updated        timestamp
-                                        :agreement_id   "agreement/agreement-id-01"
+                                        :agreement_id   {:href "agreement/agreement-id-01"}
                                         :guarantee      "gt01"
                                         :datetime       timestamp
                                     }
