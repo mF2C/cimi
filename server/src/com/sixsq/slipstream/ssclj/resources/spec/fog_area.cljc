@@ -43,14 +43,14 @@
 
 (s/def :cimi.fog-area/leaderDevice :cimi.common/resource-link)   	   
 (s/def :cimi.fog-area/numDevices pos-int?)     
-(s/def :cimi.fog-area/ramUnits :cimi.core/nonblank-string)	    
-(s/def :cimi.fog-area/ramTotal pos-int?)
-(s/def :cimi.fog-area/ramMax pos-int?)
-(s/def :cimi.fog-area/ramMin pos-int?)
-(s/def :cimi.fog-area/storageUnits :cimi.core/nonblank-string)		  
-(s/def :cimi.fog-area/storageTotal pos-int?)
-(s/def :cimi.fog-area/storageMax pos-int?)
-(s/def :cimi.fog-area/storageMin pos-int?)
+;(s/def :cimi.fog-area/ramUnits :cimi.core/nonblank-string)
+(s/def :cimi.fog-area/ramTotal float?)
+(s/def :cimi.fog-area/ramMax float?)
+(s/def :cimi.fog-area/ramMin float?)
+;(s/def :cimi.fog-area/storageUnits :cimi.core/nonblank-string)
+(s/def :cimi.fog-area/storageTotal float?)
+(s/def :cimi.fog-area/storageMax float?)
+(s/def :cimi.fog-area/storageMin float?)
 (s/def :cimi.fog-area/avgProcessingCapacityPercent float?)
 (s/def :cimi.fog-area/cpuMaxPercent float?)
 (s/def :cimi.fog-area/cpuMinPercent float?)
@@ -67,11 +67,11 @@
 	(su/only-keys-maps c/common-attrs
 					   {:req-un [:cimi.device-dynamic/leaderDevice
 								:cimi.fog-area/numDevices
-								:cimi.fog-area/ramUnits
+								;:cimi.fog-area/ramUnits
 								:cimi.fog-area/ramTotal
 								:cimi.fog-area/ramMax
 								:cimi.fog-area/ramMin
-								:cimi.fog-area/storageUnits
+								;:cimi.fog-area/storageUnits
 								:cimi.fog-area/storageTotal
 								:cimi.fog-area/storageMax
 								:cimi.fog-area/storageMin
@@ -83,6 +83,7 @@
                 :cimi.fog-area/physicalCoresMin
                 :cimi.fog-area/avgLogicalCores
                 :cimi.fog-area/logicalCoresMax
+                :cimi.fog-area/logicalCoresMin					     
                 :cimi.fog-area/powerRemainingMax
                 :cimi.fog-area/powerRemainingMin]
 						:opt-un []}))

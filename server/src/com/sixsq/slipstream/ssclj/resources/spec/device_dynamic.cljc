@@ -31,12 +31,12 @@
 
  	
 (s/def :cimi.device-dynamic/device :cimi.common/resource-link)	
-(s/def :cimi.device-dynamic/isLeader boolean?)			
-(s/def :cimi.device-dynamic/ramUnits :cimi.core/nonblank-string)	
+; (s/def :cimi.device-dynamic/isLeader boolean?)			
+;(s/def :cimi.device-dynamic/ramUnits :cimi.core/nonblank-string)	
 (s/def :cimi.device-dynamic/ramFree float?)
 (s/def :cimi.device-dynamic/ramFreePercent float?)
-(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
-(s/def :cimi.device-dynamic/storageFree nat-int?)
+;(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
+(s/def :cimi.device-dynamic/storageFree float?)
 (s/def :cimi.device-dynamic/storageFreePercent float?)
 (s/def :cimi.device-dynamic/cpuFreePercent float?)
 (s/def :cimi.device-dynamic/powerRemainingStatus :cimi.core/nonblank-string)
@@ -50,11 +50,11 @@
 (s/def :cimi/device-dynamic
 	(su/only-keys-maps c/common-attrs
 					   {:req-un [:cimi.device-dynamic/device
-								:cimi.device-dynamic/isLeader
-								:cimi.device-dynamic/ramUnits
+								; :cimi.device-dynamic/isLeader
+								;:cimi.device-dynamic/ramUnits
 								:cimi.device-dynamic/ramFree
 								:cimi.device-dynamic/ramFreePercent
-								:cimi.device-dynamic/storageUnits
+								;:cimi.device-dynamic/storageUnits
 								:cimi.device-dynamic/storageFree
 								:cimi.device-dynamic/storageFreePercent
 								:cimi.device-dynamic/cpuFreePercent

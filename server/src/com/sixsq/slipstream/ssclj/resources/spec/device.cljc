@@ -32,8 +32,8 @@
 (s/def :cimi.device/physicalCores nat-int?)
 (s/def :cimi.device/logicalCores nat-int?)
 (s/def :cimi.device/cpuClockSpeed :cimi.core/nonblank-string)
-(s/def :cimi.device/memory pos-int?)
-(s/def :cimi.device/storage nat-int?)
+(s/def :cimi.device/memory float?)
+(s/def :cimi.device/storage float?)
 (s/def :cimi.device/powerPlugged boolean?)
 (s/def :cimi.device/networkingStandards :cimi.core/nonblank-string)
 (s/def :cimi.device/ethernetAddress :cimi.core/nonblank-string)
@@ -48,13 +48,13 @@
 								:cimi.device/arch
 								:cimi.device/cpuManufacturer
 								:cimi.device/physicalCores
-								:cimi.device/logicalCore
+								:cimi.device/logicalCores
 								:cimi.device/cpuClockSpeed
 								:cimi.device/memory
 								:cimi.device/storage
 								:cimi.device/powerPlugged
 								:cimi.device/networkingStandards
-								:cimi.device/ethernetAddress
-						     		:cimi.device/wifiAddress]
+						     		:cimi.device/ethernetAddress
+								:cimi.device/wifiAddress]
 						:opt-un []}))
 
