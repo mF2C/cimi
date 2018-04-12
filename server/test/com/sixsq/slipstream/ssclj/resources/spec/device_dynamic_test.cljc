@@ -23,7 +23,7 @@
                           :updated     timestamp
                           :acl         valid-acl
                                   :device                                {:href "device/142165441eewe"}
-                                  :isLeader                              false
+                                  ; :isLeader                              false
                                   :ramFree                               5225.359375
                                   :ramFreePercent                        66.4
                                   :storageFree                           211712.4765625

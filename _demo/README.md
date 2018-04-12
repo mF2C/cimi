@@ -44,7 +44,9 @@ The first thing you'll want to do is to create a user so that you can login and 
 curl -XPOST -k -H "Content-type: application/json" https://localhost/api/user -d @addRegularUser.json
 ```
 
-2. login as `testuser`, using the `regularUser.json` session template in this directory
+2. an email will be sent to you (if you haven't provided a SMTP server to CIMI, then **you might have to check your SPAM folder**). Copy the API address in that email, and paste it in your browser. Ex: `https://localhost/api/CALLBACK_ENDPOINT`.
+
+3. login as `testuser`, using the `regularUser.json` session template in this directory
 
 ```bash
 curl -XPOST -k https://localhost/api/session -d @regularUser.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k
@@ -95,5 +97,282 @@ cd container
 mvn -Ddocker.username=YOUR_DOCKER_USERNAME -Ddocker.password=YOUR_DOCKER_PWD docker:push
 ```
 
+# Examples
+
+## The "service" resource
+
+After creating a session, the user can submit a **service** like this:
+
+```bash
+cat >>service.json <<EOF
+{
+    "name": "EMS",
+    "description": "Emergency Management System",
+    "exec": "hello-world",
+    "exec_type": "docker",
+    "category": {
+        "cpu": "low",
+        "memory": "low",
+        "storage": "low",
+        "inclinometer": true,
+        "temperature": true,
+        "jammer": true,
+        "location": true
+    }
+}
+EOF
+```
+
+Nothing is there yet:
+`curl -XGET -k https://localhost/api/service --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "count" : 0,
+  "acl" : {
+    "owner" : {
+      "principal" : "ADMIN",
+      "type" : "ROLE"
+    },
+    "rules" : [ {
+      "principal" : "USER",
+      "type" : "ROLE",
+      "right" : "MODIFY"
+    } ]
+  },
+  "resourceURI" : "http://schemas.dmtf.org/cimi/2/ServiceCollection",
+  "id" : "service",
+  "operations" : [ {
+    "rel" : "add",
+    "href" : "service"
+  } ],
+  "services" : [ ]
+}
+```
+
+Let's submit the above service:
+`curl -XPOST -k https://localhost/api/service -d @service.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "status" : 201,
+  "message" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d created",
+  "resource-id" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+}
+```
+Double check it is there, and it is owned by the user:
+`curl -XGET -k https://localhost/api/service --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+```
+{
+  "count" : 1,
+  "acl" : {
+    "owner" : {
+      "principal" : "ADMIN",
+      "type" : "ROLE"
+    },
+    "rules" : [ {
+      "principal" : "USER",
+      "type" : "ROLE",
+      "right" : "MODIFY"
+    } ]
+  },
+  "resourceURI" : "http://schemas.dmtf.org/cimi/2/ServiceCollection",
+  "id" : "service",
+  "operations" : [ {
+    "rel" : "add",
+    "href" : "service"
+  } ],
+  "services" : [ {
+    "description" : "Emergency Management System",
+    "category" : {
+      "cpu" : "low",
+      "memory" : "low",
+      "storage" : "low",
+      "inclinometer" : true,
+      "temperature" : true,
+      "jammer" : true,
+      "location" : true
+    },
+    "updated" : "2018-03-19T10:17:26.487Z",
+    "name" : "EMS",
+    "created" : "2018-03-19T10:17:26.487Z",
+    "id" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d",
+    "acl" : {
+      "owner" : {
+        "principal" : "testuser",
+        "type" : "USER"
+      },
+      "rules" : [ {
+        "type" : "ROLE",
+        "principal" : "ADMIN",
+        "right" : "ALL"
+      } ]
+    },
+    "operations" : [ {
+      "rel" : "edit",
+      "href" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+    }, {
+      "rel" : "delete",
+      "href" : "service/95e6eb84-b77a-42c1-822f-bf3523bdec2d"
+    } ],
+    "resourceURI" : "http://schemas.dmtf.org/cimi/2/Service"
+  } ]
+}
+```
+
+Finally, the above service can be inspected at `curl -XGET -k https://localhost/api/service/95e6eb84-b77a-42c1-822f-bf3523bdec2d --cookie-jar ~/cookies -b ~/cookies -sS -k`
 
 
+## The "sharing-model" resource
+
+After creating a session,
+```bash
+cat >>sharingModel.json <<EOF
+{
+    "description": "example of a sharing model resource instance",
+    "max_apps": 3,
+    "gps_allowed": false,
+    "max_cpu_usage": 1,
+    "max_memory_usage": 1024,
+    "max_storage_usage": 500,
+    "max_bandwidth_usage": 20,
+    "battery_limit": 10
+}
+EOF
+```
+
+Let's submit the above:
+`curl -XPOST -k https://localhost/api/sharing-model -d @sharingModel.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+Double check it is there:
+`curl -XGET -k https://localhost/api/sharing-model --cookie-jar ~/cookies -b ~/cookies -sS -k`
+
+
+## The "service-instance" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>serviceInstance.json <<EOF
+{
+    "service_id": {"href": "service/asasdasd"},
+    "agreement_id": {"href": "sla/asdasdasd"},
+    "status": "running",
+    "agents": [
+        {
+          "agent": {"href": "device/testdevice"}, 
+          "port": 8081, 
+          "container_id": "0938afd12323", 
+          "status": "running", 
+          "num_cpus": 3, 
+          "allow": true
+        }
+    ]
+}
+EOF
+```
+
+## The "user-profile" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>userProfile.json <<EOF
+{
+      "service_consumer": true,
+      "resource_contributor": false
+}
+EOF
+```
+
+
+## The "agreement" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>agreement.json <<EOF
+{
+    "id": "a02",
+    "name": "Agreement 02",
+    "state": "stopped",
+    "details":{
+        "id": "a02",
+        "type": "agreement",
+        "name": "Agreement 02",
+        "provider": { "id": "mf2c", "name": "mF2C Platform" },
+        "client": { "id": "c02", "name": "A client" },
+        "creation": "2018-01-16T17:09:45.0Z",
+        "expiration": "2019-01-17T17:09:45.0Z",
+        "guarantees": [
+            {
+                "name": "TestGuarantee",
+                "constraint": "[test_value] < 10"
+            }
+        ]
+    }
+}
+EOF
+```
+
+## The "sla-violation" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>slaViolation.json <<EOF
+{
+    "guarantee" : "TestGuarantee",
+    "datetime" : "2018-04-11T10:39:51.527008088Z",
+    "agreement_id" : "agreement/4e529393-f659-44d6-9c8b-b0589132599b"
+}
+EOF
+
+```
+
+
+## The "device" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>device.json <<EOF
+{
+    "deviceID": "123",
+    "isLeader": false,
+    "os": "Linux-4.13.0-38-generic-x86_64-with-debian-8.10",
+    "arch": "x86_64",
+    "cpuManufacturer": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+    "physicalCores": 4,
+    "logicalCores": 8,
+    "cpuClockSpeed": "1.8000 GHz",
+    "memory": 7874.2109375,
+    "storage": 234549.5078125,
+    "powerPlugged": true,
+    "networkingStandards": "['eth0', 'lo']",
+    "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
+    "wifiAddress": "Empty"
+}
+EOF
+
+```
+
+
+## The "device-dynamic" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>device.json <<EOF
+{
+    "device": {"href": "device/123"},
+    "ramFree": 4795.15234375,
+    "ramFreePercent": 60.9,
+    "storageFree": 208409.25,
+    "storageFreePercent": 93.6,
+    "cpuFreePercent": 93.5,
+    "powerRemainingStatus": "30.75885328836425",
+    "powerRemainingStatusSeconds": "3817",
+    "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
+    "wifiAddress": "Empty",
+    "ethernetThroughputInfo": [1595,8644,16,74,0,0,0,0],
+    "wifiThroughputInfo": ["E","m","p","t","y"]
+}
+EOF
+
+```

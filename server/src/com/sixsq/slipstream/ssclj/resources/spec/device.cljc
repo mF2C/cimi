@@ -48,7 +48,7 @@
 								:cimi.device/arch
 								:cimi.device/cpuManufacturer
 								:cimi.device/physicalCores
-								:cimi.device/logicalCore
+								:cimi.device/logicalCores
 								:cimi.device/cpuClockSpeed
 								:cimi.device/memory
 								:cimi.device/storage
