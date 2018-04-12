@@ -106,19 +106,28 @@ After creating a session, the user can submit a **service** like this:
 ```bash
 cat >>service.json <<EOF
 {
-    "name": "EMS",
-    "description": "Emergency Management System",
-    "exec": "hello-world",
-    "exec_type": "docker",
-    "category": {
-        "cpu": "low",
-        "memory": "low",
-        "storage": "low",
-        "inclinometer": true,
-        "temperature": true,
-        "jammer": true,
-        "location": true
-    }
+  "name": "hello-world",
+  "description": "Hello World Service",
+  "resourceURI": "/hello-world",
+  "exec": "hello-world",
+  "exec_type": "docker",
+  "exec_ports": [8080, 8081],
+  "category": {
+    "cpu": "low",
+    "memory": "low",
+    "storage": "low",
+    "inclinometer": false,
+    "temperature": false,
+    "jammer": false,
+    "location": false,
+    "battery_level": true,
+    "door_sensor": true,
+    "pump_sensor": true,
+    "accelerometer": true,
+    "humidity": true,
+    "air_pressure": true,
+    "ir_motion": true
+  }
 }
 EOF
 ```
