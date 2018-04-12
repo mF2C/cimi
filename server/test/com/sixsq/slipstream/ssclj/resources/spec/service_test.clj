@@ -17,14 +17,23 @@
                         :created     timestamp
                         :updated     timestamp
                         :acl         valid-acl
-                        :category    {:cpu          "low"
-                                      :memory       "medium"
-                                      :storage      "low"
-                                      :inclinometer true
-                                      :temperature  false
-                                      :jammer       true
-                                      :location     true}
+                        :category    {:cpu            "low"
+                                      :memory         "medium"
+                                      :storage        "low"
+                                      :inclinometer   true
+                                      :temperature    false
+                                      :jammer         true
+                                      :location       true
+                                      :battery_level  true
+                                      :door_sensor    true
+                                      :pump_sensor    true
+                                      :accelerometer  true
+                                      :humidity       true
+                                      :air_pressure   true
+                                      :ir_motion      true}
                         :exec         "hello-world"
-                        :exec_type    "docker"}]
+                        :exec_type    "docker"
+                        :exec_ports   [8080 8081]
+                        }]
 
               (is (s/valid? :cimi/service service))))
