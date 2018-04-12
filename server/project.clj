@@ -1,7 +1,7 @@
-(def +version+ "1.0-SNAPSHOT")
+(def +version+ "1.3-SNAPSHOT")
 (def +slipstream-version+ "3.48")
 
-(defproject eu.mf2c-project.cimi/server "1.0-SNAPSHOT"
+(defproject eu.mf2c-project.cimi/server "1.3-SNAPSHOT"
 
   :description "MF2C CIMI resources and server"
 

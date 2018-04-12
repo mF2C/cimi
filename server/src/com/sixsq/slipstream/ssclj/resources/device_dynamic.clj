@@ -3,13 +3,14 @@
   (:require
     [com.sixsq.slipstream.ssclj.resources.spec.device-dynamic]
     [com.sixsq.slipstream.auth.acl :as a]
+    [superstring.core :as str]        
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-tag :device-dynamic)
 (def ^:const resource-name "DeviceDynamic")
+(def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
 (def ^:const collection-name "DeviceDynamicCollection")
 
