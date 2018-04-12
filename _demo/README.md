@@ -106,19 +106,28 @@ After creating a session, the user can submit a **service** like this:
 ```bash
 cat >>service.json <<EOF
 {
-    "name": "EMS",
-    "description": "Emergency Management System",
-    "exec": "hello-world",
-    "exec_type": "docker",
-    "category": {
-        "cpu": "low",
-        "memory": "low",
-        "storage": "low",
-        "inclinometer": true,
-        "temperature": true,
-        "jammer": true,
-        "location": true
-    }
+  "name": "hello-world",
+  "description": "Hello World Service",
+  "resourceURI": "/hello-world",
+  "exec": "hello-world",
+  "exec_type": "docker",
+  "exec_ports": [8080, 8081],
+  "category": {
+    "cpu": "low",
+    "memory": "low",
+    "storage": "low",
+    "inclinometer": false,
+    "temperature": false,
+    "jammer": false,
+    "location": false,
+    "battery_level": true,
+    "door_sensor": true,
+    "pump_sensor": true,
+    "accelerometer": true,
+    "humidity": true,
+    "air_pressure": true,
+    "ir_motion": true
+  }
 }
 EOF
 ```
@@ -327,3 +336,81 @@ EOF
 
 ```
 
+
+## The "device" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>device.json <<EOF
+{
+    "deviceID": "123",
+    "isLeader": false,
+    "os": "Linux-4.13.0-38-generic-x86_64-with-debian-8.10",
+    "arch": "x86_64",
+    "cpuManufacturer": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+    "physicalCores": 4,
+    "logicalCores": 8,
+    "cpuClockSpeed": "1.8000 GHz",
+    "memory": 7874.2109375,
+    "storage": 234549.5078125,
+    "powerPlugged": true,
+    "networkingStandards": "['eth0', 'lo']",
+    "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
+    "wifiAddress": "Empty"
+}
+EOF
+
+```
+
+
+## The "device-dynamic" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>deviceDynamic.json <<EOF
+{
+    "device": {"href": "device/123"},
+    "ramFree": 4795.15234375,
+    "ramFreePercent": 60.9,
+    "storageFree": 208409.25,
+    "storageFreePercent": 93.6,
+    "cpuFreePercent": 93.5,
+    "powerRemainingStatus": "30.75885328836425",
+    "powerRemainingStatusSeconds": "3817",
+    "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
+    "wifiAddress": "Emp": [1595,8644,16,74,0,0,0,0],
+    "wifiThroughputInfo": ["E","m","p","t","y"]
+}
+EOF
+
+```
+
+## The "fog-area" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>fogArea.json <<EOF
+{
+    "leaderDevice": {"href": "device/123refegh"},
+    "numDevices": 10,
+    "ramTotal": 56789.90,
+    "ramMax": 4569.34,
+    "ramMin": 1478.34,
+    "storageTotal": 120003456798.23456,
+    "storageMax": 345678000.23456,
+    "storageMin": 3456789.248,
+    "avgProcessingCapacityPercent": 88.6,
+    "cpuMaxPercent": 98.2,
+    "cpuMinPercent": 56.7,
+    "avgPhysicalCores": 4,
+    "physicalCoresMax": 6,
+    "physicalCoresMin":  2,
+    "avgLogicalCores" : 4,
+    "logicalCoresMax": 6,
+    "logicalCoresMin": 2,
+    "powerRemainingMax": "Device has unlimited power source",
+    "powerRemainingMin": "88.2"
+ } 
+EOF
+
+```
