@@ -24,7 +24,7 @@ mvn clean install
 docker push mf2c/cimi-server:$2
 sed -i "" 's/    image: mf2c\/cimi-server.*/    image: mf2c\/cimi-server:'$2'/g' _demo/docker-compose.yml
 
-git add _demo/README.md server/pom.xml server/project.clj container/pom.xml pom.xml
+git add _demo/docker-compose.yml _demo/README.md server/pom.xml server/project.clj container/pom.xml pom.xml
 git commit -m "release $1"
 
 echo "please do a git push"
