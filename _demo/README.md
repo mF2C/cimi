@@ -358,7 +358,7 @@ EOF
 
 Same as the other ones above. The JSON resource should look like:
 ```bash
-cat >>device.json <<EOF
+cat >>deviceDynamic.json <<EOF
 {
     "device": {"href": "device/123"},
     "ramFree": 4795.15234375,
@@ -369,10 +369,39 @@ cat >>device.json <<EOF
     "powerRemainingStatus": "30.75885328836425",
     "powerRemainingStatusSeconds": "3817",
     "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
-    "wifiAddress": "Empty",
-    "ethernetThroughputInfo": [1595,8644,16,74,0,0,0,0],
+    "wifiAddress": "Emp": [1595,8644,16,74,0,0,0,0],
     "wifiThroughputInfo": ["E","m","p","t","y"]
 }
+EOF
+
+```
+
+## The "fog-area" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>fogArea.json <<EOF
+{
+    "leaderDevice": {"href": "device/123refegh"},
+    "numDevices": 10,
+    "ramTotal": 56789.90,
+    "ramMax": 4569.34,
+    "ramMin": 1478.34,
+    "storageTotal": 120003456798.23456,
+    "storageMax": 345678000.23456,
+    "storageMin": 3456789.248,
+    "avgProcessingCapacityPercent": 88.6,
+    "cpuMaxPercent": 98.2,
+    "cpuMinPercent": 56.7,
+    "avgPhysicalCores": 4,
+    "physicalCoresMax": 6,
+    "physicalCoresMin":  2,
+    "avgLogicalCores" : 4,
+    "logicalCoresMax": 6,
+    "logicalCoresMin": 2,
+    "powerRemainingMax": "Device has unlimited power source",
+    "powerRemainingMin": "88.2"
+ } 
 EOF
 
 ```
