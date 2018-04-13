@@ -38,7 +38,6 @@
 (s/def :cimi.device/networkingStandards :cimi.core/nonblank-string)
 (s/def :cimi.device/ethernetAddress :cimi.core/nonblank-string)
 (s/def :cimi.device/wifiAddress :cimi.core/nonblank-string)
-(s/def :cimi.device/myleaderID :cimi.core/nonblank-string)
 
 
 (s/def :cimi/device
@@ -56,7 +55,6 @@
 								:cimi.device/powerPlugged
 								:cimi.device/networkingStandards
 								:cimi.device/ethernetAddress
-								:cimi.device/wifiAddress
-								:cimi.device/myleaderID]
+								:cimi.device/wifiAddress]
 						:opt-un []}))
 

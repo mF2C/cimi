@@ -45,7 +45,7 @@
 (s/def :cimi.device-dynamic/wifiAddress :cimi.core/nonblank-string)
 (s/def :cimi.device-dynamic/ethernetThroughputInfo vector?)
 (s/def :cimi.device-dynamic/wifiThroughputInfo vector?)
-(s/def :cimi.device-dynamic/myleaderID :cimi.common/resource-link)
+(s/def :cimi.device-dynamic/myLeaderID :cimi.common/resource-link)
 
 
 (s/def :cimi/device-dynamic
@@ -65,5 +65,5 @@
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/myleaderID]
+								:cimi.device-dynamic/myLeaderID]
 						:opt-un []}))
