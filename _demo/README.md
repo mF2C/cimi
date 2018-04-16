@@ -264,8 +264,9 @@ Same as the other ones above. The JSON resource should look like:
 ```bash
 cat >>serviceInstance.json <<EOF
 {
-    "service_id": {"href": "service/asasdasd"},
-    "agreement_id": {"href": "sla/asdasdasd"},
+    "user": {"href": "user/asasdasd"},
+    "service": {"href": "service/asasdasd"},
+    "agreement": {"href": "sla/asdasdasd"},
     "status": "running",
     "agents": [
         {
