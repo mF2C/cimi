@@ -20,7 +20,7 @@
                                 :created        timestamp
                                 :updated        timestamp
                                 :acl            valid-acl
-                                :service_instance_id {:href "service-instance/si-id"}
+                                :serviceInstance {:href "service-instance/si-id"}
                                 :operation      "dijkstra"
                                 :datetime       timestamp
                                 :execution_time 99.9
