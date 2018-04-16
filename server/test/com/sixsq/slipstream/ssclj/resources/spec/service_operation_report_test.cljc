@@ -22,7 +22,6 @@
                                 :acl            valid-acl
                                 :serviceInstance {:href "service-instance/si-id"}
                                 :operation      "dijkstra"
-                                :datetime       timestamp
                                 :execution_time 99.9
                                 }]
     (is (s/valid? :cimi/service-operation-report resource))

@@ -422,11 +422,10 @@ EOF
 
 Same as the other ones above. The JSON resource should look like:
 ```bash
-cat >>fogArea.json <<EOF
+cat >>serviceOperationReport.json <<EOF
 {
     "serviceInstance": {"href": "service-instance/asasdasd"},
     "operation": "newMethod",
-    "datetime": "1964-08-25T10:00:00.0Z",
     "execution_time": 123.32
 }
 

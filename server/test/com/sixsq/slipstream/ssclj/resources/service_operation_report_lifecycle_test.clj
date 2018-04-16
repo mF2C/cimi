@@ -64,7 +64,6 @@
                                         :updated        timestamp
                                         :serviceInstance   {:href "service-instance/id-01"}
                                         :operation      "dijkstra"
-                                        :datetime       timestamp
                                         :execution_time 99.8
                                     }
 
