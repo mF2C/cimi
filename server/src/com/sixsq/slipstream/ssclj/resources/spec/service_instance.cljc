@@ -18,9 +18,9 @@
 ; }
 
 
-(s/def :cimi.service-instance/user_id :cimi.core/nonblank-string)       ; the user that launches the service
-(s/def :cimi.service-instance/service_id :cimi.core/nonblank-string)    ; service
-(s/def :cimi.service-instance/agreement_id :cimi.core/nonblank-string)  ; sla
+(s/def :cimi.service-instance/user :cimi.core/nonblank-string)       ; the user that launches the service
+(s/def :cimi.service-instance/service :cimi.core/nonblank-string)    ; service
+(s/def :cimi.service-instance/agreement :cimi.core/nonblank-string)  ; sla
 (s/def :cimi.service-instance/status :cimi.core/nonblank-string)
 ; agent fileds:
 (s/def :cimi.service-instance/agent :cimi.common/resource-link)
@@ -44,9 +44,9 @@
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.common/acl
-                         :cimi.service-instance/user_id
-                         :cimi.service-instance/service_id
-                         :cimi.service-instance/agreement_id
+                         :cimi.service-instance/user
+                         :cimi.service-instance/service
+                         :cimi.service-instance/agreement
                          :cimi.service-instance/status
                          :cimi.common/created
                          :cimi.common/updated
