@@ -55,8 +55,9 @@
           create-test-callback  {:id              (str resource-url "/service-instance-resource")
                                  :resourceURI     base-uri
                                  ;; service instance fields
-                                 :service_id      "71230958abdef9" ;{:href "service/1230958abdef"}
-                                 :agreement_id    "a1230958abdef0" ;{:href "agreement/1230958abdef"}
+                                 :user         "user/testuser"
+                                 :service      "service/71230958abdef9"
+                                 :agreement    "agreement/a1230958abdef0" 
                                  :status          "running"
                                  :agents          [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
                                                     :status "running", :container_id "asdasd-asdasda", :allow true,
