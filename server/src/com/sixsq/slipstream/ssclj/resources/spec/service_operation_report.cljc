@@ -14,7 +14,6 @@
 
 (s/def :cimi.service-operation-report/serviceInstance :cimi.common/resource-link)
 (s/def :cimi.service-operation-report/operation string?)
-(s/def :cimi.service-operation-report/datetime :cimi.core/timestamp)
 (s/def :cimi.service-operation-report/execution_time float?)
 
 (s/def :cimi/service-operation-report
@@ -26,5 +25,4 @@
                         :cimi.common/updated
                         :cimi.service-operation-report/serviceInstance
                         :cimi.service-operation-report/operation
-                        :cimi.service-operation-report/datetime
                         :cimi.service-operation-report/execution_time]))
