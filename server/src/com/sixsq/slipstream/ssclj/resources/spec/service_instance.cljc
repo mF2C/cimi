@@ -6,26 +6,25 @@
 
 ; {
 ; 	"id": URI,
-; 	"name": string,
-; 	"description": "profiling ...",
-; 	"created": dateTime,
-; 	"updated": dateTime,
 ; 	"resourceURI": URI,
+;   "user_id": string,
 ; 	"service_id": string,
 ;   "agreement_id": string,
 ; 	"status": string,
 ; 	"agents": [
-;     {"agent": resource-link, "url": "192.168.1.31", "port": int, "container_id": string, "status": string, "num_cpus": int}
+;     {"agent": resource-link, "url": "192.168.1.31", "port": int,
+;      "container_id": string, "status": string, "num_cpus": int, "allow": boolean}
 ;   ]
 ; }
 
 
-(s/def :cimi.service-instance/service_id :cimi.core/nonblank-string)   ; service (changed to string)
-(s/def :cimi.service-instance/agreement_id :cimi.core/nonblank-string) ; sla (changed to string)
+(s/def :cimi.service-instance/user_id :cimi.core/nonblank-string)       ; the user that launches the service
+(s/def :cimi.service-instance/service_id :cimi.core/nonblank-string)    ; service
+(s/def :cimi.service-instance/agreement_id :cimi.core/nonblank-string)  ; sla
 (s/def :cimi.service-instance/status :cimi.core/nonblank-string)
 ; agent fileds:
-(s/def :cimi.service-instance/agent :cimi.common/resource-link)         ; (not mandatory field)
-(s/def :cimi.service-instance/url :cimi.core/nonblank-string)           ; docker (new field)
+(s/def :cimi.service-instance/agent :cimi.common/resource-link)
+(s/def :cimi.service-instance/url :cimi.core/nonblank-string)
 (s/def :cimi.service-instance/port pos-int?)
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
@@ -45,6 +44,7 @@
   (su/only-keys :req-un [:cimi.common/id
                          :cimi.common/resourceURI
                          :cimi.common/acl
+                         :cimi.service-instance/user_id
                          :cimi.service-instance/service_id
                          :cimi.service-instance/agreement_id
                          :cimi.service-instance/status
