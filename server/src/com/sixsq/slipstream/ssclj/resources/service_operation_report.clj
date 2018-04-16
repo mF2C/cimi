@@ -1,7 +1,7 @@
 (ns
-  com.sixsq.slipstream.ssclj.resources.operation-times
+  com.sixsq.slipstream.ssclj.resources.service-operation-report
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.operation-times]
+    [com.sixsq.slipstream.ssclj.resources.spec.service-operation-report]
     [com.sixsq.slipstream.auth.acl :as a]
     [superstring.core :as str]    
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
@@ -9,10 +9,10 @@
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
-(def ^:const resource-name "OperationTimes")
+(def ^:const resource-name "ServiceOperationReport")
 (def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "OperationTimesCollection")
+(def ^:const collection-name "ServiceOperationReportCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))
@@ -30,7 +30,7 @@
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/operation-times))
+(def validate-fn (u/create-spec-validation-fn :cimi/service-operation-report))
 (defmethod crud/validate
   resource-uri
   [resource]

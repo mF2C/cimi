@@ -1,5 +1,5 @@
 (ns
-  com.sixsq.slipstream.ssclj.resources.operation-times-lifecycle-test
+  com.sixsq.slipstream.ssclj.resources.service-operation-report-lifecycle-test
   (:require
     [clojure.test :refer :all]
     [clojure.data.json :as json]
@@ -9,7 +9,7 @@
     [com.sixsq.slipstream.ssclj.resources.lifecycle-test-utils :as ltu]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
-    [com.sixsq.slipstream.ssclj.resources.operation-times :as callback]
+    [com.sixsq.slipstream.ssclj.resources.service-operation-report :as callback]
     [com.sixsq.slipstream.ssclj.resources.example-resource.utils :as utils]))
 
 (use-fixtures :each ltu/with-test-server-fixture)

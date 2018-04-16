@@ -1,11 +1,11 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.operation-times-test
+(ns com.sixsq.slipstream.ssclj.resources.spec.service-operation-report-test
   (:require [clojure.test :refer [deftest are is]]
             [clojure.spec.alpha :as s]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
             [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
-(deftest check-operation-times-resource-schema
+(deftest check-service-operation-report-resource-schema
   (let [resource-name             "OperationTimeResource"
         resource-url              (u/de-camelcase resource-name)
         resource-uri              (str schema/slipstream-schema-uri resource-name)
@@ -15,7 +15,7 @@
                                    :rules [{:principal "ADMIN"
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
-        resource                {:id            (str resource-url "/operation-times-resource")
+        resource                {:id            (str resource-url "/service-operation-report-resource")
                                 :resourceURI    resource-uri
                                 :created        timestamp
                                 :updated        timestamp
@@ -25,5 +25,5 @@
                                 :datetime       timestamp
                                 :execution_time 99.9
                                 }]
-    (is (s/valid? :cimi/operation-times resource))
-    (is (not (s/valid? :cimi/operation-times (assoc resource :bad-field "bla bla bla"))))))
+    (is (s/valid? :cimi/service-operation-report resource))
+    (is (not (s/valid? :cimi/service-operation-report (assoc resource :bad-field "bla bla bla"))))))
