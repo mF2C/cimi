@@ -379,7 +379,8 @@ cat >>deviceDynamic.json <<EOF
     "powerRemainingStatusSeconds": "3817",
     "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
     "wifiAddress": "Emp": [1595,8644,16,74,0,0,0,0],
-    "wifiThroughputInfo": ["E","m","p","t","y"]
+    "wifiThroughputInfo": ["E","m","p","t","y"],
+    "myLeaderID": {"href": "device/1"}
 }
 EOF
 
@@ -411,6 +412,23 @@ cat >>fogArea.json <<EOF
     "powerRemainingMax": "Device has unlimited power source",
     "powerRemainingMin": "88.2"
  } 
+EOF
+
+```
+
+
+## The "service-operation-report" resource
+
+Same as the other ones above. The JSON resource should look like:
+```bash
+cat >>fogArea.json <<EOF
+{
+    "serviceInstance": {"href": "service-instance/asasdasd"},
+    "operation": "newMethod",
+    "datetime": "1964-08-25T10:00:00.0Z",
+    "execution_time": 123.32
+}
+
 EOF
 
 ```
