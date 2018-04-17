@@ -52,6 +52,55 @@ curl -XPOST -k -H "Content-type: application/json" https://localhost/api/user -d
 curl -XPOST -k https://localhost/api/session -d @regularUser.json -H 'content-type: application/json' --cookie-jar ~/cookies -b ~/cookies -sS -k
 ```
 
+ #### API Keys
+ 
+API keys are a safer way to have robots (scripts) interacting with CIMI on behalf of a user, since the same user can issue multiple API keys, and every one of them can be revoked without interfering with the original user access. 
+
+Basically CIMI distinguishes between _internal_ logins and _api_key_ logins, even though they might be associated with the same user account.
+
+To create an API key, once you've logged in as `testuser` (step 3 above), do the following:
+
+1. request the creation of an API key:
+
+```bash
+curl https://localhost/api/credential -X POST -H 'content-type: application/json' -d @generateAPIKey.json --cookie-jar ~/cookies -b ~/cookies -sS -k
+```
+
+you'll get something like
+
+```json
+{
+  "status" : 201,
+  "message" : "credential/4f8b8f66-2e15-4570-a14e-f9d3582425ad created",
+  "resource-id" : "credential/4f8b8f66-2e15-4570-a14e-f9d3582425ad",
+  "secretKey" : "nehrHa.V9Ppzb.vHf4BG.5vxv3j.DzLtqb"
+}
+```
+
+2. take the key and secret:
+
+```bash
+export CIMI_API_KEY=credential/4f8b8f66-2e15-4570-a14e-f9d3582425ad
+export CIMI_API_SECRET=nehrHa.V9Ppzb.vHf4BG.5vxv3j.DzLtqb
+```
+
+3. create another session login, `regularUserAPIKey.json`:
+
+```bash
+cat >regularUserAPIKey.json <<EOF
+{
+    "sessionTemplate": {
+        "href": "session-template/api-key",
+        "key": "$CIMI_API_KEY",
+        "secret": "$CIMI_API_SECRET"
+    }
+}
+EOF
+```
+
+4. login, same as testuser, but use `regularUserAPIKey.json` instead of `regularUser.json`
+
+
 
 ## Testing new changes
 
