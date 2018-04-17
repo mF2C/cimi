@@ -58,6 +58,36 @@ API keys are a safer way to have robots (scripts) interacting with CIMI on behal
 
 Basically CIMI distinguishes between _internal_ logins and _api_key_ logins, even though they might be associated with the same user account.
 
+Before using API keys, create the session-template for it (only do it once):
+```bash
+curl -XPOST -H content-type:application/json -d '
+{
+   "method": "api-key",
+   "instance": "api-key",
+
+   "name" : "Login with API Key and Secret",
+   "description" : "Authentication with API Key and Secret",
+   "group" : "Login with API Key and Secret",
+
+   "key" : "key",
+   "secret" : "secret",
+
+   "acl": {
+             "owner": {"principal": "ADMIN",
+                       "type":      "ROLE"},
+             "rules": [{"principal": "ADMIN",
+                        "type":      "ROLE",
+                        "right":     "ALL"},
+                       {"principal": "ANON",
+                        "type":      "ROLE",
+                        "right":     "VIEW"},
+                       {"principal": "USER",
+                        "type":      "ROLE",
+                        "right":     "VIEW"}]
+          }
+}' https://localhost/api/session-template -k -H 'slipstream-authn-info: super ADMIN'
+```
+
 To create an API key, once you've logged in as `testuser` (step 3 above), do the following:
 
 1. request the creation of an API key:
