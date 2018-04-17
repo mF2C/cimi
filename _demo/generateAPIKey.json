@@ -1,0 +1,6 @@
+{
+    "credentialTemplate": {
+        "href": "credential-template/generate-api-key",
+        "ttl": 0
+    }
+}
