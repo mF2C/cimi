@@ -22,6 +22,9 @@ sed -i "" 's/(defproject eu.mf2c-project.cimi\/server.*/(defproject eu.mf2c-proj
 mvn clean install
 
 docker push mf2c/cimi-server:$2
+docker tag mf2c/cimi-server:$2 mf2c/cimi-server:latest
+docker push mf2c/cimi-server:latest
+
 sed -i "" 's/    image: mf2c\/cimi-server.*/    image: mf2c\/cimi-server:'$2'/g' _demo/docker-compose.yml
 
 git add _demo/docker-compose.yml _demo/README.md server/pom.xml server/project.clj container/pom.xml pom.xml
