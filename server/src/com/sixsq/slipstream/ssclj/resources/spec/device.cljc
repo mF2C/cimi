@@ -55,6 +55,8 @@
 								:cimi.device/powerPlugged
 								:cimi.device/networkingStandards
 								:cimi.device/ethernetAddress
-								:cimi.device/wifiAddress]
+								:cimi.device/wifiAddress
+                :cimi.device/hwloc
+                :cimi.device/cpuinfo]
 						:opt-un []}))
 
