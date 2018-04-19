@@ -38,6 +38,8 @@
 (s/def :cimi.device/networkingStandards :cimi.core/nonblank-string)
 (s/def :cimi.device/ethernetAddress :cimi.core/nonblank-string)
 (s/def :cimi.device/wifiAddress :cimi.core/nonblank-string)
+(s/def :cimi.device/hwloc string?)
+(s/def :cimi.device/cpuinfo string?)
 
 
 (s/def :cimi/device
@@ -55,8 +57,7 @@
 								:cimi.device/powerPlugged
 								:cimi.device/networkingStandards
 								:cimi.device/ethernetAddress
-								:cimi.device/wifiAddress
-                :cimi.device/hwloc
-                :cimi.device/cpuinfo]
-						:opt-un []}))
+								:cimi.device/wifiAddress]
+						:opt-un [:cimi.device/hwloc
+								:cimi.device/cpuinfo]}))
 
