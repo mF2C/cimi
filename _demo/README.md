@@ -436,7 +436,9 @@ cat >>device.json <<EOF
     "powerPlugged": true,
     "networkingStandards": "['eth0', 'lo']",
     "ethernetAddress": "[snic(family=<AddressFamily.AF_INET: 2>, address='172.17.0.3', netmask='255.255.0.0', broadcast='172.17.255.255', ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='02:42:ac:11:00:03', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]",
-    "wifiAddress": "Empty"
+    "wifiAddress": "Empty",
+    "hwloc": "<xmlString>",
+    "cpuinfo": "<rawCPUinfo>"
 }
 EOF
 
