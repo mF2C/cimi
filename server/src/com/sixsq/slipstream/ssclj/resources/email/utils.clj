@@ -12,9 +12,13 @@
 
 
 (def ^:const validation-email-body
-  (str "To validate your email address, please visit the address:\n\n-->>    %s\n\n"
-       "If you did not initiate this request, do NOT click on the\n"
-       "link and report this to the service administrator."))
+  (str "Welcome to the mF2C Community\n\n"
+        "Your registration was sucessful. Before you can join your devices to the mF2C network, "
+        "you must activate your account by clicking the following link: \n\n-->>    %s\n\n"
+        "In case the link does not work in your email client, please copy and paste it in your favorite web browser.\n\n"
+        "Don't forget to follow us in our social networks and visit our webpage.\n\n\n\n"
+        "If you did not initiate this request, do NOT click on the\n"
+        "link and report this to the service administrator."))
 
 
 (defn md5 [^String s]
@@ -74,7 +78,7 @@
             body (format validation-email-body callback-url)
             msg {:from    sender
                 :to      [address]
-                :subject "email validation"
+                :subject "mF2C - User Registration"
                 :body    body}
             resp (postal/send-message msg)]
         (if-not (= :SUCCESS (:error resp))

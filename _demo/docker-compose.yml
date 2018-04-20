@@ -33,6 +33,8 @@ services:
      - "5601:5601"
   cimi:
     image: mf2c/cimi-server:1.6-SNAPSHOT
+    depends_on:
+      - elasticsearch
     expose:
      - "8201"
     labels:
