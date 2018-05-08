@@ -22,15 +22,15 @@
                                     :updated        timestamp
                                     :acl            valid-acl
                                     ;; service instance fields
-                                    :user        "user/testuser"
-                                    :service     "service/71230958abdef9"
-                                    :agreement   "agreement/a1230958abdef0"
+                                    :user           "user/testuser"
+                                    :service        "service/71230958abdef9"
+                                    :agreement      "agreement/a1230958abdef0"
                                     :status         "running"
                                     :agents         [{:agent {:href "agent/1230958abdef1"}, :port 31111, :num_cpus 1
                                                       :status "running", :container_id "asdasd-asdasda", :allow true,
-                                                      :url "192.168.1.31"}
+                                                      :url "192.168.1.31", :master_compss true}
                                                      {:agent {:href "agent/1230958abdef2"}, :port 31111, :num_cpus 2
                                                       :status "running", :container_id "asdasd-hasdagsa", :allow false,
-                                                      :url "192.168.1.32"}]}]
+                                                      :url "192.168.1.32", :master_compss false}]}]
     (is (s/valid? :cimi/service-instance service-instance-resource))
     (is (not (s/valid? :cimi/service-instance (assoc service-instance-resource :bad-field "bla bla bla"))))))

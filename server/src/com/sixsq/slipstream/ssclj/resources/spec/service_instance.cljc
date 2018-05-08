@@ -6,14 +6,13 @@
 
 ; {
 ; 	"id": URI,
-; 	"resourceURI": URI,
-;   "user_id": string,
-; 	"service_id": string,
-;   "agreement_id": string,
+;   "user": string,
+; 	"service": string,
+;   "agreement": string,
 ; 	"status": string,
 ; 	"agents": [
 ;     {"agent": resource-link, "url": "192.168.1.31", "port": int,
-;      "container_id": string, "status": string, "num_cpus": int, "allow": boolean}
+;      "container_id": string, "status": string, "num_cpus": int, "allow": boolean, "master_compss": boolean}
 ;   ]
 ; }
 
@@ -29,6 +28,8 @@
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
 (s/def :cimi.service-instance/allow? boolean?)
+(s/def :cimi.service-instance/master_compss? boolean?)
+(s/def :cimi.service-instance/agent_param string?)
 (s/def :cimi.service-instance/agentinfo (su/only-keys :req-un [:cimi.service-instance/url
                                                                :cimi.service-instance/port
                                                                :cimi.service-instance/status
@@ -36,7 +37,9 @@
                                                                :cimi.service-instance/allow
                                                                ; resources assigned to agent:
                                                                :cimi.service-instance/num_cpus]
-                                                      :opt-un [:cimi.service-instance/agent]))
+                                                      :opt-un [:cimi.service-instance/agent
+                                                               :cimi.service-instance/master_compss
+                                                               :cimi.service-instance/agent_param]))
 (s/def :cimi.service-instance/agents (s/coll-of :cimi.service-instance/agentinfo :kind vector? :distinct true))
 
 
