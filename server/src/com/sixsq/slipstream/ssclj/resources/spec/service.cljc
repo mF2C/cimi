@@ -34,7 +34,7 @@
                                                      :cimi.service/air_pressure
                                                      :cimi.service/ir_motion]))
 (s/def :cimi.service/exec :cimi.core/nonblank-string)
-(s/def :cimi.service/exec_type :cimi.core/nonblank-string)
+(s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose"})
 (s/def :cimi.service/exec_ports vector?)
 (s/def :cimi/service
   (su/only-keys :req-un [:cimi.common/id
@@ -44,9 +44,9 @@
                          :cimi.common/updated
                          :cimi.common/acl
                          :cimi.service/exec
-                         :cimi.service/exec_type
-                         :cimi.service/exec_ports]
+                         :cimi.service/exec_type]
                 :opt-un [:cimi.common/name
                          :cimi.common/description
                          :cimi.common/properties
-                         :cimi.common/operations]))
+                         :cimi.common/operations
+                         :cimi.service/exec_ports]))
