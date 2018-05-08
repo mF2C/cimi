@@ -343,18 +343,20 @@ Same as the other ones above. The JSON resource should look like:
 ```bash
 cat >>serviceInstance.json <<EOF
 {
-    "user": {"href": "user/asasdasd"},
-    "service": {"href": "service/asasdasd"},
-    "agreement": {"href": "sla/asdasdasd"},
+    "user": "test_user",
+    "service": "a3bcf627-99cb-4138-a429-b44c5645e6d2",
+    "agreement": "e6bcf627-99cb-4138-a429-b44c5645e6b5",
     "status": "running",
     "agents": [
         {
-          "agent": {"href": "device/testdevice"}, 
-          "port": 8081, 
-          "container_id": "0938afd12323", 
-          "status": "running", 
-          "num_cpus": 3, 
-          "allow": true
+          "agent": {"href": "device/testdevice"},
+          "ports": [8081],
+          "container_id": "8259ec5ce1c97c0ce0e12e671f532b6fe44c015ee422ec10320df180a0e6da38",
+          "status": "running",
+          "num_cpus": 3,
+          "allow": true,
+          "master_compss": false,
+          "agent_param": "-"
         }
     ]
 }
