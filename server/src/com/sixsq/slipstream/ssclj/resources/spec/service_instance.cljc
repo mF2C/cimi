@@ -11,7 +11,7 @@
 ;   "agreement": string,
 ; 	"status": string,
 ; 	"agents": [
-;     {"agent": resource-link, "url": "192.168.1.31", "port": int,
+;     {"agent": resource-link, "url": "192.168.1.31", "ports": [], "agent_param": string,
 ;      "container_id": string, "status": string, "num_cpus": int, "allow": boolean, "master_compss": boolean}
 ;   ]
 ; }
@@ -24,14 +24,14 @@
 ; agent fileds:
 (s/def :cimi.service-instance/agent :cimi.common/resource-link)
 (s/def :cimi.service-instance/url :cimi.core/nonblank-string)
-(s/def :cimi.service-instance/port pos-int?)
+(s/def :cimi.service-instance/ports vector?) ; pos-int?
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
 (s/def :cimi.service-instance/allow? boolean?)
 (s/def :cimi.service-instance/master_compss? boolean?)
 (s/def :cimi.service-instance/agent_param string?)
 (s/def :cimi.service-instance/agentinfo (su/only-keys :req-un [:cimi.service-instance/url
-                                                               :cimi.service-instance/port
+                                                               :cimi.service-instance/ports
                                                                :cimi.service-instance/status
                                                                :cimi.service-instance/container_id
                                                                :cimi.service-instance/allow
