@@ -24,6 +24,9 @@
 
   :pom-location "target/"
 
+  :dependencies
+  [[dataclay/cimi "0.0.1-SNAPSHOT"]]
+
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
                              [com.sixsq.slipstream/SlipStreamCljResources-jar ~+slipstream-version+]
