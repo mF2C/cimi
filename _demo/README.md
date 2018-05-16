@@ -410,7 +410,9 @@ cat >>slaViolation.json <<EOF
 {
     "guarantee" : "TestGuarantee",
     "datetime" : "2018-04-11T10:39:51.527008088Z",
-    "agreement_id" : "agreement/4e529393-f659-44d6-9c8b-b0589132599b"
+    "agreement_id" : "agreement/4e529393-f659-44d6-9c8b-b0589132599b",
+    "constraint": "var1 < 100 and var2 > 100",
+    "values": { "var1": 101, "var2": 100 }
 }
 EOF
 
