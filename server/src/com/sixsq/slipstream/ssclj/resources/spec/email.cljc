@@ -1,10 +1,12 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.email
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
-(s/def :cimi.email/address :cimi.core/email)
+(s/def :cimi.email/address ::cimi-core/email)
 (s/def :cimi.email/validated? boolean?)
 
 (s/def :cimi/email

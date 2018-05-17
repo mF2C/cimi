@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.service
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -33,20 +35,20 @@
                                                      :cimi.service/humidity
                                                      :cimi.service/air_pressure
                                                      :cimi.service/ir_motion]))
-(s/def :cimi.service/exec :cimi.core/nonblank-string)
+(s/def :cimi.service/exec ::cimi-core/nonblank-string)
 (s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose"})
 (s/def :cimi.service/exec_ports vector?)
 (s/def :cimi/service
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
+  (su/only-keys :req-un [::cimi-common/id
+                         ::cimi-common/resourceURI
                          :cimi.service/category
-                         :cimi.common/created
-                         :cimi.common/updated
-                         :cimi.common/acl
+                         ::cimi-common/created
+                         ::cimi-common/updated
+                         ::cimi-common/acl
                          :cimi.service/exec
                          :cimi.service/exec_type]
-                :opt-un [:cimi.common/name
-                         :cimi.common/description
-                         :cimi.common/properties
-                         :cimi.common/operations
+                :opt-un [::cimi-common/name
+                         ::cimi-common/description
+                         ::cimi-common/properties
+                         ::cimi-common/operations
                          :cimi.service/exec_ports]))

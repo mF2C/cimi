@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.service-instance
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -17,13 +19,13 @@
 ; }
 
 
-(s/def :cimi.service-instance/user :cimi.core/nonblank-string)       ; the user that launches the service
-(s/def :cimi.service-instance/service :cimi.core/nonblank-string)    ; service
-(s/def :cimi.service-instance/agreement :cimi.core/nonblank-string)  ; sla
-(s/def :cimi.service-instance/status :cimi.core/nonblank-string)
+(s/def :cimi.service-instance/user ::cimi-core/nonblank-string)       ; the user that launches the service
+(s/def :cimi.service-instance/service ::cimi-core/nonblank-string)    ; service
+(s/def :cimi.service-instance/agreement ::cimi-core/nonblank-string)  ; sla
+(s/def :cimi.service-instance/status ::cimi-core/nonblank-string)
 ; agent fileds:
-(s/def :cimi.service-instance/agent :cimi.common/resource-link)
-(s/def :cimi.service-instance/url :cimi.core/nonblank-string)
+(s/def :cimi.service-instance/agent ::cimi-common/resource-link)
+(s/def :cimi.service-instance/url ::cimi-core/nonblank-string)
 (s/def :cimi.service-instance/ports vector?) ; pos-int?
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
@@ -44,17 +46,17 @@
 
 
 (s/def :cimi/service-instance
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
-                         :cimi.common/acl
+  (su/only-keys :req-un [::cimi-common/id
+                         ::cimi-common/resourceURI
+                         ::cimi-common/acl
                          :cimi.service-instance/user
                          :cimi.service-instance/service
                          :cimi.service-instance/agreement
                          :cimi.service-instance/status
-                         :cimi.common/created
-                         :cimi.common/updated
+                         ::cimi-common/created
+                         ::cimi-common/updated
                          :cimi.service-instance/agents]
-                :opt-un [:cimi.common/name
-                         :cimi.common/description
-                         :cimi.common/properties
-                         :cimi.common/operations]))
+                :opt-un [::cimi-common/name
+                         ::cimi-common/description
+                         ::cimi-common/properties
+                         ::cimi-common/operations]))

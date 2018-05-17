@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.service-operation-report
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -12,17 +14,17 @@
 ;   "execution_time": float
 ; }
 
-(s/def :cimi.service-operation-report/serviceInstance :cimi.common/resource-link)
+(s/def :cimi.service-operation-report/serviceInstance ::cimi-common/resource-link)
 (s/def :cimi.service-operation-report/operation string?)
 (s/def :cimi.service-operation-report/execution_time float?)
 
 (s/def :cimi/service-operation-report
   (su/only-keys :req-un [
-                        :cimi.common/id
-                        :cimi.common/resourceURI
-                        :cimi.common/acl
-                        :cimi.common/created
-                        :cimi.common/updated
+                        ::cimi-common/id
+                        ::cimi-common/resourceURI
+                        ::cimi-common/acl
+                        ::cimi-common/created
+                        ::cimi-common/updated
                         :cimi.service-operation-report/serviceInstance
                         :cimi.service-operation-report/operation
                         :cimi.service-operation-report/execution_time]))

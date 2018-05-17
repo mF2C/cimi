@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.device-dynamic
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -30,22 +32,22 @@
 
 
  	
-(s/def :cimi.device-dynamic/device :cimi.common/resource-link)	
+(s/def :cimi.device-dynamic/device ::cimi-common/resource-link)	
 ; (s/def :cimi.device-dynamic/isLeader boolean?)			
-;(s/def :cimi.device-dynamic/ramUnits :cimi.core/nonblank-string)	
+;(s/def :cimi.device-dynamic/ramUnits ::cimi-core/nonblank-string)	
 (s/def :cimi.device-dynamic/ramFree float?)
 (s/def :cimi.device-dynamic/ramFreePercent float?)
-;(s/def :cimi.device-dynamic/storageUnits :cimi.core/nonblank-string)		
+;(s/def :cimi.device-dynamic/storageUnits ::cimi-core/nonblank-string)		
 (s/def :cimi.device-dynamic/storageFree float?)
 (s/def :cimi.device-dynamic/storageFreePercent float?)
 (s/def :cimi.device-dynamic/cpuFreePercent float?)
-(s/def :cimi.device-dynamic/powerRemainingStatus :cimi.core/nonblank-string)
-(s/def :cimi.device-dynamic/powerRemainingStatusSeconds :cimi.core/nonblank-string)
-(s/def :cimi.device-dynamic/ethernetAddress :cimi.core/nonblank-string)
-(s/def :cimi.device-dynamic/wifiAddress :cimi.core/nonblank-string)
+(s/def :cimi.device-dynamic/powerRemainingStatus ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/powerRemainingStatusSeconds ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/ethernetAddress ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/wifiAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/ethernetThroughputInfo vector?)
 (s/def :cimi.device-dynamic/wifiThroughputInfo vector?)
-(s/def :cimi.device-dynamic/myLeaderID :cimi.common/resource-link)
+(s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
 
 
 (s/def :cimi/device-dynamic
