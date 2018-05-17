@@ -157,7 +157,7 @@
                                :request-method :put
                                :body (json/write-str {}))
                       (ltu/body->edn)
-                      (ltu/is-count zero?)
+                      (ltu/is-count 1)
                       (ltu/is-status 200))
 
                   ;; delete

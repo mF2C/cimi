@@ -67,7 +67,7 @@
 
 (s/def :cimi/fog-area
 	(su/only-keys-maps c/common-attrs
-					   {:req-un [:cimi.device-dynamic/leaderDevice
+					   {:req-un [:cimi.fog-area/leaderDevice
 								:cimi.fog-area/numDevices
 								;:cimi.fog-area/ramUnits
 								:cimi.fog-area/ramTotal

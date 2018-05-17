@@ -26,11 +26,11 @@
 ; agent fileds:
 (s/def :cimi.service-instance/agent ::cimi-common/resource-link)
 (s/def :cimi.service-instance/url ::cimi-core/nonblank-string)
-(s/def :cimi.service-instance/ports vector?) ; pos-int?
+(s/def :cimi.service-instance/ports (s/coll-of ::cimi-core/port)) ; pos-int?
 (s/def :cimi.service-instance/num_cpus pos-int?)
 (s/def :cimi.service-instance/container_id string?)
-(s/def :cimi.service-instance/allow? boolean?)
-(s/def :cimi.service-instance/master_compss? boolean?)
+(s/def :cimi.service-instance/allow boolean?)
+(s/def :cimi.service-instance/master_compss boolean?)
 (s/def :cimi.service-instance/agent_param string?)
 (s/def :cimi.service-instance/agentinfo (su/only-keys :req-un [:cimi.service-instance/url
                                                                :cimi.service-instance/ports
