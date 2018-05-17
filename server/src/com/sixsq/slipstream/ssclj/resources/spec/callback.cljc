@@ -13,7 +13,7 @@
 (s/def :cimi.callback/state #{"WAITING" "FAILED" "SUCCEEDED"})
 (s/def :cimi.callback/targetResource ::cimi-common/resource-link)
 (s/def :cimi.callback/data (su/constrained-map keyword? any?))
-(s/def ::cimi-common/expires ::cimi-core/timestamp)
+(s/def :cimi.callback/expires ::cimi-core/timestamp)
 
 (s/def :cimi/callback
   (su/only-keys-maps c/common-attrs

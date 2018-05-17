@@ -151,13 +151,13 @@
                             )
                        )
 
-                  ;; search
+                  ;; put
                   (-> session-admin
                       (request base-uri
                                :request-method :put
                                :body (json/write-str {}))
                       (ltu/body->edn)
-                      (ltu/is-count 1)
+                      (ltu/is-count zero?)
                       (ltu/is-status 200))
 
                   ;; delete
