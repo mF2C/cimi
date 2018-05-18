@@ -6,6 +6,9 @@
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
+    [clojure.pprint :as pp]
+    [com.sixsq.slipstream.util.response :as r]
+    [com.sixsq.slipstream.ssclj.util.log :as log-util]    
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
 
 (def ^:const resource-tag :services)
@@ -87,6 +90,33 @@
 (defmethod crud/query resource-name
   [request]
   (query-impl request))
+
+
+;;
+;; actions
+;;
+
+(def dispatch-on-action :action)
+
+(defmulti execute dispatch-on-action)
+
+(defmethod execute :default
+  [{:keys [id] :as resource}]
+  (pp/pprint id)
+  ; (utils/callback-failed! id)
+  (log-util/log-and-throw 400 (str "error executing service: '" (dispatch-on-action resource) "'")))
+
+
+(defmethod crud/do-action [resource-url "execute"]
+  [{{uuid :uuid} :params :as request}]
+  ; (try
+    (let [id (str resource-url "/" uuid)]
+      (when-let [callback (crud/retrieve-by-id id {:user-name "INTERNAL", :user-roles ["ADMIN"]})]
+        ; (if (utils/executable? callback)
+        (execute callback))))
+        ; (r/map-response "cannot re-execute callback" 409 id)))
+    ; (catch ExceptionInfo ei
+      ; (ex-data ei))))
 
 ;;
 ;; initialization
