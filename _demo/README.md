@@ -194,7 +194,8 @@ cat >>service.json <<EOF
   "category": {
     "cpu": "low",
     "memory": "low",
-    "storage": "low",
+    "disk": "low",
+    "network": "low",
     "inclinometer": false,
     "temperature": false,
     "jammer": false,
