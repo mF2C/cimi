@@ -64,6 +64,7 @@
                                          :acl         valid-acl
                                          :category    {:cpu            "low"
                                                        :memory         "medium"
+                                                       :storage        "low"
                                                        :disk           "low"
                                                        :network        "low"
                                                        :inclinometer   true

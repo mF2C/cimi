@@ -7,6 +7,7 @@
 
 (s/def :cimi.service/cpu #{"high" "medium" "low"})
 (s/def :cimi.service/memory #{"high" "medium" "low"})
+(s/def :cimi.service/storage #{"high" "medium" "low"})
 (s/def :cimi.service/disk #{"high" "medium" "low"})
 (s/def :cimi.service/network #{"high" "medium" "low"})
 (s/def :cimi.service/inclinometer? boolean?)
@@ -22,6 +23,7 @@
 (s/def :cimi.service/ir_motion? boolean?)
 (s/def :cimi.service/category (su/only-keys :req-un [:cimi.service/cpu
                                                      :cimi.service/memory
+                                                     :cimi.service/storage
                                                      :cimi.service/disk
                                                      :cimi.service/network
                                                      :cimi.service/inclinometer
