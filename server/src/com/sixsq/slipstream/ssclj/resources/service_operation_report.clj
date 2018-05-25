@@ -88,3 +88,11 @@
 (defmethod crud/query resource-name
   [request]
   (query-impl request))
+
+
+;;
+;; initialization
+;;
+(defn initialize
+  []
+  (std-crud/initialize resource-url :cimi/service-operation-report))

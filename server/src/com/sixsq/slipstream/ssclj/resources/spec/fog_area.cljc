@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.fog-area
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -41,13 +43,13 @@
 ;
 
 
-(s/def :cimi.fog-area/leaderDevice :cimi.common/resource-link)   	   
+(s/def :cimi.fog-area/leaderDevice ::cimi-common/resource-link)   	   
 (s/def :cimi.fog-area/numDevices pos-int?)     
-;(s/def :cimi.fog-area/ramUnits :cimi.core/nonblank-string)
+;(s/def :cimi.fog-area/ramUnits ::cimi-core/nonblank-string)
 (s/def :cimi.fog-area/ramTotal float?)
 (s/def :cimi.fog-area/ramMax float?)
 (s/def :cimi.fog-area/ramMin float?)
-;(s/def :cimi.fog-area/storageUnits :cimi.core/nonblank-string)
+;(s/def :cimi.fog-area/storageUnits ::cimi-core/nonblank-string)
 (s/def :cimi.fog-area/storageTotal float?)
 (s/def :cimi.fog-area/storageMax float?)
 (s/def :cimi.fog-area/storageMin float?)
@@ -60,12 +62,12 @@
 (s/def :cimi.fog-area/avgLogicalCores pos-int?)
 (s/def :cimi.fog-area/logicalCoresMax pos-int?)
 (s/def :cimi.fog-area/logicalCoresMin pos-int?)
-(s/def :cimi.fog-area/powerRemainingMax :cimi.core/nonblank-string)
-(s/def :cimi.fog-area/powerRemainingMin :cimi.core/nonblank-string)
+(s/def :cimi.fog-area/powerRemainingMax ::cimi-core/nonblank-string)
+(s/def :cimi.fog-area/powerRemainingMin ::cimi-core/nonblank-string)
 
 (s/def :cimi/fog-area
 	(su/only-keys-maps c/common-attrs
-					   {:req-un [:cimi.device-dynamic/leaderDevice
+					   {:req-un [:cimi.fog-area/leaderDevice
 								:cimi.fog-area/numDevices
 								;:cimi.fog-area/ramUnits
 								:cimi.fog-area/ramTotal

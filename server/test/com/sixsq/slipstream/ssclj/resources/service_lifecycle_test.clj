@@ -153,7 +153,7 @@
                             )
                        )
 
-                  ;; search
+                  ;; put
                   (-> session-admin
                       (request base-uri
                                :request-method :put
