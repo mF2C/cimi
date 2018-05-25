@@ -25,6 +25,11 @@
       <version>${project.version}</version>
       <type>pom</type>
     </dependency>
+    <dependency>
+      <groupId>eu.mf2c-project.cimi</groupId>
+      <artifactId>server</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <profiles>
@@ -61,9 +66,16 @@
                             </includes>
                           </fileSet>
                         </fileSets>
+                        <files>
+                          <file>
+                            <source>src/main/scripts/cimi-dc-init.sh</source>
+                            <outputDirectory>${installation.dir}/bin</outputDirectory>
+                          </file>
+                        </files>
                       </inline>
                     </assembly>
                     <workdir>${installation.dir}</workdir>
+                    <cmd>postfix start &amp;&amp; sh ${installation.dir}/bin/cimi-dc-init.sh &amp;&amp; sh ${installation.dir}/bin/generate-auth-keys.sh &amp;&amp; /usr/bin/java -Dconfig.name=db.spec -Dlogfile.path=production -cp "/opt/slipstream/ring-container/lib/*:resources:lib/*:extra-resources/*" sixsq.slipstream.server.ring_container</cmd>
                   </build>
                 </image>
               </images>
@@ -95,7 +107,7 @@
           <execution>
             <id>copy-dependencies</id>
             <goals>
-              <goal>copy</goal>
+              <goal>copy-dependencies</goal>
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
@@ -103,13 +115,13 @@
               <stripClassifier>true</stripClassifier>
               <excludeTypes>pom</excludeTypes>
               <includeScope>runtime</includeScope>
-              <artifactItems>
+              <!-- <artifactItems>
                 <artifact>
                   <groupId>eu.mf2c-project.cimi</groupId>
                   <artifactId>server</artifactId>
                   <version>${project.version}</version>
                 </artifact>
-              </artifactItems>
+              </artifactItems> -->
             </configuration>
           </execution>
 
