@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.agreement
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
@@ -30,8 +32,8 @@
 (s/def :cimi.agreement/state #{"started" "stopped" "terminated"})
 
 ; ASSESSMENT
-(s/def :cimi.agreement/first_execution :cimi.core/timestamp)
-(s/def :cimi.agreement/last_execution :cimi.core/timestamp)
+(s/def :cimi.agreement/first_execution ::cimi-core/timestamp)
+(s/def :cimi.agreement/last_execution ::cimi-core/timestamp)
 
 (s/def :cimi.agreement/assessment (su/only-keys :req-un [:cimi.agreement/first_execution
                                                         :cimi.agreement/last_execution]))
@@ -41,18 +43,18 @@
 (s/def :cimi.agreement/type #{"agreement" "template"})
 
 (s/def :cimi.agreement/party (su/only-keys :req-un [:cimi.agreement/id  ; this could a common/resourceURI in the near future
-                                                    :cimi.common/name]))
+                                                    ::cimi-common/name]))
 
 (s/def :cimi.agreement/provider :cimi.agreement/party)
 (s/def :cimi.agreement/client :cimi.agreement/party)
 
-(s/def :cimi.agreement/creation :cimi.core/timestamp)
-(s/def :cimi.agreement/expiration :cimi.core/timestamp)
+(s/def :cimi.agreement/creation ::cimi-core/timestamp)
+(s/def :cimi.agreement/expiration ::cimi-core/timestamp)
 
 ; DETAILS/GUARANTEE
 (s/def :cimi.agreement/constraint string?)
 
-(s/def :cimi.agreement/guarantee (su/only-keys :req-un [:cimi.common/name
+(s/def :cimi.agreement/guarantee (su/only-keys :req-un [::cimi-common/name
                                                         :cimi.agreement/constraint]))
 
 (s/def :cimi.agreement/guarantees (s/coll-of :cimi.agreement/guarantee :kind vector? :distinct true))
@@ -60,7 +62,7 @@
 ; --
 
 (s/def :cimi.agreement/details (su/only-keys :req-un [:cimi.agreement/type
-                                                    :cimi.common/name
+                                                    ::cimi-common/name
                                                     :cimi.agreement/provider
                                                     :cimi.agreement/client
                                                     :cimi.agreement/creation
@@ -71,14 +73,14 @@
 ; --
 
 (s/def :cimi/agreement
-  (su/only-keys :req-un [:cimi.common/id
-                         :cimi.common/resourceURI
-                         :cimi.common/acl
-                         :cimi.common/created
-                         :cimi.common/updated
+  (su/only-keys :req-un [::cimi-common/id
+                         ::cimi-common/resourceURI
+                         ::cimi-common/acl
+                         ::cimi-common/created
+                         ::cimi-common/updated
                          :cimi.agreement/state
                          :cimi.agreement/details]
-                :opt-un [:cimi.common/name
-                         :cimi.common/properties
+                :opt-un [::cimi-common/name
+                         ::cimi-common/properties
                          :cimi.agreement/assessment
-                         :cimi.common/operations]))
+                         ::cimi-common/operations]))

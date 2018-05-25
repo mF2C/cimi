@@ -1,7 +1,7 @@
-(def +version+ "1.8-SNAPSHOT")
-(def +slipstream-version+ "3.48")
+(def +version+ "1.10-SNAPSHOT")
+(def +slipstream-version+ "3.51")
 
-(defproject eu.mf2c-project.cimi/server "1.8-SNAPSHOT"
+(defproject eu.mf2c-project.cimi/server "1.10-SNAPSHOT"
 
   :description "MF2C CIMI resources and server"
 
@@ -14,7 +14,7 @@
   :plugins [[lein-parent "0.3.2"]
             [lein-environ "1.1.0"]]
 
-  :parent-project {:coords  [sixsq/slipstream-parent "5.0.0"]
+  :parent-project {:coords  [sixsq/slipstream-parent "5.3.5"]
                    :inherit [:min-lein-version
                              :managed-dependencies
                              :repositories

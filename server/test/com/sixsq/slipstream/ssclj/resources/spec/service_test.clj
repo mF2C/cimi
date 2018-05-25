@@ -19,7 +19,9 @@
                         :acl         valid-acl
                         :category    {:cpu            "low"
                                       :memory         "medium"
+                                      :disk           "low"
                                       :storage        "low"
+                                      :network        "low"
                                       :inclinometer   true
                                       :temperature    false
                                       :jammer         true

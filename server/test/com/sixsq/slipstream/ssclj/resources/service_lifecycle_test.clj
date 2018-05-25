@@ -65,6 +65,8 @@
                                          :category    {:cpu            "low"
                                                        :memory         "medium"
                                                        :storage        "low"
+                                                       :disk           "low"
+                                                       :network        "low"
                                                        :inclinometer   true
                                                        :temperature    false
                                                        :jammer         true
@@ -151,7 +153,7 @@
                             )
                        )
 
-                  ;; search
+                  ;; put
                   (-> session-admin
                       (request base-uri
                                :request-method :put

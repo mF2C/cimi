@@ -1,5 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.user-template-self-registration
-  (:require
+  (:require 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.user :as u]
     [com.sixsq.slipstream.ssclj.resources.spec.user-template :as ps]

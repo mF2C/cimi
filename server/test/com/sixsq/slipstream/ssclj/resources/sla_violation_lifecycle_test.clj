@@ -66,6 +66,9 @@
                                         :agreement_id   {:href "agreement/agreement-id-01"}
                                         :guarantee      "gt01"
                                         :datetime       timestamp
+                                        :constraint     "var1 < 100 and var2 > 100"
+                                        :values         { :var1 200
+                                                        :var2 "0" }
                                     }
 
                    resp-test (-> session-admin

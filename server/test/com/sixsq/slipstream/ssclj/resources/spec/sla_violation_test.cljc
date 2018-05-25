@@ -23,6 +23,9 @@
                                 :agreement_id   {:href "agreement/agreement-id"}
                                 :guarantee      "gt01"
                                 :datetime       timestamp
+                                :constraint     "var1 < 100 and var2 > 100"
+                                :values         { :var1 200
+                                                  :var2 "0" }
                                 }]
     (is (s/valid? :cimi/sla-violation sla-violation-resource))
     (is (not (s/valid? :cimi/sla-violation (assoc sla-violation-resource :bad-field "bla bla bla"))))))
