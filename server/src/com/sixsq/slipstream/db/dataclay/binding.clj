@@ -55,8 +55,8 @@
     (let [results (DataClayWrapper/query collection-id filter user-name user-roles)
           json-results (map json/json->edn results)
           n (count json-results)]
-      {:count n
-       (keyword (str collection-id "s") json-results)}))
+      {:count                            n
+       (keyword (str collection-id "s")) json-results}))
 
 
   Closeable
