@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-CFG=$1/cfgfiles
+workdir=$1
+CFG=$workdir/cfgfiles
 
 mkdir -p $CFG
 
@@ -28,22 +29,27 @@ EOF
 mkdir -p DCCLASSES
 TMPDIR=`mktemp -d`
 
-(cd DCCLASSES && jar -xf $1/lib/cimi-*.jar) 
+(cd DCCLASSES && jar -xf $workdir/lib/cimi-*.jar) 
 
 cp -r DCCLASSES/CIMI $TMPDIR
 
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.NewAccount $USER $PASSWORD)
+function dc_command {
+    (cd $workdir && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $workdir/lib/dataclay-*.jar $@)
+}
 
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.NewDataContract $USER $PASSWORD $DATASET $USER)
+until dc_command dataclay.tool.NewAccount $USER $PASSWORD
+do
+    echo "Waiting for DataClay to be ready"
+    sleep 2
+done
 
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.NewNamespace $USER $PASSWORD $NAMESPACE java)
-
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.NewModel $USER $PASSWORD $NAMESPACE $TMPDIR)
+dc_command dataclay.tool.NewDataContract $USER $PASSWORD $DATASET $USER
+dc_command dataclay.tool.NewNamespace $USER $PASSWORD $NAMESPACE java
+dc_command dataclay.tool.NewModel $USER $PASSWORD $NAMESPACE $TMPDIR
 
 rm -fr $TMPDIR DCCLASSES
 
 mkdir -p $STUBSPATH
 
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.AccessNamespace $USER $PASSWORD $NAMESPACE)
-
-(cd $1 && java -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF -cp $1/lib/dataclay-*.jar dataclay.tool.GetStubs $USER $PASSWORD $NAMESPACE $STUBSPATH)
+dc_command dataclay.tool.AccessNamespace $USER $PASSWORD $NAMESPACE
+dc_command dataclay.tool.GetStubs $USER $PASSWORD $NAMESPACE $STUBSPATH
