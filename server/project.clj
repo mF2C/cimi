@@ -25,7 +25,8 @@
   :pom-location "target/"
 
   :dependencies
-  [[dataclay/cimi "0.0.1-SNAPSHOT"]]
+  [[dataclay/cimi "0.0.1-SNAPSHOT"]
+   [dataclay "0.0.1"]]
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
