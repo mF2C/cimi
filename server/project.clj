@@ -26,7 +26,7 @@
 
   :dependencies
   [[dataclay/cimi "0.0.1-SNAPSHOT"]
-   [dataclay "0.0.1"]]
+   [dataclay/client "0.0.1"]]
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
