@@ -1,5 +1,5 @@
 (def +version+ "1.10-SNAPSHOT")
-(def +slipstream-version+ "3.51")
+(def +slipstream-version+ "3.52-SNAPSHOT")
 
 (defproject eu.mf2c-project.cimi/server "1.10-SNAPSHOT"
 
@@ -30,8 +30,10 @@
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
-                             [com.sixsq.slipstream/SlipStreamCljResources-jar ~+slipstream-version+]
-                             [org.clojure/test.check :scope "provided"]]}
+                             [com.sixsq.slipstream/SlipStreamCljResources-jar ~+slipstream-version+
+                              :exclusions [org.elasticsearch/elasticsearch
+                                           org.elasticsearch.client/transport
+                                           cc.qbits/spandex]]]}
 
              :test
              {:dependencies   [[peridot]
