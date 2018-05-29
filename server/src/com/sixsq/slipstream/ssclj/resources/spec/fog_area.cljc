@@ -1,10 +1,10 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.fog-area
   (:require 
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [clojure.spec.alpha :as s] 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
-    [clojure.spec.alpha :as s]
-    [com.sixsq.slipstream.ssclj.util.spec :as su]
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
+    [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 ; Before publishing the fog area's information, all the agent's information of the corresponding fog area will be retrieve to the Leader agent local device
 ; Then making some simple aggregation and publish the total capacity of a fog area as following- 

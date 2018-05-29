@@ -5,8 +5,8 @@
     [com.sixsq.slipstream.util.response :as response]
     [sixsq.slipstream.client.impl.utils.json :as json])
   (:import
-    (java.io Closeable)
-    (api DataClayWrapper)))
+    (api DataClayWrapper)
+    (java.io Closeable)))
 
 
 (deftype DataClayBinding

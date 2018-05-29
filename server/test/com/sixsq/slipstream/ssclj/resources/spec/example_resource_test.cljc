@@ -3,8 +3,8 @@
     :license   "http://www.apache.org/licenses/LICENSE-2.0"}
   com.sixsq.slipstream.ssclj.resources.spec.example-resource-test
   (:require
-    [clojure.test :refer [deftest are is]]
     [clojure.spec.alpha :as s]
+    [clojure.test :refer [are deftest is]]
     [com.sixsq.slipstream.ssclj.resources.example-resource :as t]))
 
 

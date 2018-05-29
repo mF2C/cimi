@@ -1,15 +1,15 @@
 (ns
   com.sixsq.slipstream.ssclj.resources.service
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.service]
+    [clojure.pprint :as pp]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
+    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
-    [clojure.pprint :as pp]
-    [com.sixsq.slipstream.util.response :as r]
+    [com.sixsq.slipstream.ssclj.resources.spec.service]
     [com.sixsq.slipstream.ssclj.util.log :as log-util]    
-    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
+    [com.sixsq.slipstream.util.response :as r]))
 
 (def ^:const resource-tag :services)
 (def ^:const resource-name "Service")

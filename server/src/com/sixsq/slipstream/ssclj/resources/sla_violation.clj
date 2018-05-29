@@ -1,13 +1,13 @@
 (ns
   com.sixsq.slipstream.ssclj.resources.sla-violation
   (:require
-    [com.sixsq.slipstream.ssclj.resources.spec.sla-violation]
     [com.sixsq.slipstream.auth.acl :as a]
-    [superstring.core :as str]    
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
+    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]    
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
-    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]))
+    [com.sixsq.slipstream.ssclj.resources.spec.sla-violation]
+    [superstring.core :as str]))
 
 (def ^:const resource-name "SlaViolation")
 (def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
