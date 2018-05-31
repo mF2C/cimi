@@ -22,11 +22,9 @@
 
   :source-paths ["src"]
 
-  :pom-location "target/"
+  :resource-paths ["resources"]
 
-  :dependencies
-  [[dataclay/cimi "0.0.1-SNAPSHOT"]
-   [dataclay/client "0.0.1"]]
+  :pom-location "target/"
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]

@@ -1,16 +1,25 @@
 (ns com.sixsq.slipstream.db.dataclay.binding
   (:require
-    [clojure.string :as str]
+    [clojure.core.async :refer [<!!]]
+    [clojure.tools.logging :as log]
     [com.sixsq.slipstream.db.binding :refer [Binding]]
-    [com.sixsq.slipstream.util.response :as response]
-    [sixsq.slipstream.client.impl.utils.json :as json])
+    [kvlt.chan :as kvlt])
   (:import
-    (api DataClayWrapper)
     (java.io Closeable)))
 
 
+(defn send-command
+  [url command]
+  (let [{:keys [status body]} (<!! (kvlt/request! {:url    url
+                                                   :method get
+                                                   :body   ^:kvlt.body/edn command
+                                                   :as     :edn}))]
+    (log/debugf "status %s\n\n%s\n\n%s" status command body)
+    body))
+
+
 (deftype DataClayBinding
-  []
+  [send-fn]
 
   Binding
 
@@ -18,45 +27,28 @@
     nil)
 
 
-  (add [_ {:keys [id] :as data} options]
-    (let [[type uuid] (str/split id #"/")]
-      (DataClayWrapper/create type uuid (json/edn->json data))))
+  (add [_ data options]
+    (send-fn [:add data options]))
 
 
-  (add [_ _ {:keys [id] :as data} options]
-    (let [[type uuid] (str/split id #"/")]
-      (DataClayWrapper/create type uuid (json/edn->json data))))
+  (add [_ _ data options]
+    (send-fn [:add data options]))
 
 
   (retrieve [_ id options]
-    (let [[type uuid] (str/split id #"/")]
-      (json/json->edn (DataClayWrapper/read type uuid))))
+    (send-fn [:retrieve id options]))
 
 
-  (delete [_ {:keys [id] :as data} options]
-    (let [[type uuid] (str/split id #"/")]
-      (try
-        (DataClayWrapper/delete type uuid)
-        (response/map-response (format "resource %s deleted" id) 200)
-        (catch Exception e
-          (response/ex-bad-request (format "resource %s NOT deleted" id))))))
+  (delete [_ data options]
+    (send-fn [:delete data options]))
 
 
-  (edit [_ {:keys [id] :as data} options]
-    (let [[type uuid] (str/split id #"/")]
-      (try
-        (DataClayWrapper/update type uuid data)
-        (response/map-response (format "resource %s updated" id) 200)
-        (catch Exception e
-          (response/ex-bad-request (format "resource %s NOT updated" id))))))
+  (edit [_ data options]
+    (send-fn [:edit data options]))
 
 
-  (query [_ collection-id {:keys [filter user-name user-roles] :as options}]
-    (let [results (DataClayWrapper/query collection-id filter user-name user-roles)
-          json-results (map json/json->edn results)
-          n (count json-results)]
-      {:count                            n
-       (keyword (str collection-id "s")) json-results}))
+  (query [_ collection-id options]
+    (send-fn [:query collection-id options]))
 
 
   Closeable
