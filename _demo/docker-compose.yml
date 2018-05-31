@@ -16,6 +16,9 @@ services:
     image: mf2c/cimi-server:1.10-SNAPSHOT
     depends_on:
       - logicmodule1
+    environment:
+      - DC_HOST=localhost
+      - DC_PORT=6472
     expose:
      - "8201"
     labels:
