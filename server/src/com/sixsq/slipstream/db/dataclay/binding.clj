@@ -10,10 +10,13 @@
 
 (defn send-command
   [url command]
-  (let [{:keys [status body]} (<!! (kvlt/request! {:url    url
-                                                   :method get
-                                                   :body   ^:kvlt.body/edn command
-                                                   :as     :edn}))]
+  (log/debugf "url: '%s'; command: '%s'" url command)
+  (let [{:keys [status body]} (-> {:url    url
+                                   :method :get
+                                   :body   (prn-str command)
+                                   :as     :edn}
+                                  kvlt/request!
+                                  <!!)]
     (log/debugf "status %s\n\n%s\n\n%s" status command body)
     body))
 

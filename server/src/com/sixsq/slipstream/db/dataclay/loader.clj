@@ -12,6 +12,6 @@
   []
   (let [host (env/env :es-host "localhost")
         port (env/env :es-port "6472")
-        url (format "http://%s:%s" host port)
+        url (format "http://%s:%s/" host port)
         send-fn (partial dataclay/send-command url)]
     (dataclay/->DataClayBinding send-fn)))
