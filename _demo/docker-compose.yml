@@ -18,8 +18,6 @@ services:
       - logicmodule1
     expose:
       - "6472"
-    ports:
-      - 6472
   cimi:
     image: mf2c/cimi-server:1.10-SNAPSHOT
     depends_on:
@@ -40,7 +38,7 @@ services:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
   rc:
-    image: sixsq/ring-container:3.52-SNAPSHOT
+    image: sixsq/ring-container:3.53-SNAPSHOT
     expose:
      - "5000"
     volumes:
