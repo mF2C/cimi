@@ -19,7 +19,7 @@ services:
     expose:
       - "6472"
   cimi:
-    image: mf2c/cimi-server:1.10-SNAPSHOT
+    image: mf2c/cimi-server:2.1-SNAPSHOT
     depends_on:
       - logicmodule1
       - dcproxy

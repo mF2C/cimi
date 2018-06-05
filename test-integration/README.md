@@ -1,7 +1,7 @@
 # Integration Tests
 
 To test the integration of the CIMI server with the DataClay backend, 
-you'll find in this folder a compose file which references multiple services,
+you'll find in this folder a compose file which references multiple micro-services,
 spread throughout this repository, aiming at testing and validating 
 different aspects of the data management workflows.
 
