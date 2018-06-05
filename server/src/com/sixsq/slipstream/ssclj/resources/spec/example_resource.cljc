@@ -3,12 +3,12 @@
     :license   "http://www.apache.org/licenses/LICENSE-2.0"}
   com.sixsq.slipstream.ssclj.resources.spec.example-resource
   (:require 
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common] 
+    [clojure.spec.alpha :as s] 
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
+    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
-    [clojure.spec.alpha :as s]
-    [com.sixsq.slipstream.ssclj.util.spec :as su]
     [com.sixsq.slipstream.ssclj.resources.spec.session-template]
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
+    [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 (s/def :cimi.example-resource/action ::cimi-core/nonblank-string)
 (s/def :cimi.example-resource/state #{"WAITING" "FAILED" "SUCCEEDED"})

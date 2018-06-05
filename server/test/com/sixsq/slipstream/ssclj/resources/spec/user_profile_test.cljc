@@ -1,6 +1,6 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.user-profile-test
-  (:require [clojure.test :refer [deftest are is]]
-            [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as s]
+            [clojure.test :refer [are deftest is]]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
             [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))

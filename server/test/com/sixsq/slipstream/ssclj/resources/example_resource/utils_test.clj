@@ -3,10 +3,10 @@
     :license   "http://www.apache.org/licenses/LICENSE-2.0"}
   com.sixsq.slipstream.ssclj.resources.example-resource.utils-test
   (:require
-    [clojure.test :refer [deftest is are]]
-    [clj-time.core :refer [weeks ago from-now]]
-    [com.sixsq.slipstream.ssclj.resources.example-resource.utils :as t]
-    [com.sixsq.slipstream.ssclj.resources.common.utils :as u]))
+    [clj-time.core :refer [ago from-now weeks]]
+    [clojure.test :refer [are deftest is]]
+    [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
+    [com.sixsq.slipstream.ssclj.resources.example-resource.utils :as t]))
 
 
 (deftest check-executable?

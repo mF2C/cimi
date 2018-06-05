@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  private-endpoints:
+    build: .
+    image: test-endpoints
+    environment:
+      - ENDPOINTS=cimi,dcproxy,logicmodule1,proxy
+  public-endpoints:
+    image: test-endpoints
+    depends_on:
+      - private-endpoints
+    environment:
+      - ENDPOINTS=localhost
+    network_mode: "host"
+  cimi-operations:
+    build: ../container/test-integration/
+    environment:
+      - BASE_API_URL=https://localhost/api
+    network_mode: "host"
