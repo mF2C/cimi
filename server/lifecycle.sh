@@ -4,7 +4,7 @@
 # Example script to exercise the full lifecycle of one CIMI resource.
 #
 
-BASE_URI=http://localhost:5555/api/
+BASE_URI=https://localhost/api/
 
 cat > sharing-model-example.json <<'EOF'
 {
@@ -25,7 +25,7 @@ RELATIVE_URL=`curl -XPOST -k \
               -d @sharing-model-example.json \
                ${BASE_URI}sharing-model \
                -s -v \
-               2>&1 | grep Location: | cut -d ' ' -f 3`
+               2>&1 | grep -i location: | cut -d ' ' -f 3`
 
 LOCATION="${BASE_URI}${RELATIVE_URL}"
 LOCATION=`echo ${LOCATION} | tr '\r' ' '`
@@ -56,6 +56,18 @@ curl -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${BASE_URI}sharing-model
+
+echo "QUERY THE DOCUMENTS WITH FILTER (EMPTY)"
+curl -XGET -k \
+  -H 'content-type: application/json' \
+  -H 'slipstream-authn-info: internal ADMIN' \
+  ${BASE_URI}sharing-model?'$filter=max_storage_usage<200%20and%20gps_allowed=false'
+
+echo "QUERY THE DOCUMENTS WITH FILTER (NOT EMPTY)"
+curl -XGET -k \
+  -H 'content-type: application/json' \
+  -H 'slipstream-authn-info: internal ADMIN' \
+  ${BASE_URI}sharing-model?'$filter=max_storage_usage>200%20and%20gps_allowed=false'
 
 echo "DELETE THE DOCUMENT"
 curl -XDELETE -k \
