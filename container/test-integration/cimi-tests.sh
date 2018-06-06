@@ -40,11 +40,11 @@ USER=$(cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
         log "NO" "failed to create new user $USER"
 
 # test "create resource" operation
-(curl -XPOST "${BASE_API_URL}/user-profile" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
+ID=`curl -XPOST "${BASE_API_URL}/user-profile" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
     "service_consumer": true,
     "resource_contributor": false
-}' | jq -e 'select(.status == 201)' > /dev/null 2>&1 && \
-    log "OK" "created new resource successfully") || \
+}' | jq -e -r '.["resource-id"]'` && \
+    log "OK" "created new resource $ID successfully" || \
         log "NO" "failed to create new resource"
 
 # test "retrieve resource" operation
@@ -58,11 +58,11 @@ USER=$(cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
         log "NO" "failed perform a query with filters"
 
 # test "update resource" operation
-(curl -XPUT "${BASE_API_URL}/user/$USER" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
-    "password": "testpasswordnew",
-    "passwordRepeat" : "testpasswordnew"
-}' | jq -e 'select(.status == 201)' > /dev/null 2>&1 && \
-    log "OK" "resource update successfully") || \
+(curl -XPUT "${BASE_API_URL}/${ID}" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
+    "service_consumer": false,
+    "resource_contributor": true
+}' --fail > /dev/null 2>&1 && \
+    log "OK" "resource $ID update successfully") || \
         log "NO" "failed to update resource"
 
 # test "delete resource" operation
