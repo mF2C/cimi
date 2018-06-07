@@ -33,50 +33,50 @@ LOCATION=`echo ${LOCATION} | tr '\r' ' '`
 echo "DOCUMENT URL: " ${LOCATION}
 
 echo "GET CREATED DOCUMENT"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${LOCATION}
 
 echo "UPDATE CREATE DOCUMENT WITH NEW NAME"
-curl -XPUT -k \
+curl -s -XPUT -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   -d '{"name": "UPDATED NAME", "max_cpu_usage": 1000}' \
   ${LOCATION}
 
 echo "GET UPDATED DOCUMENT"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${LOCATION}
 
 echo "QUERY THE DOCUMENTS"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${BASE_URI}sharing-model
 
 echo "QUERY THE DOCUMENTS WITH FILTER (EMPTY)"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${BASE_URI}sharing-model?'$filter=max_storage_usage<200%20and%20gps_allowed=false'
 
 echo "QUERY THE DOCUMENTS WITH FILTER (NOT EMPTY)"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${BASE_URI}sharing-model?'$filter=max_storage_usage>200%20and%20gps_allowed=false'
 
 echo "DELETE THE DOCUMENT"
-curl -XDELETE -k \
+curl -s -XDELETE -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${LOCATION}
 
 echo "ENSURE DOCUMENT IS DELETED"
-curl -XGET -k \
+curl -s -XGET -k \
   -H 'content-type: application/json' \
   -H 'slipstream-authn-info: internal ADMIN' \
   ${LOCATION}
