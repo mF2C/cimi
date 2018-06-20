@@ -44,6 +44,7 @@ services:
     volumes:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
+    command: sh
   ####################################
   #  LOGIC MODULE ON DC 1            #
   ####################################
