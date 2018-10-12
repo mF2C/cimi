@@ -1,0 +1,14 @@
+{
+	"configurationTemplate": {
+	"href": "configuration-template/slipstream",
+        "mailHost": "your SMTP host",
+        "mailPort": smtpPORTNUMBER,
+        "mailSSL": true,
+        "registrationEmail": "mf2c-general@lists.atosresearch.eu",
+        "serviceURL": "https://dashboard.mf2c-project.eu",
+        "supportEmail": "mf2c-general@lists.atosresearch.eu",
+        "mailDebug": true,
+        "mailUsername": "your SMTP user email",
+        "mailPassword": "your SMTP user password"
+	}
+}
