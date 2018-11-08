@@ -59,28 +59,22 @@
 
 
              ;; create a callback as an admin
-             (let [create-test-callback {:id          (str callback/resource-url "/example-service")
-                                         :resourceURI callback/resource-uri
-                                         :acl         valid-acl
-                                         :category    {:cpu            "low"
-                                                       :memory         "medium"
-                                                       :storage        "low"
-                                                       :disk           "low"
-                                                       :network        "low"
-                                                       :inclinometer   true
-                                                       :temperature    false
-                                                       :jammer         true
-                                                       :location       true
-                                                       :battery_level  true
-                                                       :door_sensor    true
-                                                       :pump_sensor    true
-                                                       :accelerometer  true
-                                                       :humidity       true
-                                                       :air_pressure   true
-                                                       :ir_motion      true}
-                                         :exec         "hello-world"
+             (let [create-test-callback {:id           (str callback/resource-url "/example-service")
+                                         :resourceURI  callback/resource-uri
+                                         :acl          valid-acl
+                                         :name         "name_test"
+                                         :exec         "exec_name_test"
                                          :exec_type    "docker"
-                                         :exec_ports   [8080 8081]
+                                         :exec_ports   [8080]
+                                         :agent_type   "normal"
+                                         :category     0
+                                         :cpu_arch     "x86-64"
+                                         :os           "linux"
+                                         :memory_min   0
+                                         :storage_min  0
+                                         :disk         0
+                                         :req_resource ["req_resource_test"]
+                                         :opt_resource ["opt_resource_test"]
                                          }
 
                    resp-test (-> session-admin
