@@ -185,30 +185,20 @@ After creating a session, the user can submit a **service** like this:
 ```bash
 cat >>service.json <<EOF
 {
-  "name": "hello-world",
-  "description": "Hello World Service",
-  "resourceURI": "/hello-world",
-  "exec": "hello-world",
-  "exec_type": "docker",
-  "exec_ports": [8080, 8081],
-  "category": {
-    "cpu": "low",
-    "memory": "low",
-    "storage": "low",
-    "disk": "low",
-    "network": "low",
-    "inclinometer": false,
-    "temperature": false,
-    "jammer": false,
-    "location": false,
-    "battery_level": true,
-    "door_sensor": true,
-    "pump_sensor": true,
-    "accelerometer": true,
-    "humidity": true,
-    "air_pressure": true,
-    "ir_motion": true
-  }
+    "name": "hello-world",
+    "description": "Hello World Service",
+    "exec": "hello-world",
+    "exec_type": "docker",
+    "exec_ports": [8080],
+    "agent_type": "cloud",
+    "cpu_arch": "x86-64",
+    "os": "linux", 
+    "memory_min": 1000,
+    "storage_min": 100, 
+    "disk": 100, 
+    "req_resource": ["Location", "Sentinel", "Ambulance"],
+    "opt_resource": ["SenseHat", "GP-20U7"],
+    "category": 3 
 }
 EOF
 ```
