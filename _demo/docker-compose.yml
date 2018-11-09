@@ -25,7 +25,7 @@ services:
      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
 
   cimi:
-    image: mf2c/cimi-server:2.1-SNAPSHOT
+    image: mf2c/cimi-server:2.2-SNAPSHOT
     environment:
       - EPHEMERAL_DB_BINDING_NS=com.sixsq.slipstream.db.es.loader
       - PERSISTENT_DB_BINDING_NS=com.sixsq.slipstream.db.es.loader
