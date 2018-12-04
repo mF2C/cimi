@@ -45,8 +45,8 @@
 (s/def :cimi.device-dynamic/powerRemainingStatusSeconds ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/ethernetAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/wifiAddress ::cimi-core/nonblank-string)
-(s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of string?))
-(s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
+(s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of integer?))
+(s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of integer?))
 (s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
 
 
