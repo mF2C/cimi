@@ -67,6 +67,7 @@
                                          :exec_type    "docker"
                                          :exec_ports   [8080]
                                          :agent_type   "normal"
+                                         :num_agents   1
                                          :category     0
                                          :cpu_arch     "x86-64"
                                          :os           "linux"

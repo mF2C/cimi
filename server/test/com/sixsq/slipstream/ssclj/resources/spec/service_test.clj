@@ -20,6 +20,7 @@
                         :name         "name_test"
                         :exec         "exec_name_test"
                         :exec_type    "docker"
+                        :num_agents   1
                         :exec_ports   [8080]
                         :agent_type   "normal"
                         :category     0
