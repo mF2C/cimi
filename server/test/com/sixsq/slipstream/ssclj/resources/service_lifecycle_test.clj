@@ -68,7 +68,6 @@
                                          :exec_ports   [8080]
                                          :agent_type   "normal"
                                          :num_agents   1
-                                         :category     0
                                          :cpu_arch     "x86-64"
                                          :os           "linux"
                                          :memory_min   0
@@ -76,6 +75,8 @@
                                          :disk         0
                                          :req_resource ["req_resource_test"]
                                          :opt_resource ["opt_resource_test"]
+                                         :category     0
+;                                         :template_id  {:href "sla_template/id"}
                                          }
 
                    resp-test (-> session-admin
