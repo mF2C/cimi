@@ -7,9 +7,10 @@
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 (s/def :cimi.service/exec ::cimi-core/nonblank-string)
-(s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose"})
+(s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose" "docker-swarm" "kubernetes"})
 (s/def :cimi.service/exec_ports (s/coll-of ::cimi-core/port))
 (s/def :cimi.service/agent_type #{"cloud" "normal" "micro"})
+(s/def :cimi.service/num_agents nat-int?)
 (s/def :cimi.service/cpu_arch #{"arm" "x86-64"})
 (s/def :cimi.service/os #{"linux" "mac" "windows" "iOS" "android"})
 (s/def :cimi.service/memory_min nat-int?)
@@ -34,6 +35,7 @@
                          ::cimi-common/properties
                          ::cimi-common/operations
                          :cimi.service/exec_ports
+                         :cimi.service/num_agents
                          :cimi.service/cpu_arch
                          :cimi.service/os
                          :cimi.service/memory_min
