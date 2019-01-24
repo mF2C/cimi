@@ -5,6 +5,7 @@
   (:require
     [clojure.data.json :as json]
     [clojure.test :refer :all]
+    [clj-http.client :as http]
     [com.sixsq.slipstream.ssclj.app.params :as p]
     [com.sixsq.slipstream.ssclj.middleware.authn-info-header :refer [authn-info-header]]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
@@ -25,7 +26,44 @@
                          :type      "ROLE"
                          :right     "MODIFY"}]})
 
+(def resource-body {:id           (str callback/resource-url "/example-service")
+                    :resourceURI  callback/resource-uri
+                    :acl          valid-acl
+                    :name         "name_test"
+                    :exec         "exec_name_test"
+                    :exec_type    "docker"
+                    :exec_ports   [8080]
+                    :agent_type   "normal"
+                    :category     0
+                    :cpu_arch     "x86-64"
+                    :os           "linux"
+                    :memory_min   0
+                    :storage_min  0
+                    :disk         0
+                    :req_resource ["req_resource_test"]
+                    :opt_resource ["opt_resource_test"]
+                    })
+
 (deftest lifecycle
+    (with-redefs [http/post (fn [_ _]
+        {
+        :body "{
+            \"resourceURI\":  \"callback/resource-uri\",
+            \"name\":         \"name_test\",
+            \"exec\":         \"exec_name_test\",
+            \"exec_type\":    \"docker\",
+            \"exec_ports\":   [8080],
+            \"agent_type\":   \"normal\",
+            \"category\":     0,
+            \"cpu_arch\":     \"x86-64\",
+            \"os\":           \"linux\",
+            \"memory_min\":   0,
+            \"storage_min\":  0,
+            \"disk\":         0,
+            \"req_resource\": [\"req_resource_test\"],
+            \"opt_resource\": [\"opt_resource_test\"]}"
+        })]
+
         (let [session (-> (ltu/ring-app)
                           session
                           (content-type "application/json"))
@@ -33,8 +71,6 @@
               session-user (header session authn-info-header "jane USER ANON")
               session-anon (header session authn-info-header "unknown ANON")]
 
-
-             ;; admin collection query should succeed but be empty
              (-> session-admin
                  (request base-uri)
                  (ltu/body->edn)
@@ -42,10 +78,9 @@
                  (ltu/is-count zero?)
                  (ltu/is-operation-present "add")
                  (ltu/is-operation-absent "delete")
-                 (ltu/is-operation-absent "edit")
-                 (ltu/is-operation-absent "execute"))
+                 (ltu/is-operation-absent "edit"))
 
-             ; user collection query should not succeed
+             ; user collection query should succeed
              (-> session-user
                  (request base-uri)
                  (ltu/body->edn)
@@ -56,7 +91,6 @@
                  (request base-uri)
                  (ltu/body->edn)
                  (ltu/is-status 403))
-
 
              ;; create a callback as an admin
              (let [create-test-callback {:id           (str callback/resource-url "/example-service")
@@ -180,7 +214,7 @@
                       (request test-uri
                                :request-method :delete)
                       (ltu/body->edn)
-                      (ltu/is-status 404)))))
+                      (ltu/is-status 404))))))
 
 
 (deftest bad-methods

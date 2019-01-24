@@ -3,6 +3,9 @@
   (:require
     [clojure.pprint :as pp]
     [com.sixsq.slipstream.auth.acl :as a]
+    [clj-http.client :as http]
+    [clojure.data.json :as json]
+    [clojure.walk :refer [keywordize-keys]]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
@@ -28,6 +31,26 @@
 (defmethod crud/add-acl resource-uri
   [resource request]
   (a/add-acl resource request))
+
+
+
+(defn call-sm
+  "Returns a tuple with status and message"
+  [url body]
+  ; (if (and url body)
+  ;   (try
+      (json/read-str (:body (http/post url
+                                  {:headers     {"Accept" "application/json"}
+                                  :content-type :json
+                                  :accept :json
+                                  :body (json/write-str body)})) :key-fn keyword)
+      
+      ; (catch Exception e
+      ;   (ex-data e))  )
+    ; [412 "Incomplete"]))
+)
+
+
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
@@ -42,7 +65,14 @@
 
 (defmethod crud/add resource-name
   [request]
-  (add-impl request))
+  ; (try
+  ;   [202 (-> (http/post "http://service-manager:46200/api/service-management"
+  ;             {:headers     {"Accept" "application/json"}
+  ;               :body request}) )
+  ;   response ]
+    (add-impl (assoc request :service (call-sm "http://service-manager:46200/api/service-management" (:body request))) ))
+     
+  ; (add-impl request))
 
 (def retrieve-impl (std-crud/retrieve-fn resource-name))
 
