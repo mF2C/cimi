@@ -13,7 +13,7 @@ services:
      - "80:80"
      - "443:443"
   dcproxy:
-    image: mf2c/dataclay-proxy:2.3
+    image: mf2c/dataclay-proxy:latest
     depends_on:
       - logicmodule1
       - ds1java1
