@@ -33,7 +33,7 @@
                                     :status         	"running"
                                     :agents         	[{:agent {:href "agent/1230958abdef1"}, :ports [31111], :num_cpus 1
 															:status "running", :container_id "asdasd-asdasda", :allow true,
-															url "192.168.1.31", :master_compss true :app_type "docker"}
+															:url "192.168.1.31", :master_compss true :app_type "docker"}
 														{:agent {:href "agent/1230958abdef2"}, :ports [31111], :num_cpus 2
 															:status "running", :container_id "asdasd-hasdagsa", :allow false,
 															:url "192.168.1.32", :master_compss false :app_type "docker"}]}]
