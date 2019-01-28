@@ -15,11 +15,11 @@
 ; }
 
 
-(s/def :cimi.user-model/user_id ::cimi-core/nonblank-string)      	; user
-(s/def :cimi.user-model/device_id ::cimi-core/nonblank-string)  	; device ID
+(s/def :cimi.user-profile/user_id ::cimi-core/nonblank-string)      	; user
+(s/def :cimi.user-profile/device_id ::cimi-core/nonblank-string)  	; device ID
 (s/def :cimi.user-profile/service_consumer boolean?)
 (s/def :cimi.user-profile/resource_contributor boolean?)
-(s/def :cimi.user-model/max_apps pos-int?)
+(s/def :cimi.user-profile/max_apps pos-int?)
 
 
 (s/def :cimi/user-profile
@@ -27,8 +27,8 @@
                          ::cimi-common/resourceURI
                          ::cimi-common/acl
                          ; user-profile
-						 :cimi.user-instance/user_id
-						 :cimi.user-instance/device_id
+						 :cimi.user-profile/user_id
+						 :cimi.user-profile/device_id
                          :cimi.user-profile/service_consumer
 						 :cimi.user-profile/resource_contributor
                          :cimi.user-profile/max_apps

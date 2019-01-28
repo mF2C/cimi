@@ -35,8 +35,8 @@
                          ::cimi-common/created
                          ::cimi-common/updated
                          ; sharing-model
-						 :cimi.sharing-instance/user_id
-						 :cimi.sharing-instance/device_id
+						 :cimi.sharing-model/user_id
+						 :cimi.sharing-model/device_id
                          :cimi.sharing-model/gps_allowed
                          :cimi.sharing-model/max_cpu_usage
                          :cimi.sharing-model/max_memory_usage
