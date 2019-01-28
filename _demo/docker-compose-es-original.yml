@@ -56,7 +56,7 @@ services:
     volumes:
      - resources:/opt/slipstream/cimi/lib
   service-manager:
-    image: mf2c/service-manager:1.5.2
+    image: mf2c/service-manager:1.6.0
     restart: unless-stopped
     depends_on:
       - cimi

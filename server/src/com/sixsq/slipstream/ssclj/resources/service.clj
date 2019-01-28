@@ -39,12 +39,12 @@
   [url body]
   ; (if (and url body)
   ;   (try
-      (json/read-str (:body (http/post url
+      (:service (json/read-str (:body (http/post url
                                   {:headers     {"Accept" "application/json"}
                                   :content-type :json
                                   :accept :json
                                   :body (json/write-str body)})) :key-fn keyword)
-      
+      )
       ; (catch Exception e
       ;   (ex-data e))  )
     ; [412 "Incomplete"]))
@@ -70,7 +70,7 @@
   ;             {:headers     {"Accept" "application/json"}
   ;               :body request}) )
   ;   response ]
-    (add-impl (assoc request :service (call-sm "http://service-manager:46200/api/service-management" (:body request))) ))
+    (add-impl (assoc request :body (call-sm "http://service-manager:46200/api/service-management" (:body request))) ))
      
   ; (add-impl request))
 

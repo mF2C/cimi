@@ -47,21 +47,21 @@
 (deftest lifecycle
     (with-redefs [http/post (fn [_ _]
         {
-        :body "{
-            \"resourceURI\":  \"callback/resource-uri\",
-            \"name\":         \"name_test\",
-            \"exec\":         \"exec_name_test\",
-            \"exec_type\":    \"docker\",
-            \"exec_ports\":   [8080],
-            \"agent_type\":   \"normal\",
-            \"category\":     0,
-            \"cpu_arch\":     \"x86-64\",
-            \"os\":           \"linux\",
-            \"memory_min\":   0,
-            \"storage_min\":  0,
-            \"disk\":         0,
-            \"req_resource\": [\"req_resource_test\"],
-            \"opt_resource\": [\"opt_resource_test\"]}"
+        :body "{\"service\": {
+                    \"resourceURI\":  \"callback/resource-uri\",
+                    \"name\":         \"name_test\",
+                    \"exec\":         \"exec_name_test\",
+                    \"exec_type\":    \"docker\",
+                    \"exec_ports\":   [8080],
+                    \"agent_type\":   \"normal\",
+                    \"category\":     0,
+                    \"cpu_arch\":     \"x86-64\",
+                    \"os\":           \"linux\",
+                    \"memory_min\":   0,
+                    \"storage_min\":  0,
+                    \"disk\":         0,
+                    \"req_resource\": [\"req_resource_test\"],
+                    \"opt_resource\": [\"opt_resource_test\"]}}"
         })]
 
         (let [session (-> (ltu/ring-app)
@@ -110,7 +110,7 @@
                                          :req_resource ["req_resource_test"]
                                          :opt_resource ["opt_resource_test"]
                                          :category     0
-                                         :template_id  {:href "sla_template/id"}
+                                        ;  :template_id  {:href "sla_template/id"}
                                          }
 
                    resp-test (-> session-admin

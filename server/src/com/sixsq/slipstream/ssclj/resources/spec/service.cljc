@@ -19,6 +19,7 @@
 (s/def :cimi.service/req_resource (s/coll-of string?))
 (s/def :cimi.service/opt_resource (s/coll-of string?))
 (s/def :cimi.service/category nat-int?)
+;(s/def :cimi.service/template_id ::cimi-common/resource-link)
 
 (s/def :cimi/service
   (su/only-keys :req-un [::cimi-common/id
@@ -29,8 +30,7 @@
                          ::cimi-common/name
                          :cimi.service/exec
                          :cimi.service/exec_type
-                         :cimi.service/agent_type
-                         :cimi.service/category]
+                         :cimi.service/agent_type]
                 :opt-un [::cimi-common/description
                          ::cimi-common/properties
                          ::cimi-common/operations
@@ -42,4 +42,7 @@
                          :cimi.service/storage_min
                          :cimi.service/disk
                          :cimi.service/req_resource
-                         :cimi.service/opt_resource]))
+                         :cimi.service/opt_resource
+                         :cimi.service/category
+;                         :cimi.service/template_id
+                         ]))
