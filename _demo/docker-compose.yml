@@ -50,16 +50,11 @@ services:
   ####################################
   #  LOGIC MODULE ON DC 1            #
   ####################################
-  lmpostgres1:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
 
   logicmodule1:
-    image: "bscdataclay/logicmodule"
+    image: "bscdataclay/logicmodule:mf2c"
     ports:
-      - "11034:1034"
+      - "1034:1034"
     env_file:
       - ./env/PG.environment
       - ./env/LM.environment
@@ -67,23 +62,18 @@ services:
       - DATACLAY_ADMIN_USER=admin
       - DATACLAY_ADMIN_PASSWORD=admin
       - POSTGRES_HOST=lmpostgres1
-    depends_on:
-      - lmpostgres1
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   ####################################
   #  JAVA DATA SERVICES ON DC 1      #
   ####################################
-  ds1postgres1:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
 
   ds1java1:
-    image: "bscdataclay/dsjava"
+    image: "bscdataclay/dsjava:mf2c"
+    depends_on:
+      - logicmodule1
     ports:
       - 2127
     env_file:
@@ -93,21 +83,14 @@ services:
     environment:
       - DATASERVICE_NAME=DS1
       - POSTGRES_HOST=ds1postgres1
-    depends_on:
-      - ds1postgres1
-      - logicmodule1
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
-
-  ds2postgres1:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   ds2java1:
-    image: "bscdataclay/dsjava"
+    image: "bscdataclay/dsjava:mf2c"
+    depends_on:
+      - logicmodule1
     ports:
       - 2127
     env_file:
@@ -117,48 +100,18 @@ services:
     environment:
       - DATASERVICE_NAME=DS2
       - POSTGRES_HOST=ds2postgres1
-    depends_on:
-      - ds2postgres1
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
-
-  ####################################
-  #  PYTHON DATA SERVICES ON DC 1    #
-  ####################################
-
-  # Python ExecutionEnvironment (which, by default, are unused)
-  # See initDC.sh shell script for more information on initialization
-  ds1pythonee1:
-    image: "bscdataclay/dspython"
-    ports:
-      - 6867
-    env_file:
-      - ./env/DS.environment
-      - ./env/LM.environment
-    depends_on:
-      - ds1java1
-    environment:
-      - DATASERVICE_NAME=DS1
-      - POSTGRES_HOST=ds1postgres1
-      - DEBUG=false
-      #- PYTHONVERBOSE=1
-
-
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   #############################################
   #   LOGIC MODULE ON DC 2                    #
   #############################################
-  lmpostgres2:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
 
   logicmodule2:
-    image: "bscdataclay/logicmodule"
+    image: "bscdataclay/logicmodule:mf2c"
     ports:
-      - "12034:2034"
+      - "2034:2034"
     env_file:
       - ./env/PG.environment
       - ./env/LM2.environment
@@ -166,23 +119,18 @@ services:
       - DATACLAY_ADMIN_USER=admin
       - DATACLAY_ADMIN_PASSWORD=admin
       - POSTGRES_HOST=lmpostgres2
-    depends_on:
-      - lmpostgres2
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   ####################################
   #    JAVA DATA SERVICES ON DC 2    #
   ####################################
-  ds1postgres2:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
 
   ds1java2:
-    image: "bscdataclay/dsjava"
+    image: "bscdataclay/dsjava:mf2c"
+    depends_on:
+      - logicmodule2
     ports:
       - 2127
     env_file:
@@ -192,48 +140,18 @@ services:
     environment:
       - DATASERVICE_NAME=DS1
       - POSTGRES_HOST=ds1postgres2
-    depends_on:
-      - ds1postgres2
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
-
-  ####################################
-  #  PYTHON DATA SERVICES ON DC 2    #
-  ####################################
-
-  # Python ExecutionEnvironment (which, by default, are unused)
-  # See initDC.sh shell script for more information on initialization
-  ds1pythonee2:
-    image: "bscdataclay/dspython"
-    ports:
-      - 6867
-    env_file:
-      - ./env/DS.environment
-      - ./env/LM2.environment
-    depends_on:
-      - ds1java2
-    environment:
-      - DATASERVICE_NAME=DS1
-      - POSTGRES_HOST=ds1postgres2
-      - DEBUG=false
-      #- PYTHONVERBOSE=1
-
-
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   ####################################
   #  LOGIC MODULE FOR BACKUP         #
   ####################################
-  lmpostgres_bk:
-    image: postgres:9.5.12
-    env_file:
-      - ./env/PG.environment
-    command: -c fsync=off
 
   logicmodule_bk:
-    image: "bscdataclay/logicmodule"
+    image: "bscdataclay/logicmodule:mf2c"
     ports:
-      - "13034:3034"
+      - "3034:3034"
     env_file:
       - ./env/PG.environment
       - ./env/LM_BK.environment
@@ -241,11 +159,9 @@ services:
       - DATACLAY_ADMIN_USER=admin
       - DATACLAY_ADMIN_PASSWORD=admin
       - POSTGRES_HOST=lmpostgres_bk
-    depends_on:
-      - lmpostgres_bk
     volumes:
-      - ./prop/global.properties:/usr/src/app/cfgfiles/global.properties:ro
-      - ./prop/log4j2.xml:/usr/src/app/log4j2.xml:ro
+      - ./prop/global.properties:/usr/src/dataclay/cfgfiles/global.properties:ro
+      - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
 
 volumes:
