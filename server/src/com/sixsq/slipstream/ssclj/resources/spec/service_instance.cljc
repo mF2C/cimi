@@ -74,7 +74,7 @@
                                                                :cimi.service-instance/status
                                                                :cimi.service-instance/container_id
                                                                :cimi.service-instance/allow
-                                                               :cimi.service-instance/app_type]
+                                                               :cimi.service-instance/app_type
                                                                :cimi.service-instance/num_cpus]
                                                       :opt-un [:cimi.service-instance/agent
                                                                :cimi.service-instance/master_compss
