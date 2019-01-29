@@ -26,7 +26,7 @@
 
   :pom-location "target/"
 
-  :dependencies [[com.sixsq.dataclay/proxy "0.1.0-SNAPSHOT"]]
+  :dependencies [[com.sixsq.dataclay/proxy "2.4"]]
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
