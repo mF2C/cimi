@@ -8,5 +8,5 @@
 (defn load
   "Creates a dataClay database binding that directly accesses the database."
   []
-  (let [send-fn #(-> proxy/scrud-action second)]
+  (let [send-fn #(-> % proxy/scrud-action second)]
     (dataclay/->DataClayBinding send-fn)))
