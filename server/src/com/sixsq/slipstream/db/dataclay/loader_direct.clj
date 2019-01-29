@@ -10,11 +10,12 @@
 (defn send-fn
   [argv]
   (log/info "dataClay direct binding argv:" argv)
-  (let [{:keys [status body]} (proxy/scrud-action argv)
-        edn (some-> body edn/read-string)]
-    (log/info "dataClay direct binding scrud status:" status)
-    (log/info "dataClay direct binding scrud body:" edn)
-    edn))
+  (let [wrapped-response (some-> argv
+                                 proxy/scrud-action
+                                 edn/read-string
+                                 :body)]
+    (log/info "dataClay direct binding wrapped response:" wrapped-response)
+    wrapped-response))
 
 
 (defn load
