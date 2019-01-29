@@ -9,9 +9,11 @@
 (defn send-fn
   [argv]
   (log/info "dataClay direct binding argv:" argv)
-  (let [response (proxy/scrud-action argv)]
+  (let [response (proxy/scrud-action argv)
+        response-body (:body response)]
     (log/info "dataClay direct binding scrud response:" response)
-    (second response)))
+    (log/info "dataClay direct binding scrud body:" response-body)
+    response-body))
 
 
 (defn load
