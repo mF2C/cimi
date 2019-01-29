@@ -1,5 +1,5 @@
 (def +version+ "2.3-SNAPSHOT")
-(def +slipstream-version+ "3.53-SNAPSHOT")
+(def +slipstream-version+ "3.67")
 
 (defproject eu.mf2c-project.cimi/server "2.3-SNAPSHOT"
 
@@ -14,7 +14,7 @@
   :plugins [[lein-parent "0.3.2"]
             [lein-environ "1.1.0"]]
 
-  :parent-project {:coords  [sixsq/slipstream-parent "5.3.5"]
+  :parent-project {:coords  [sixsq/slipstream-parent "5.3.19"]
                    :inherit [:min-lein-version
                              :managed-dependencies
                              :repositories
@@ -25,6 +25,8 @@
   :resource-paths ["resources"]
 
   :pom-location "target/"
+
+  :dependencies [[com.sixsq.dataclay/proxy "0.1.0-SNAPSHOT"]]
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]
