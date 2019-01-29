@@ -8,24 +8,18 @@
 
 ; {
 ;   "user_id": "user/1230958abdef",
-; 	"id": URI,
-; 	"name": string,
-; 	"description": "profiling ...",
-; 	"created": dateTime,
-; 	"updated": dateTime,
-; 	"resourceURI": URI,
-; 	"id_key": string,
-; 	"email": string,
+;   "device_id": string,
 ; 	"service_consumer": boolean,
 ; 	"resource_contributor": boolean
+; 	"max_apps": integer
 ; }
 
 
-(s/def :cimi.user-profile/user_id ::cimi-core/nonblank-string)      ; user
-(s/def :cimi.user-profile/id_key ::cimi-core/nonblank-string)
-(s/def :cimi.user-profile/email ::cimi-core/email)
+(s/def :cimi.user-profile/user_id ::cimi-core/nonblank-string)      	; user
+(s/def :cimi.user-profile/device_id ::cimi-core/nonblank-string)  	; device ID
 (s/def :cimi.user-profile/service_consumer boolean?)
 (s/def :cimi.user-profile/resource_contributor boolean?)
+(s/def :cimi.user-profile/max_apps pos-int?)
 
 
 (s/def :cimi/user-profile
@@ -33,8 +27,11 @@
                          ::cimi-common/resourceURI
                          ::cimi-common/acl
                          ; user-profile
+						 :cimi.user-profile/user_id
+						 :cimi.user-profile/device_id
                          :cimi.user-profile/service_consumer
-                         :cimi.user-profile/resource_contributor
+						 :cimi.user-profile/resource_contributor
+                         :cimi.user-profile/max_apps
                          ::cimi-common/created
                          ::cimi-common/updated]
                 :opt-un [::cimi-common/name
