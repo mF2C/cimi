@@ -26,12 +26,12 @@ BASE_API_URL=`echo ${BASE_API_URL:="https://localhost/api"} | tr -d '"'`
         log "NO" "user authorization not working: public access to restricted resource"
 
 # test 405 for invalid collection
-(curl -XGET "${BASE_API_URL}/invalid-collection" -ksS | tee collection.json | jq -e 'select(.status == 405)' > /dev/null 2>&1 && \
+(curl -XGET "${BASE_API_URL}/invalid-collection" -ksS | jq -e 'select(.status == 405)' > /dev/null 2>&1 && \
     log "OK" "correct 405 on invalid resource collection") || \
         log "NO" "incorrect response: did not receive 404 for invalid resource collection"
 
 # test 404 for invalid resource
-(curl -XGET "${BASE_API_URL}/user/unknown" -ksS -H 'slipstream-authn-info: internal ADMIN' | tee user.json | jq -e 'select(.status == 404)' > /dev/null 2>&1 && \
+(curl -XGET "${BASE_API_URL}/user/unknown" -ksS -H 'slipstream-authn-info: internal ADMIN' | jq -e 'select(.status == 404)' > /dev/null 2>&1 && \
     log "OK" "correct 404 for non-existent user") || \
         log "NO" "incorrect response: did not receive 404 for non-existent user"
 
@@ -58,7 +58,7 @@ USER=$(export LC_CTYPE=C; cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
         "emailAddress": "testuser@testemail.com",
         "username": "'$USER'"
     }
-}' | tee second.json | jq -e 'select(.status == 409)' > /dev/null 2>&1 && \
+}' | jq -e 'select(.status == 409)' > /dev/null 2>&1 && \
     log "OK" "user $USER cannot be created a second time") || \
         log "NO" "no error or wrong error when trying to create $USER a second time"
 
