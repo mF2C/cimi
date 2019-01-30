@@ -28,8 +28,8 @@ services:
     environment:
       - DC_HOST=dcproxy
       - DC_PORT=6472
-      - EPHEMERAL_DB_BINDING_NS=com.sixsq.slipstream.db.dataclay.loader-direct
-      - PERSISTENT_DB_BINDING_NS=com.sixsq.slipstream.db.dataclay.loader-direct
+      - EPHEMERAL_DB_BINDING_NS=com.sixsq.slipstream.db.dataclay.loader
+      - PERSISTENT_DB_BINDING_NS=com.sixsq.slipstream.db.dataclay.loader
     expose:
      - "8201"
     labels:
