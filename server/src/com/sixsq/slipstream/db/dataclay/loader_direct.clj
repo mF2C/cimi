@@ -3,7 +3,8 @@
   (:require
     [com.sixsq.dataclay.handler :as proxy]
     [com.sixsq.slipstream.db.dataclay.binding :as dataclay]
-    [clojure.tools.logging :as log]))
+    [clojure.tools.logging :as log]
+    [clojure.edn :as edn]))
 
 
 (defn send-fn
@@ -13,7 +14,10 @@
                                  proxy/scrud-action
                                  :body)]
     (log/info "dataClay direct binding wrapped response:" wrapped-response)
-    wrapped-response))
+    (log/info "dataClay direct binding wrapped response:" (string? wrapped-response))
+    (if (string? wrapped-response)
+      (edn/read-string wrapped-response)
+      wrapped-response)))
 
 
 (defn load
