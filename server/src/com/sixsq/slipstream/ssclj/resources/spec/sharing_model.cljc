@@ -8,13 +8,7 @@
 
 ; {
 ;   "user_id": {:href "user/1230958abdef"},
-; 	"id": URI,
-; 	"name": string,
-; 	"description": "sharing model ...",
-; 	"created": dateTime,
-; 	"updated": dateTime,
-; 	"resourceURI": URI,
-; 	"max_apps": integer,
+;   "device_id": string,
 ; 	"GPS_allowed": boolean,
 ; 	"max_CPU_usage": integer,
 ; 	"max_memory_usage": integer,
@@ -24,8 +18,8 @@
 ; }
 
 
-(s/def :cimi.sharing-model/user_id ::cimi-core/nonblank-string)      ; user
-(s/def :cimi.sharing-model/max_apps pos-int?)
+(s/def :cimi.sharing-model/user_id ::cimi-core/nonblank-string)      	; user
+(s/def :cimi.sharing-model/device_id ::cimi-core/nonblank-string)  	; device ID
 (s/def :cimi.sharing-model/gps_allowed boolean?)
 (s/def :cimi.sharing-model/max_cpu_usage pos-int?)
 (s/def :cimi.sharing-model/max_memory_usage pos-int?)
@@ -41,7 +35,8 @@
                          ::cimi-common/created
                          ::cimi-common/updated
                          ; sharing-model
-                         :cimi.sharing-model/max_apps
+						 :cimi.sharing-model/user_id
+						 :cimi.sharing-model/device_id
                          :cimi.sharing-model/gps_allowed
                          :cimi.sharing-model/max_cpu_usage
                          :cimi.sharing-model/max_memory_usage

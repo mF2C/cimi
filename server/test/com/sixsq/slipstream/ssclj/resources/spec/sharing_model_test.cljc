@@ -22,8 +22,8 @@
                                   :updated        timestamp
                                   :acl            valid-acl
                                   ;; sharing model fields
-                                  ; :user_id              "user/1230958abdef"
-                                  :max_apps             2
+                                  :user_id           	"user/testuser"
+							      :device_id			"device/id12345678"
                                   :gps_allowed          false
                                   :max_cpu_usage        50
                                   :max_memory_usage     50

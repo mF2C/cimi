@@ -28,7 +28,7 @@ BASE_API_URL=`echo ${BASE_API_URL:="https://localhost/api"} | tr -d '"'`
 # test 405 for invalid collection
 (curl -XGET "${BASE_API_URL}/invalid-collection" -ksS | jq -e 'select(.status == 405)' > /dev/null 2>&1 && \
     log "OK" "correct 405 on invalid resource collection") || \
-        log "NO" "incorrect response: did not receive 404 for invalid resource collection"
+        log "NO" "incorrect response: did not receive 405 for invalid resource collection"
 
 # test 404 for invalid resource
 (curl -XGET "${BASE_API_URL}/user/unknown" -ksS -H 'slipstream-authn-info: internal ADMIN' | jq -e 'select(.status == 404)' > /dev/null 2>&1 && \

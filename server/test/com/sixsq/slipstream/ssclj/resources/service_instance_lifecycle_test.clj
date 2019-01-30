@@ -55,16 +55,21 @@
           create-test-callback  {:id              (str resource-url "/service-instance-resource")
                                  :resourceURI     base-uri
                                  ;; service instance fields
-                                 :user         "user/testuser"
-                                 :service      "service/71230958abdef9"
-                                 :agreement    "agreement/a1230958abdef0"
+                                 :user         	  "user/testuser"
+								 :device_id			"device/id12345678"
+								 :device_ip			"192.168.242.5"
+								 :parent_device_id	"device/id024681214"
+								 :parent_device_ip	"192.168.242.15"
+								 :service_type		"docker"
+                                 :service      	  "service/71230958abdef9"
+                                 :agreement    	  "agreement/a1230958abdef0"
                                  :status          "running"
                                  :agents          [{:agent {:href "agent/1230958abdef1"}, :ports [31111], :num_cpus 1
                                                     :status "running", :container_id "asdasd-asdasda", :allow true,
-                                                    :url "192.168.1.31", :master_compss true}
+                                                    :url "192.168.1.31", :master_compss true :app_type "docker"}
                                                    {:agent {:href "agent/1230958abdef2"}, :ports [31111], :num_cpus 2
                                                     :status "running", :container_id "asdasd-hasdagsa", :allow false,
-                                                    :url "192.168.1.32", :master_compss false}]}
+                                                    :url "192.168.1.32", :master_compss false :app_type "docker"}]}
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post
