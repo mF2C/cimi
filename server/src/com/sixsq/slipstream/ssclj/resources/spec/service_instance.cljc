@@ -1,8 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.service-instance
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
@@ -50,20 +49,20 @@
 ; }
 
 
-(s/def :cimi.service-instance/user ::cimi-core/nonblank-string)       		; the user that launches the service
-(s/def :cimi.service-instance/device_id ::cimi-core/nonblank-string)  		; the device ID that gets the "submit" request
-(s/def :cimi.service-instance/device_ip ::cimi-core/nonblank-string)  		; the device IP address that gets the "submit" request
+(s/def :cimi.service-instance/user ::cimi-core/nonblank-string) ; the user that launches the service
+(s/def :cimi.service-instance/device_id ::cimi-core/nonblank-string) ; the device ID that gets the "submit" request
+(s/def :cimi.service-instance/device_ip ::cimi-core/nonblank-string) ; the device IP address that gets the "submit" request
 (s/def :cimi.service-instance/parent_device_id ::cimi-core/nonblank-string) ; the leader device ID
 (s/def :cimi.service-instance/parent_device_ip ::cimi-core/nonblank-string) ; the leader device IP address
-(s/def :cimi.service-instance/service ::cimi-core/nonblank-string)    		; service
-(s/def :cimi.service-instance/agreement ::cimi-core/nonblank-string)  		; sla
-(s/def :cimi.service-instance/status ::cimi-core/nonblank-string)			; status of the service (instance): running, error...
-(s/def :cimi.service-instance/service_type ::cimi-core/nonblank-string)  	; type of service: docker, docker-compose, docker-swarm, kubernetes
+(s/def :cimi.service-instance/service ::cimi-core/nonblank-string) ; service
+(s/def :cimi.service-instance/agreement ::cimi-core/nonblank-string) ; sla
+(s/def :cimi.service-instance/status ::cimi-core/nonblank-string) ; status of the service (instance): running, error...
+(s/def :cimi.service-instance/service_type ::cimi-core/nonblank-string) ; type of service: docker, docker-compose, docker-swarm, kubernetes
 ; agent fileds:
 (s/def :cimi.service-instance/agent ::cimi-common/resource-link)
 (s/def :cimi.service-instance/url ::cimi-core/nonblank-string)
-(s/def :cimi.service-instance/ports (s/coll-of ::cimi-core/port)) 			
-(s/def :cimi.service-instance/num_cpus pos-int?)							; resources assigned to agent:
+(s/def :cimi.service-instance/ports (s/coll-of ::cimi-core/port))
+(s/def :cimi.service-instance/num_cpus pos-int?)            ; resources assigned to agent:
 (s/def :cimi.service-instance/container_id string?)
 (s/def :cimi.service-instance/allow boolean?)
 (s/def :cimi.service-instance/master_compss boolean?)
@@ -87,14 +86,14 @@
                          ::cimi-common/resourceURI
                          ::cimi-common/acl
                          :cimi.service-instance/user
-						 :cimi.service-instance/device_id
-						 :cimi.service-instance/device_ip
-						 :cimi.service-instance/parent_device_id
-						 :cimi.service-instance/parent_device_ip
+                         :cimi.service-instance/device_id
+                         :cimi.service-instance/device_ip
+                         :cimi.service-instance/parent_device_id
+                         :cimi.service-instance/parent_device_ip
                          :cimi.service-instance/service
                          :cimi.service-instance/agreement
                          :cimi.service-instance/status
-						 :cimi.service-instance/service_type
+                         :cimi.service-instance/service_type
                          ::cimi-common/created
                          ::cimi-common/updated
                          :cimi.service-instance/agents]
