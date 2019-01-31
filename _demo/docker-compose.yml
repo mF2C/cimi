@@ -13,7 +13,7 @@ services:
      - "80:80"
      - "443:443"
   dcproxy:
-    image: mf2c/dataclay-proxy:latest
+    image: mf2c/dataclay-proxy:2.4
     depends_on:
       - logicmodule1
       - ds1java1
@@ -47,6 +47,17 @@ services:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
     command: sh
+  service-manager:
+    image: mf2c/service-manager:1.6.0
+    restart: unless-stopped
+    depends_on:
+      - cimi
+    expose:
+      - 46200
+    ports:
+      - 46200:46200
+    environment:
+      - JAVA_OPTS=-Xms32m -Xmx256m
   ####################################
   #  LOGIC MODULE ON DC 1            #
   ####################################
