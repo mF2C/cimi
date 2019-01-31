@@ -2,8 +2,8 @@
   ^{:copyright "Copyright 2018, SixSq Sàrl"
     :license   "http://www.apache.org/licenses/LICENSE-2.0"}
   com.sixsq.slipstream.ssclj.resources.spec.example-resource
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
