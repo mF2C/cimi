@@ -1,7 +1,6 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.device
-  (:require 
-    [clojure.spec.alpha :as s] 
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
@@ -26,8 +25,8 @@
 ;}
 ;
 
-(s/def :cimi.device/deviceID ::cimi-core/nonblank-string)   			
-(s/def :cimi.device/isLeader boolean?)			
+(s/def :cimi.device/deviceID ::cimi-core/nonblank-string)
+(s/def :cimi.device/isLeader boolean?)
 (s/def :cimi.device/os ::cimi-core/nonblank-string)
 (s/def :cimi.device/arch ::cimi-core/nonblank-string)
 (s/def :cimi.device/cpuManufacturer ::cimi-core/nonblank-string)
@@ -47,23 +46,23 @@
 
 
 (s/def :cimi/device
-	(su/only-keys-maps c/common-attrs
-					   {:req-un [:cimi.device/deviceID
-								:cimi.device/isLeader
-								:cimi.device/os
-								:cimi.device/arch
-								:cimi.device/cpuManufacturer
-								:cimi.device/physicalCores
-								:cimi.device/logicalCores
-								:cimi.device/cpuClockSpeed
-								:cimi.device/memory
-								:cimi.device/storage
-								:cimi.device/powerPlugged
-								:cimi.device/agentType
-								:cimi.device/actuatorInfo
-								:cimi.device/networkingStandards
-								:cimi.device/ethernetAddress
-								:cimi.device/wifiAddress]
-						:opt-un [:cimi.device/hwloc
-								:cimi.device/cpuinfo]}))
+  (su/only-keys-maps c/common-attrs
+                     {:req-un [:cimi.device/deviceID
+                               :cimi.device/isLeader
+                               :cimi.device/os
+                               :cimi.device/arch
+                               :cimi.device/cpuManufacturer
+                               :cimi.device/physicalCores
+                               :cimi.device/logicalCores
+                               :cimi.device/cpuClockSpeed
+                               :cimi.device/memory
+                               :cimi.device/storage
+                               :cimi.device/powerPlugged
+                               :cimi.device/agentType
+                               :cimi.device/actuatorInfo
+                               :cimi.device/networkingStandards
+                               :cimi.device/ethernetAddress
+                               :cimi.device/wifiAddress]
+                      :opt-un [:cimi.device/hwloc
+                               :cimi.device/cpuinfo]}))
 
