@@ -1,0 +1,6 @@
+{
+   "name": "compss-hello-world",
+   "exec": "mf2c/compss-test:it2",
+   "exec_type": "compss",
+   "agent_type": "normal"
+}
