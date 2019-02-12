@@ -39,7 +39,7 @@ services:
      - ringcontainerexample:/opt/slipstream/ring-example
     command: sh
   cimi:
-    image: mf2c/cimi-server:latest
+    image: mf2c/cimi-server:2.4-SNAPSHOT
     depends_on:
       - elasticsearch
     expose:
@@ -60,7 +60,7 @@ services:
      - ringcontainerexample:/opt/slipstream/ring-example
     command: sh
   eventService:
-    image: sixsq/cimi-sse
+    image: sixsq/cimi-sse:1.0.1
     depends_on:
       - cimi
     ports:
