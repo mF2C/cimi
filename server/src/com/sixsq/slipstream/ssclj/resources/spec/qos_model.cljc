@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.spec.service
+(ns com.sixsq.slipstream.ssclj.resources.spec.qos-model
   (:require 
     [clojure.spec.alpha :as s] 
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
