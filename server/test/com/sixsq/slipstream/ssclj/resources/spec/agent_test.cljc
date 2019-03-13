@@ -3,6 +3,7 @@
             [clojure.test :refer [are deftest is]]
             [com.sixsq.slipstream.ssclj.resources.common.schema :as schema]
             [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
+            [com.sixsq.slipstream.ssclj.resources.agent :as t]
             [com.sixsq.slipstream.ssclj.resources.spec.common :as c]))
 
 (deftest check-agent-resource-schema
