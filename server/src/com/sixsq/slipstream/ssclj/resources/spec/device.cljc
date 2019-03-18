@@ -39,7 +39,7 @@
 (s/def :cimi.device/powerPlugged boolean?)
 (s/def :cimi.device/agentType ::cimi-core/nonblank-string)
 (s/def :cimi.device/actuatorInfo ::cimi-core/nonblank-string)
-(s/def :cimi.device/sensorInfo ::cimi-core/nonblank-string)
+(s/def :cimi.device/sensorType ::cimi-core/nonblank-string)
 (s/def :cimi.device/sensorModel ::cimi-core/nonblank-string)
 (s/def :cimi.device/sensorConnection ::cimi-core/nonblank-string)
 (s/def :cimi.device/networkingStandards ::cimi-core/nonblank-string)
@@ -64,7 +64,7 @@
                         :cimi.device/powerPlugged
                         :cimi.device/agentType
                         :cimi.device/actuatorInfo
-                        :cimi.device/sensorInfo
+                        :cimi.device/sensorType
                         :cimi.device/sensorModel
                         :cimi.device/sensorConnection
                         :cimi.device/networkingStandards
