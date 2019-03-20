@@ -64,9 +64,6 @@
                         :cimi.device/powerPlugged
                         :cimi.device/agentType
                         :cimi.device/actuatorInfo
-                        :cimi.device/sensorType
-                        :cimi.device/sensorModel
-                        :cimi.device/sensorConnection
                         :cimi.device/networkingStandards
                         :cimi.device/ethernetAddress
                         :cimi.device/wifiAddress]
