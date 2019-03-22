@@ -22,6 +22,9 @@
                               :updated        timestamp
                               :acl            valid-acl
                               ;; profiling fields
+							  :user_id           	  "user/testuser"
+							  :device_id			  "device/id12345678"
+							  :max_apps               1 
                               :service_consumer       false
                               :resource_contributor   false}]
     (is (s/valid? :cimi/user-profile user-profile-resource))

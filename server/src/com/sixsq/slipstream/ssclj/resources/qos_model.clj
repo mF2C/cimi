@@ -1,23 +1,20 @@
 (ns
-  com.sixsq.slipstream.ssclj.resources.service
+  com.sixsq.slipstream.ssclj.resources.qos-model
   (:require
     [clojure.pprint :as pp]
     [com.sixsq.slipstream.auth.acl :as a]
-    [clj-http.client :as http]
-    [clojure.data.json :as json]
-    [clojure.walk :refer [keywordize-keys]]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
-    [com.sixsq.slipstream.ssclj.resources.spec.service]
+    [com.sixsq.slipstream.ssclj.resources.spec.qos_model]
     [com.sixsq.slipstream.ssclj.util.log :as log-util]    
     [com.sixsq.slipstream.util.response :as r]))
 
-(def ^:const resource-tag :services)
-(def ^:const resource-name "Service")
+(def ^:const resource-tag :qos-models)
+(def ^:const resource-name "QosModel")
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "ServiceCollection")
+(def ^:const collection-name "QosModelCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))
@@ -31,31 +28,11 @@
 (defmethod crud/add-acl resource-uri
   [resource request]
   (a/add-acl resource request))
-
-
-
-(defn call-sm
-  "Returns a tuple with status and message"
-  [url body]
-  ; (if (and url body)
-  ;   (try
-      (:service (json/read-str (:body (http/post url
-                                  {:headers     {"Accept" "application/json"}
-                                  :content-type :json
-                                  :accept :json
-                                  :body (json/write-str body)})) :key-fn keyword)
-      )
-      ; (catch Exception e
-      ;   (ex-data e))  )
-    ; [412 "Incomplete"]))
-)
-
-
 ;;
 ;; "Implementations" of multimethod declared in crud namespace
 ;;
 
-(def validate-fn (u/create-spec-validation-fn :cimi/service))
+(def validate-fn (u/create-spec-validation-fn :cimi/qos-model))
 (defmethod crud/validate
   resource-uri
   [resource]
@@ -65,14 +42,7 @@
 
 (defmethod crud/add resource-name
   [request]
-  ; (try
-  ;   [202 (-> (http/post "http://service-manager:46200/api/service-management"
-  ;             {:headers     {"Accept" "application/json"}
-  ;               :body request}) )
-  ;   response ]
-    (add-impl (assoc request :body (call-sm "http://service-manager:46200/api/service-management" (:body request))) ))
-     
-  ; (add-impl request))
+  (add-impl request))
 
 (def retrieve-impl (std-crud/retrieve-fn resource-name))
 
@@ -153,4 +123,4 @@
 ;;
 (defn initialize
   []
-  (std-crud/initialize resource-url :cimi/service))
+  (std-crud/initialize resource-url :cimi/qos-model))

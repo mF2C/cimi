@@ -9,6 +9,7 @@ bin
 .idea/
 .project
 *.pem
+server.crt
 *.p12
 hsql*
 war/*

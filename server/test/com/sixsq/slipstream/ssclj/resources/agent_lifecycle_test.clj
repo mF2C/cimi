@@ -1,4 +1,4 @@
-(ns com.sixsq.slipstream.ssclj.resources.service-instance-lifecycle-test
+(ns com.sixsq.slipstream.ssclj.resources.agent-lifecycle-test
   (:require
     [clojure.data.json :as json]
     [clojure.test :refer :all]
@@ -8,12 +8,12 @@
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.example-resource.utils :as utils]
     [com.sixsq.slipstream.ssclj.resources.lifecycle-test-utils :as ltu]
-    [com.sixsq.slipstream.ssclj.resources.service-instance :as service-instance]
+    [com.sixsq.slipstream.ssclj.resources.agent :as agent]
     [peridot.core :refer :all]))
 
 (use-fixtures :each ltu/with-test-server-fixture)
 
-(def base-uri (str p/service-context (u/de-camelcase service-instance/resource-url)))
+(def base-uri (str p/service-context (u/de-camelcase agent/resource-url)))
 
 (deftest lifecycle
   (let [session (-> (ltu/ring-app)
@@ -50,26 +50,31 @@
     )
 
     ;; create a callback as an admin
-    (let [resource-name         "ServiceInstanceResource"
+    (let [resource-name         "Agent"
           resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id              (str resource-url "/service-instance-resource")
-                                 :resourceURI     base-uri
-                                 ;; service instance fields
-                                 :user         	  "user/testuser"
-								 :device_id			"device/id12345678"
-								 :device_ip			"192.168.242.5"
-								 :parent_device_id	"device/id024681214"
-								 :parent_device_ip	"192.168.242.15"
-								 :service_type		"docker"
-                                 :service      	  "service/71230958abdef9"
-                                 :agreement    	  "agreement/a1230958abdef0"
-                                 :status          "running"
-                                 :agents          [{:agent {:href "agent/1230958abdef1"}, :ports [31111], :num_cpus 1
-                                                    :status "running", :container_id "asdasd-asdasda", :allow true,
-                                                    :url "192.168.1.31", :master_compss true :app_type "docker"}
-                                                   {:agent {:href "agent/1230958abdef2"}, :ports [31111], :num_cpus 2
-                                                    :status "running", :container_id "asdasd-hasdagsa", :allow false,
-                                                    :url "192.168.1.32", :master_compss false :app_type "docker"}]}
+          create-test-callback  {:id          (str resource-url "/agent-resource")
+                                 :resourceURI base-uri
+                                 ;  :acl                   {:owner {:principal "ADMIN"
+                                 ;                                  :type      "ROLE"}
+                                 ;                          :rules [{:principal "ADMIN"
+                                 ;                                   :type      "ROLE"
+                                 ;                                   :right     "ALL"}]}
+                                 ;{:principal "ANON"
+                                 ;:type      "ROLE"
+                                 ;:right     "MODIFY"}]}
+
+                                 ;:user_id           	"user/testuser"
+
+                                 :device_id         "device/id12345678"
+                                 :device_ip         "127.0.0.1"
+                                 :leader_id         "somelongstringhere"
+                                 :leader_ip         "127.0.0.1"
+                                 :authenticated     true
+                                 :connected         true
+                                 :isLeader          false
+                                 :backup_ip         "0.0.0.0"
+                                 :childrenIPs       "[]"
+                                 }
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post

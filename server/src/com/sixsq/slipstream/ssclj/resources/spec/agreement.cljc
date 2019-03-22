@@ -1,8 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.agreement
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
-    [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
@@ -36,13 +35,13 @@
 (s/def :cimi.agreement/last_execution ::cimi-core/timestamp)
 
 (s/def :cimi.agreement/assessment (su/only-keys :req-un [:cimi.agreement/first_execution
-                                                        :cimi.agreement/last_execution]))
+                                                         :cimi.agreement/last_execution]))
 
 ; DETAILS
 (s/def :cimi.agreement/id string?)
 (s/def :cimi.agreement/type #{"agreement" "template"})
 
-(s/def :cimi.agreement/party (su/only-keys :req-un [:cimi.agreement/id  ; this could a common/resourceURI in the near future
+(s/def :cimi.agreement/party (su/only-keys :req-un [:cimi.agreement/id ; this could a common/resourceURI in the near future
                                                     ::cimi-common/name]))
 
 (s/def :cimi.agreement/provider :cimi.agreement/party)
@@ -62,12 +61,12 @@
 ; --
 
 (s/def :cimi.agreement/details (su/only-keys :req-un [:cimi.agreement/type
-                                                    ::cimi-common/name
-                                                    :cimi.agreement/provider
-                                                    :cimi.agreement/client
-                                                    :cimi.agreement/creation
-                                                    :cimi.agreement/expiration
-                                                    :cimi.agreement/guarantees]
+                                                      ::cimi-common/name
+                                                      :cimi.agreement/provider
+                                                      :cimi.agreement/client
+                                                      :cimi.agreement/creation
+                                                      :cimi.agreement/expiration
+                                                      :cimi.agreement/guarantees]
                                              :opt-un [:cimi.agreement/id]))
 
 ; --

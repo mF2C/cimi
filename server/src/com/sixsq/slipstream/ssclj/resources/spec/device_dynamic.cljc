@@ -1,6 +1,6 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.device-dynamic
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
@@ -20,7 +20,7 @@
 ;  "wifi_address": string,
 ;  "throughput_info_ethernet": string,
 ;  "throughput_info_wifi": string
-;  "inclinometer": x,                  The information about the sensors and actuators will be provided   
+;  "inclinometer": x,                  The information about the sensors and actuators will be provided
 ;  "temperature": x,
 ;  "jammer": x,
 ;  "location": x,
@@ -31,13 +31,13 @@
 ; }
 
 
- 	
-(s/def :cimi.device-dynamic/device ::cimi-common/resource-link)	
-; (s/def :cimi.device-dynamic/isLeader boolean?)			
-;(s/def :cimi.device-dynamic/ramUnits ::cimi-core/nonblank-string)	
+
+(s/def :cimi.device-dynamic/device ::cimi-common/resource-link)
+; (s/def :cimi.device-dynamic/isLeader boolean?)
+;(s/def :cimi.device-dynamic/ramUnits ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/ramFree float?)
 (s/def :cimi.device-dynamic/ramFreePercent float?)
-;(s/def :cimi.device-dynamic/storageUnits ::cimi-core/nonblank-string)		
+;(s/def :cimi.device-dynamic/storageUnits ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/storageFree float?)
 (s/def :cimi.device-dynamic/storageFreePercent float?)
 (s/def :cimi.device-dynamic/cpuFreePercent float?)
@@ -75,3 +75,4 @@
 								:cimi.device-dynamic/sensorConnection
 								:cimi.device-dynamic/myLeaderID]
 						:opt-un []}))
+

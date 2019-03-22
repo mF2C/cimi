@@ -25,7 +25,17 @@ BASE_API_URL=`echo ${BASE_API_URL:="https://localhost/api"} | tr -d '"'`
     log "OK" "user authorization working properly") || \
         log "NO" "user authorization not working: public access to restricted resource"
 
-USER=$(cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
+# test 405 for invalid collection
+(curl -XGET "${BASE_API_URL}/invalid-collection" -ksS | jq -e 'select(.status == 405)' > /dev/null 2>&1 && \
+    log "OK" "correct 405 on invalid resource collection") || \
+        log "NO" "incorrect response: did not receive 405 for invalid resource collection"
+
+# test 404 for invalid resource
+(curl -XGET "${BASE_API_URL}/user/unknown" -ksS -H 'slipstream-authn-info: internal ADMIN' | jq -e 'select(.status == 404)' > /dev/null 2>&1 && \
+    log "OK" "correct 404 for non-existent user") || \
+        log "NO" "incorrect response: did not receive 404 for non-existent user"
+
+USER=$(export LC_CTYPE=C; cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
 # test "create user" operation
 (curl -XPOST "${BASE_API_URL}/user" -ksS -H 'content-type: application/json' -d '{
     "userTemplate": {
@@ -39,10 +49,26 @@ USER=$(cat /dev/random | tr -dc "[:alpha:]" | head -c 8)
     log "OK" "user $USER created successfully") || \
         log "NO" "failed to create new user $USER"
 
+# verify creating same user results in conflict (409)
+(curl -XPOST "${BASE_API_URL}/user" -ksS -H 'content-type: application/json' -d '{
+    "userTemplate": {
+        "href": "user-template/self-registration",
+        "password": "testpassword",
+        "passwordRepeat" : "testpassword",
+        "emailAddress": "testuser@testemail.com",
+        "username": "'$USER'"
+    }
+}' | jq -e 'select(.status == 409)' > /dev/null 2>&1 && \
+    log "OK" "user $USER cannot be created a second time") || \
+        log "NO" "no error or wrong error when trying to create $USER a second time"
+
 # test "create resource" operation
 ID=`curl -XPOST "${BASE_API_URL}/user-profile" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
     "service_consumer": true,
-    "resource_contributor": false
+    "resource_contributor": false,
+    "device_id": "some-device",
+    "max_apps": 100,
+    "user_id": "some-user-id"
 }' | jq -e -r '.["resource-id"]'` && \
     log "OK" "created new resource $ID successfully" || \
         log "NO" "failed to create new resource"
@@ -60,7 +86,10 @@ ID=`curl -XPOST "${BASE_API_URL}/user-profile" -ksS -H 'slipstream-authn-info: i
 # test "update resource" operation
 (curl -XPUT "${BASE_API_URL}/${ID}" -ksS -H 'slipstream-authn-info: internal ADMIN' -H 'content-type: application/json' -d '{
     "service_consumer": false,
-    "resource_contributor": true
+    "resource_contributor": true,
+    "device_id": "some-device",
+    "max_apps": 100,
+    "user_id": "some-user-id"
 }' --fail > /dev/null 2>&1 && \
     log "OK" "resource $ID update successfully") || \
         log "NO" "failed to update resource"

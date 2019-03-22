@@ -1,16 +1,16 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.fog-area
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 ; Before publishing the fog area's information, all the agent's information of the corresponding fog area will be retrieve to the Leader agent local device
-; Then making some simple aggregation and publish the total capacity of a fog area as following- 
+; Then making some simple aggregation and publish the total capacity of a fog area as following-
 ;{
 ;  "fog-area_id": x
-;  "device_id" : string, 
+;  "device_id" : string,
 ;  "created_on": x,
 ;  "updated_on": x,
 ;  "number_of_devices": int,
@@ -43,8 +43,8 @@
 ;
 
 
-(s/def :cimi.fog-area/leaderDevice ::cimi-common/resource-link)   	   
-(s/def :cimi.fog-area/numDevices pos-int?)     
+(s/def :cimi.fog-area/leaderDevice ::cimi-common/resource-link)
+(s/def :cimi.fog-area/numDevices pos-int?)
 ;(s/def :cimi.fog-area/ramUnits ::cimi-core/nonblank-string)
 (s/def :cimi.fog-area/ramTotal float?)
 (s/def :cimi.fog-area/ramMax float?)
@@ -66,26 +66,26 @@
 (s/def :cimi.fog-area/powerRemainingMin ::cimi-core/nonblank-string)
 
 (s/def :cimi/fog-area
-	(su/only-keys-maps c/common-attrs
-					   {:req-un [:cimi.fog-area/leaderDevice
-								:cimi.fog-area/numDevices
-								;:cimi.fog-area/ramUnits
-								:cimi.fog-area/ramTotal
-								:cimi.fog-area/ramMax
-								:cimi.fog-area/ramMin
-								;:cimi.fog-area/storageUnits
-								:cimi.fog-area/storageTotal
-								:cimi.fog-area/storageMax
-								:cimi.fog-area/storageMin
-								:cimi.fog-area/avgProcessingCapacityPercent
-								:cimi.fog-area/cpuMaxPercent
-								:cimi.fog-area/cpuMinPercent
-								:cimi.fog-area/avgPhysicalCores
-                :cimi.fog-area/physicalCoresMax
-                :cimi.fog-area/physicalCoresMin
-                :cimi.fog-area/avgLogicalCores
-                :cimi.fog-area/logicalCoresMax
-                :cimi.fog-area/logicalCoresMin					     
-                :cimi.fog-area/powerRemainingMax
-                :cimi.fog-area/powerRemainingMin]
-						:opt-un []}))
+  (su/only-keys-maps c/common-attrs
+                     {:req-un [:cimi.fog-area/leaderDevice
+                               :cimi.fog-area/numDevices
+                               ;:cimi.fog-area/ramUnits
+                               :cimi.fog-area/ramTotal
+                               :cimi.fog-area/ramMax
+                               :cimi.fog-area/ramMin
+                               ;:cimi.fog-area/storageUnits
+                               :cimi.fog-area/storageTotal
+                               :cimi.fog-area/storageMax
+                               :cimi.fog-area/storageMin
+                               :cimi.fog-area/avgProcessingCapacityPercent
+                               :cimi.fog-area/cpuMaxPercent
+                               :cimi.fog-area/cpuMinPercent
+                               :cimi.fog-area/avgPhysicalCores
+                               :cimi.fog-area/physicalCoresMax
+                               :cimi.fog-area/physicalCoresMin
+                               :cimi.fog-area/avgLogicalCores
+                               :cimi.fog-area/logicalCoresMax
+                               :cimi.fog-area/logicalCoresMin
+                               :cimi.fog-area/powerRemainingMax
+                               :cimi.fog-area/powerRemainingMin]
+                      :opt-un []}))

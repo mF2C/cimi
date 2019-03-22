@@ -1,24 +1,8 @@
 (ns com.sixsq.slipstream.db.dataclay.binding
   (:require
-    [clojure.core.async :refer [<!!]]
-    [clojure.tools.logging :as log]
-    [com.sixsq.slipstream.db.binding :refer [Binding]]
-    [kvlt.chan :as kvlt])
+    [com.sixsq.slipstream.db.binding :refer [Binding]])
   (:import
     (java.io Closeable)))
-
-
-(defn send-command
-  [url command]
-  (log/debugf "url: '%s'; command: '%s'" url command)
-  (let [{:keys [status body]} (-> {:url    url
-                                   :method :get
-                                   :body   (prn-str command)
-                                   :as     :edn}
-                                  kvlt/request!
-                                  <!!)]
-    (log/debugf "status %s\n\n%s\n\n%s" status command body)
-    body))
 
 
 (deftype DataClayBinding
