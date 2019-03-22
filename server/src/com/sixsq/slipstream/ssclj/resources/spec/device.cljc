@@ -46,23 +46,24 @@
 
 
 (s/def :cimi/device
-  (su/only-keys-maps c/common-attrs
-                     {:req-un [:cimi.device/deviceID
-                               :cimi.device/isLeader
-                               :cimi.device/os
-                               :cimi.device/arch
-                               :cimi.device/cpuManufacturer
-                               :cimi.device/physicalCores
-                               :cimi.device/logicalCores
-                               :cimi.device/cpuClockSpeed
-                               :cimi.device/memory
-                               :cimi.device/storage
-                               :cimi.device/powerPlugged
-                               :cimi.device/agentType
-                               :cimi.device/actuatorInfo
-                               :cimi.device/networkingStandards
-                               :cimi.device/ethernetAddress
-                               :cimi.device/wifiAddress]
-                      :opt-un [:cimi.device/hwloc
-                               :cimi.device/cpuinfo]}))
+	(su/only-keys-maps c/common-attrs
+					   {:req-un [:cimi.device/deviceID
+                        :cimi.device/isLeader
+                        :cimi.device/os
+                        :cimi.device/arch
+                        :cimi.device/cpuManufacturer
+                        :cimi.device/physicalCores
+                        :cimi.device/logicalCores
+                        :cimi.device/cpuClockSpeed
+                        :cimi.device/memory
+                        :cimi.device/storage
+                        :cimi.device/powerPlugged
+                        :cimi.device/agentType
+                        :cimi.device/actuatorInfo
+                        :cimi.device/networkingStandards
+                        :cimi.device/ethernetAddress
+                        :cimi.device/wifiAddress]
+              :opt-un [:cimi.device/hwloc
+                       :cimi.device/cpuinfo]}))
+
 
