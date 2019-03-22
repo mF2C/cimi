@@ -49,7 +49,7 @@
 (s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/sensorType (s/coll-of string?))
 (s/def :cimi.device-dynamic/sensorModel ::cimi-core/nonblank-string)
-(s/def :cimi.device-dynamic/sensorConnection ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/sensorConnection (s/coll-of string?))
 (s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
 
 

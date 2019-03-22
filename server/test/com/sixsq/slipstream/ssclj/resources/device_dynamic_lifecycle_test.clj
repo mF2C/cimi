@@ -79,7 +79,7 @@
                                   :wifiThroughputInfo                    ["21689997", "950419307", "150482", "663270", "0", "0", "0", "0"]
                                   :sensorType                            ["temperature", "humidity"]
                                   :sensorModel                           "DHT22"
-                                  :sensorConnection                      "{'baudRate': 5600, 'gpioPin': 23}"
+                                  :sensorConnection                      ["{'baudRate': 5600, 'gpioPin': 23}", "{'baudRate': 5600}"]
                                   :myLeaderID                            {:href "device/889345efdet"}}
           resp-test             (-> session-admin
                                   (request base-uri
