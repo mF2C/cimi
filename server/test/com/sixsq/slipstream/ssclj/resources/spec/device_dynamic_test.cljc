@@ -35,9 +35,9 @@
                                   :wifiAddress                           "[snic(family=<AddressFamily.AF_INET: 2>, address='10.192.167.20', netmask='255.255.0.0', broadcast='10.192.255.255', ptp=None), snic(family=<AddressFamily.AF_INET6: 10>, address='fe80::fe39:ed60:dff6:db85%wlp3s0', netmask='ffff:ffff:ffff:ffff::', broadcast=None, ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='d4:6a:6a:9a:6b:87', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]"
                                   :ethernetThroughputInfo                ["0", "0", "0", "0", "0", "0", "0", "0"]
                                   :wifiThroughputInfo                    ["21689997", "950419307", "150482", "663270", "0", "0", "0", "0"]
-                                  :sensorType                            ["temperature", "humidity"]
-                                  :sensorModel                           "DHT22"
-                                  :sensorConnection                      ["{'baudRate': 5600, 'gpioPin': 23}", "{'baudRate': 5600}"]
+                                  :sensorType                            ["[\"temperature\"]", "[\"humidity\"]"]
+                                  :sensorModel                           ["DHT22"]
+                                  :sensorConnection                      ["{\"baudRate\": 5600, \"gpioPin\": 23}", "{\"baudRate\": 5600}"]
                                   :myLeaderID                            {:href "device/889345efdet"}}]
     (is (s/valid? :cimi/device-dynamic device-dynamic-resource))
     (is (not (s/valid? :cimi/device-dynamic (assoc device-dynamic-resource :bad-field "you need to check...etc...etc.."))))))
