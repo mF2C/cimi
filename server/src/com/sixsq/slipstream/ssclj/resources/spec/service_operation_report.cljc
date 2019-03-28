@@ -12,9 +12,14 @@
 ;   "execution_time": float
 ; }
 
-(s/def :cimi.service-operation-report/serviceInstance ::cimi-common/resource-link)
-(s/def :cimi.service-operation-report/operation string?)
-(s/def :cimi.service-operation-report/execution_time float?)
+(s/def :cimi.service-operation-report/requesting_application_id ::cimi-common/resource-link)
+(s/def :cimi.service-operation-report/compute_node_id string?)
+(s/def :cimi.service-operation-report/operation_name string?)
+(s/def :cimi.service-operation-report/operation_id string?)
+(s/def :cimi.service-operation-report/start_time ::cimi-core/timestamp)
+(s/def :cimi.service-operation-report/expected_end_time ::cimi-core/timestamp)
+(s/def :cimi.service-operation-report/execution_length pos-int?)
+(s/def :cimi.service-operation-report/result string?)
 
 (s/def :cimi/service-operation-report
   (su/only-keys :req-un [::cimi-common/id
@@ -22,6 +27,11 @@
                          ::cimi-common/acl
                          ::cimi-common/created
                          ::cimi-common/updated
-                         :cimi.service-operation-report/serviceInstance
-                         :cimi.service-operation-report/operation
-                         :cimi.service-operation-report/execution_time]))
+                         :cimi.service-operation-report/requesting_application_id
+                         :cimi.service-operation-report/compute_node_id
+                         :cimi.service-operation-report/operation_name
+                         :cimi.service-operation-report/operation_id
+                         :cimi.service-operation-report/start_time
+                         :cimi.service-operation-report/expected_end_time
+                         :cimi.service-operation-report/execution_length
+                         :cimi.service-operation-report/result]))
