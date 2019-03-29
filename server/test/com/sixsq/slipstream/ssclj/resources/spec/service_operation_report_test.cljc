@@ -20,9 +20,14 @@
                                 :created        timestamp
                                 :updated        timestamp
                                 :acl            valid-acl
-                                :serviceInstance {:href "service-instance/si-id"}
-                                :operation      "dijkstra"
-                                :execution_time 99.9
+                                :requesting_application_id {:href "service-instance/si-id"}
+								:compute_node_id "compute_node_id"
+                                :operation_name      "dijkstra"
+								:operation_id "operation_id"
+								:start_time  "1964-08-25T10:00:00.0Z"
+								:expected_end_time "1964-08-25T10:00:00.0Z"
+                                :execution_length 99.9
+								:result "result "
                                 }]
     (is (s/valid? :cimi/service-operation-report resource))
     (is (not (s/valid? :cimi/service-operation-report (assoc resource :bad-field "bla bla bla"))))))
