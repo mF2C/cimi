@@ -62,9 +62,14 @@
                                         :acl         valid-acl
                                         :created        timestamp
                                         :updated        timestamp
-                                        :serviceInstance   {:href "service-instance/id-01"}
-                                        :operation      "dijkstra"
-                                        :execution_time 99.8
+                                        :requesting_application_id {:href "service-instance/si-id"}
+										:compute_node_id "compute_node_id"
+										:operation_name      "dijkstra"
+										:operation_id "operation_id"
+										:start_time  "1964-08-25T10:00:00.0Z"
+										:expected_end_time "1964-08-25T10:00:00.0Z"
+										:execution_length 99.9
+										:result "result "
                                     }
 
                    resp-test (-> session-admin
