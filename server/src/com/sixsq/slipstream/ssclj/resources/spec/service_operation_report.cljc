@@ -18,7 +18,7 @@
 (s/def :cimi.service-operation-report/operation_id string?)
 (s/def :cimi.service-operation-report/start_time ::cimi-core/timestamp)
 (s/def :cimi.service-operation-report/expected_end_time ::cimi-core/timestamp)
-(s/def :cimi.service-operation-report/execution_length pos-int?)
+(s/def :cimi.service-operation-report/execution_length float?)
 (s/def :cimi.service-operation-report/result string?)
 
 (s/def :cimi/service-operation-report
