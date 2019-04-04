@@ -75,7 +75,6 @@
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-							  :cimi.device-dynamic/sensors
 								:cimi.device-dynamic/myLeaderID]
-						:opt-un []}))
+						:opt-un [:cimi.device-dynamic/sensors]}))
 

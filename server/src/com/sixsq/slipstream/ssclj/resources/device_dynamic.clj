@@ -3,10 +3,12 @@
   (:require
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
-    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]        
+    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.spec.device-dynamic]
+    [com.sixsq.slipstream.ssclj.resources.event :as event]
+    [clj-time.core :as time]
     [superstring.core :as str]))
 
 (def ^:const resource-name "DeviceDynamic")
@@ -48,10 +50,26 @@
   [request]
   (retrieve-impl request))
 
+
+(defn create-event [device-dynamicID type acl]
+  (let [event-request {:params   {:resource-name event/resource-url}
+                       :body     {:type         type
+                                  :content {:resource {:href device-dynamicID} :state "DELETED"}
+                                  :severity "low"
+                                  :timestamp (u/unparse-timestamp-datetime (time/now))
+                                  :acl acl}
+                       :identity {:current         "INTERNAL"
+                                  :authentications {"INTERNAL" {:identity "INTERNAL"
+                                                                :roles    ["ADMIN"]}}}}
+        {{:keys [resource-id]} :body status :status} (crud/add event-request)]
+    ))
+
 (def delete-impl (std-crud/delete-fn resource-name))
 
 (defmethod crud/delete resource-name
   [request]
+  (create-event (clojure.string/replace (:uri request) #"/api/" "") "action" {:owner {:type "USER" :principal "joe"}
+                                                                              :rules [{:type "ROLE" :principal "ANON" :right "ALL"}]})
   (delete-impl request))
 
 ;;

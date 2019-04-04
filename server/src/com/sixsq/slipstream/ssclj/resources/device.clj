@@ -3,13 +3,13 @@
   (:require
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
-    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]        
+    [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.spec.device]
     [com.sixsq.slipstream.util.response :as r]
     [clj-time.core :as time]
-    [com.sixsq.slipstream.ssclj.resources.event :as event]  
+    [com.sixsq.slipstream.ssclj.resources.event :as event]
     [superstring.core :as str]))
 
 (def ^:const resource-name "Device")
@@ -54,19 +54,16 @@
 
 (defn create-event [deviceID type acl]
   (let [event-request {:params   {:resource-name event/resource-url}
-                          :body     {:type         type
-                                      :content {:resource {:href deviceID} :state "DELETED"}
-                                      :severity "low"
-                                      :timestamp (u/unparse-timestamp-datetime (time/now))
-                                      :acl acl}
-                          :identity {:current         "INTERNAL"
-                                      :authentications {"INTERNAL" {:identity "INTERNAL"
-                                                                    :roles    ["ADMIN"]}}}}
+                       :body     {:type         type
+                                  :content {:resource {:href deviceID} :state "DELETED"}
+                                  :severity "low"
+                                  :timestamp (u/unparse-timestamp-datetime (time/now))
+                                  :acl acl}
+                       :identity {:current         "INTERNAL"
+                                  :authentications {"INTERNAL" {:identity "INTERNAL"
+                                                                :roles    ["ADMIN"]}}}}
         {{:keys [resource-id]} :body status :status} (crud/add event-request)]
-    ; (if (!= 201 status)
-    ;   (let [msg "cannot create event"]
-    ;     (throw (ex-info msg (r/map-response msg 500 deviceID)))))
-        ))
+    ))
 
 
 (def delete-impl (std-crud/delete-fn resource-name))
@@ -74,7 +71,7 @@
 (defmethod crud/delete resource-name
   [request]
   (create-event (clojure.string/replace (:uri request) #"/api/" "") "action" {:owner {:type "USER" :principal "joe"}
-    :rules [{:type "ROLE" :principal "ANON" :right "ALL"}]})
+                                                                              :rules [{:type "ROLE" :principal "ANON" :right "ALL"}]})
   (delete-impl request))
 
 ;;
