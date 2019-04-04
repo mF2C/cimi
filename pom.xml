@@ -8,11 +8,11 @@
   <name>server parent</name>
   <url>http://www.mf2c-project.eu/</url>
 
-  <parent>
-    <groupId>com.sixsq.slipstream</groupId>
-    <artifactId>SlipStreamCommunity</artifactId>
-    <version>3.52</version>
-  </parent>
+  <!--<parent>-->
+    <!--<groupId>com.sixsq.slipstream</groupId>-->
+    <!--<artifactId>SlipStreamCommunity</artifactId>-->
+    <!--<version>3.52</version>-->
+  <!--</parent>-->
 
   <licenses>
     <license>
@@ -31,39 +31,39 @@
     <module>container</module>
   </modules>
 
-  <scm>
-    <connection>https://github.com/mF2C/cimi.git</connection>
-    <developerConnection>git@github.com:mF2C/cimi.git</developerConnection>
-    <url>https://github.com/mF2C/cimi</url>
-    <tag>HEAD</tag>
-  </scm>
+  <!--<scm>-->
+    <!--<connection>https://github.com/mF2C/cimi.git</connection>-->
+    <!--<developerConnection>git@github.com:mF2C/cimi.git</developerConnection>-->
+    <!--<url>https://github.com/mF2C/cimi</url>-->
+    <!--<tag>HEAD</tag>-->
+  <!--</scm>-->
 
-  <repositories>
+  <!--<repositories>-->
 
-    <repository>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>slipstream.releases</id>
-      <name>SlipStream Releases</name>
-      <url>https://nexus.sixsq.com/content/repositories/releases-community-rhel7</url>
-    </repository>
+    <!--<repository>-->
+      <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>false</enabled>-->
+      <!--</snapshots>-->
+      <!--<id>slipstream.releases</id>-->
+      <!--<name>SlipStream Releases</name>-->
+      <!--<url>s3://sixsq-build-artifacts-legacy</url>-->
+    <!--</repository>-->
 
-    <repository>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>slipstream.snapshots</id>
-      <name>SlipStream Snapshots</name>
-      <url>https://nexus.sixsq.com/content/repositories/snapshots-community-rhel7</url>
-    </repository>
+    <!--<repository>-->
+      <!--<releases>-->
+        <!--<enabled>false</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+      <!--</snapshots>-->
+      <!--<id>slipstream.snapshots</id>-->
+      <!--<name>SlipStream Snapshots</name>-->
+      <!--<url>s3://sixsq-build-artifacts-legacy</url>-->
+    <!--</repository>-->
 
-  </repositories>
+  <!--</repositories>-->
 
 </project>

@@ -47,11 +47,16 @@
 (s/def :cimi.device-dynamic/wifiAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
-(s/def :cimi.device-dynamic/sensorType (s/coll-of string?))
-(s/def :cimi.device-dynamic/sensorModel (s/coll-of string?))
-(s/def :cimi.device-dynamic/sensorConnection (s/coll-of string?))
+(s/def :cimi.device-dynamic/sensorType string?)
+(s/def :cimi.device-dynamic/sensorModel string?)
+(s/def :cimi.device-dynamic/sensorConnection string?)
 (s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
 
+(s/def :cimi.device-dynamic/sensor (su/only-keys :req-un [:cimi.device-dynamic/sensorType
+																													:cimi.device-dynamic/sensorConnection
+																													:cimi.device-dynamic/sensorModel]))
+
+(s/def :cimi.device-dynamic/sensors (s/coll-of :cimi.device-dynamic/sensor :min-count 0 :kind vector?))
 
 (s/def :cimi/device-dynamic
 	(su/only-keys-maps c/common-attrs
@@ -70,9 +75,7 @@
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/sensorType
-								:cimi.device-dynamic/sensorModel
-								:cimi.device-dynamic/sensorConnection
+							  :cimi.device-dynamic/sensors
 								:cimi.device-dynamic/myLeaderID]
 						:opt-un []}))
 
