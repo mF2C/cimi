@@ -21,7 +21,7 @@ services:
       - "6472"
 
   cimi:
-    image: mf2c/cimi-server:2.10-SNAPSHOT
+    image: mf2c/cimi-server:2.11-SNAPSHOT
     depends_on:
       - logicmodule1
       - dcproxy
