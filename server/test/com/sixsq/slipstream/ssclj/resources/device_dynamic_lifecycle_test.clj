@@ -73,6 +73,7 @@
                                   :cpuFreePercent                        50.4
                                   :powerRemainingStatus                  "97.42316050915865"
                                   :powerRemainingStatusSeconds           "10557"
+                                  :powerPlugged                           true
                                   :ethernetAddress                       "[snic(family=<AddressFamily.AF_PACKET: 17>, address='50:9a:4c:cf:f4:b9', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]"
                                   :wifiAddress                           "[snic(family=<AddressFamily.AF_INET: 2>, address='10.192.167.20', netmask='255.255.0.0', broadcast='10.192.255.255', ptp=None), snic(family=<AddressFamily.AF_INET6: 10>, address='fe80::fe39:ed60:dff6:db85%wlp3s0', netmask='ffff:ffff:ffff:ffff::', broadcast=None, ptp=None), snic(family=<AddressFamily.AF_PACKET: 17>, address='d4:6a:6a:9a:6b:87', netmask=None, broadcast='ff:ff:ff:ff:ff:ff', ptp=None)]"
                                   :ethernetThroughputInfo                ["0", "0", "0", "0", "0", "0", "0", "0"]
@@ -80,6 +81,7 @@
                                   ;:sensorType                            ["[\"temperature\"]", "[\"humidity\"]"]
                                   ;:sensorModel                           ["DHT22"]
                                   ;:sensorConnection                      ["{\"baudRate\": 5600, \"gpioPin\": 23}", "{\"baudRate\": 5600}"]
+                                  :actuatorInfo                          "It has Ambulance, Firetruck, Sirene, Traffic light"
                                   :sensors                               [{:sensorType "mytype", :sensorModel "mymodel", :sensorConnection "myconn"}]
                                  :myLeaderID                            {:href "device/889345efdet"}}
           resp-test             (-> session-admin

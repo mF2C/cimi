@@ -35,12 +35,12 @@
 (s/def :cimi.device/cpuClockSpeed ::cimi-core/nonblank-string)
 (s/def :cimi.device/memory float?)
 (s/def :cimi.device/storage float?)
-(s/def :cimi.device/powerPlugged boolean?)
+;(s/def :cimi.device/powerPlugged boolean?)
 (s/def :cimi.device/agentType ::cimi-core/nonblank-string)
-(s/def :cimi.device/actuatorInfo ::cimi-core/nonblank-string)
+;(s/def :cimi.device/actuatorInfo ::cimi-core/nonblank-string)
 (s/def :cimi.device/networkingStandards ::cimi-core/nonblank-string)
-(s/def :cimi.device/ethernetAddress ::cimi-core/nonblank-string)
-(s/def :cimi.device/wifiAddress ::cimi-core/nonblank-string)
+;(s/def :cimi.device/ethernetAddress ::cimi-core/nonblank-string)
+;(s/def :cimi.device/wifiAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device/hwloc string?)
 (s/def :cimi.device/cpuinfo string?)
 
@@ -57,12 +57,13 @@
                         :cimi.device/cpuClockSpeed
                         :cimi.device/memory
                         :cimi.device/storage
-                        :cimi.device/powerPlugged
+                        ;:cimi.device/powerPlugged
                         :cimi.device/agentType
-                        :cimi.device/actuatorInfo
+                        ;:cimi.device/actuatorInfo
                         :cimi.device/networkingStandards
-                        :cimi.device/ethernetAddress
-                        :cimi.device/wifiAddress]
+                        ;:cimi.device/ethernetAddress
+                        ;:cimi.device/wifiAddress
+                        ]
               :opt-un [:cimi.device/hwloc
                        :cimi.device/cpuinfo]}))
 
