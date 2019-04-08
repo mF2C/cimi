@@ -10,6 +10,7 @@
 (s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose" "docker-swarm" "kubernetes"})
 (s/def :cimi.service/exec_ports (s/coll-of ::cimi-core/port))
 (s/def :cimi.service/agent_type #{"cloud" "normal" "micro"})
+(s/def :cimi.service/sla_templates (s/coll-of ::cimi-common/resource-link))
 (s/def :cimi.service/num_agents nat-int?)
 (s/def :cimi.service/cpu_arch #{"arm" "x86-64"})
 (s/def :cimi.service/os #{"linux" "mac" "windows" "iOS" "android"})
@@ -19,7 +20,6 @@
 (s/def :cimi.service/req_resource (s/coll-of string?))
 (s/def :cimi.service/opt_resource (s/coll-of string?))
 (s/def :cimi.service/category nat-int?)
-;(s/def :cimi.service/template_id ::cimi-common/resource-link)
 
 (s/def :cimi/service
   (su/only-keys :req-un [::cimi-common/id
@@ -34,6 +34,7 @@
                 :opt-un [::cimi-common/description
                          ::cimi-common/properties
                          ::cimi-common/operations
+                         :cimi.service/sla_templates
                          :cimi.service/exec_ports
                          :cimi.service/num_agents
                          :cimi.service/cpu_arch
@@ -44,5 +45,4 @@
                          :cimi.service/req_resource
                          :cimi.service/opt_resource
                          :cimi.service/category
-                         ;                         :cimi.service/template_id
                          ]))

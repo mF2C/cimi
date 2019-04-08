@@ -93,24 +93,24 @@
                  (ltu/is-status 403))
 
              ;; create a callback as an admin
-             (let [create-test-callback {:id           (str callback/resource-url "/example-service")
-                                         :resourceURI  callback/resource-uri
-                                         :acl          valid-acl
-                                         :name         "name_test"
-                                         :exec         "exec_name_test"
-                                         :exec_type    "docker"
-                                         :exec_ports   [8080]
-                                         :agent_type   "normal"
-                                         :num_agents   1
-                                         :cpu_arch     "x86-64"
-                                         :os           "linux"
-                                         :memory_min   0
-                                         :storage_min  0
-                                         :disk         0
-                                         :req_resource ["req_resource_test"]
-                                         :opt_resource ["opt_resource_test"]
-                                         :category     0
-                                        ;  :template_id  {:href "sla_template/id"}
+             (let [create-test-callback {:id            (str callback/resource-url "/example-service")
+                                         :resourceURI   callback/resource-uri
+                                         :acl           valid-acl
+                                         :name          "name_test"
+                                         :exec          "exec_name_test"
+                                         :exec_type     "docker"
+                                         :exec_ports    [8080]
+                                         :agent_type    "normal"
+                                         :sla_templates [{:href "sla-template/sla-template-id-1"}, {:href "sla-template/sla-template-id-2"}]
+                                         :num_agents    1
+                                         :cpu_arch      "x86-64"
+                                         :os            "linux"
+                                         :memory_min    0
+                                         :storage_min   0
+                                         :disk          0
+                                         :req_resource  ["req_resource_test"]
+                                         :opt_resource  ["opt_resource_test"]
+                                         :category      0
                                          }
 
                    resp-test (-> session-admin
