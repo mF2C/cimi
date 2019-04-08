@@ -60,10 +60,7 @@
                         ;:cimi.device/powerPlugged
                         :cimi.device/agentType
                         ;:cimi.device/actuatorInfo
-                        :cimi.device/networkingStandards
-                        ;:cimi.device/ethernetAddress
-                        ;:cimi.device/wifiAddress
-                        ]
+                        :cimi.device/networkingStandards]
               :opt-un [:cimi.device/hwloc
                        :cimi.device/cpuinfo]}))
 
