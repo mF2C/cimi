@@ -6,29 +6,6 @@
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
-;{
-;  "device_id":x
-;  "updated_on": x
-;  "available_RAM_size_in_MB": long,
-;  "available_RAM_in_percentage": float,
-;  "available_Storage_size_in_MB": long,
-;  "available_Storage_in_percentage": float,
-;  "available_CPU_percentage": float,
-;  "power_remaining_status": string,
-;  "remaining_power_info_in_seconds": string,
-;  "ethernet_address": string,
-;  "wifi_address": string,
-;  "throughput_info_ethernet": string,
-;  "throughput_info_wifi": string
-;  "inclinometer": x,                  The information about the sensors and actuators will be provided
-;  "temperature": x,
-;  "jammer": x,
-;  "location": x,
-;  "ambulance": x,
-;  "fire_car": x,
-;  "traffic_light": x,
-;  "street_light": x
-; }
 
 
 
@@ -79,7 +56,7 @@
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/actuatorInfo
-								:cimi.device-dynamic/status]
+								:cimi.device-dynamic/actuatorInfo]
+								;:cimi.device-dynamic/status]
 						:opt-un [:cimi.device-dynamic/sensors]}))
 
