@@ -43,10 +43,12 @@
 (s/def :cimi.device-dynamic/cpuFreePercent float?)
 (s/def :cimi.device-dynamic/powerRemainingStatus ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/powerRemainingStatusSeconds ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/powerPlugged boolean?)
 (s/def :cimi.device-dynamic/ethernetAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/wifiAddress ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
+(s/def :cimi.device-dynamic/actuatorInfo ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/sensorType string?)
 (s/def :cimi.device-dynamic/sensorModel string?)
 (s/def :cimi.device-dynamic/sensorConnection string?)
@@ -71,10 +73,12 @@
 								:cimi.device-dynamic/cpuFreePercent
 								:cimi.device-dynamic/powerRemainingStatus
 								:cimi.device-dynamic/powerRemainingStatusSeconds
+								:cimi.device-dynamic/powerPlugged
 								:cimi.device-dynamic/ethernetAddress
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/myLeaderID]
+								:cimi.device-dynamic/actuatorInfo]
+								;:cimi.device-dynamic/myLeaderID]
 						:opt-un [:cimi.device-dynamic/sensors]}))
 
