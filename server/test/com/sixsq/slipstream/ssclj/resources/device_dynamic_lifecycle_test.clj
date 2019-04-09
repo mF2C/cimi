@@ -82,7 +82,7 @@
                                   ;:sensorModel                           ["DHT22"]
                                   ;:sensorConnection                      ["{\"baudRate\": 5600, \"gpioPin\": 23}", "{\"baudRate\": 5600}"]
                                   :actuatorInfo                          "It has Ambulance, Firetruck, Sirene, Traffic light"
-                                  :sensors                               [{:sensorType "mytype", :sensorModel "mymodel", :sensorConnection "myconn"}]
+                                  :sensors                               [{:sensorType "mytype", :sensorModel "mymodel", :sensorConnection "myconn"}]}
                                  ;:myLeaderID                            {:href "device/889345efdet"}}
           resp-test             (-> session-admin
                                   (request base-uri
