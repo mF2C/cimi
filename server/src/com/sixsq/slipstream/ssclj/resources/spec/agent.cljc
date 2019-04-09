@@ -15,7 +15,7 @@
 ;     "connected": boolean,
 ;     "isLeader": boolean,
 ;     "backup_ip": string,
-;     "childrenIPs": string (List)
+;;;;     "childrenIPs": string (List)
 ;   }
 
 
@@ -28,7 +28,7 @@
 (s/def :cimi.agent/connected boolean?)
 (s/def :cimi.agent/isLeader boolean?)
 (s/def :cimi.agent/backup_ip string?)
-(s/def :cimi.agent/childrenIPs string?)
+;(s/def :cimi.agent/childrenIPs string?)
 
 
 (s/def :cimi/agent
@@ -41,6 +41,6 @@
                               :cimi.agent/connected
                               :cimi.agent/isLeader
                               :cimi.agent/backup_ip
-                              :cimi.agent/childrenIPs
+;                              :cimi.agent/childrenIPs
                                ]
                        }))

@@ -34,7 +34,7 @@
                           :connected          true
                           :isLeader           false
                           :backup_ip          "0.0.0.0"
-                          :childrenIPs        "[]"
+;                          :childrenIPs        "[]"
                           }
          ]
     (is (s/valid? :cimi/agent agent-resource))

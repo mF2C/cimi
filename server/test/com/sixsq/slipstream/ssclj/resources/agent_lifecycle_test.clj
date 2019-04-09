@@ -73,7 +73,7 @@
                                  :connected         true
                                  :isLeader          false
                                  :backup_ip         "0.0.0.0"
-                                 :childrenIPs       "[]"
+;                                 :childrenIPs       "[]"
                                  }
           resp-test             (-> session-admin
                                   (request base-uri
