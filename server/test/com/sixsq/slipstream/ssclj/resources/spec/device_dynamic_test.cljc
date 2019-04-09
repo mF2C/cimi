@@ -41,6 +41,6 @@
                                   :sensors                               [{:sensorType "mytype", :sensorModel "mymodel", :sensorConnection "myconn"}]
                                   ;:myLeaderID                            {:href "device/889345efdet"}}]
                                   :powerPlugged                           true
-                                  :actuatorInfo                          "It has Ambulance, Firetruck, Sirene, Traffic light"
+                                  :actuatorInfo                          "It has Ambulance, Firetruck, Sirene, Traffic light"]
     (is (s/valid? :cimi/device-dynamic device-dynamic-resource))
     (is (not (s/valid? :cimi/device-dynamic (assoc device-dynamic-resource :bad-field "you need to check...etc...etc.."))))))
