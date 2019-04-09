@@ -5,14 +5,14 @@
 
   <artifactId>server-dep</artifactId>
   <packaging>pom</packaging>
-  <version>2.13-SNAPSHOT</version>
+  <version>2.14-SNAPSHOT</version>
   <name>server dep</name>
   <url>http://sixsq.com</url>
 
   <parent>
     <groupId>eu.mf2c-project.cimi</groupId>
     <artifactId>server-parent</artifactId>
-    <version>2.13-SNAPSHOT</version>
+    <version>2.14-SNAPSHOT</version>
   </parent>
 
   <profiles>

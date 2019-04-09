@@ -14,7 +14,7 @@ services:
      - "443:443"
 
   cimi:
-    image: mf2c/cimi-server:2.13-SNAPSHOT
+    image: mf2c/cimi-server:2.14-SNAPSHOT
     depends_on:
       - logicmodule1
       - dcproxy
