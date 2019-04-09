@@ -28,19 +28,17 @@
 (s/def :cimi.agent/connected boolean?)
 (s/def :cimi.agent/isLeader boolean?)
 (s/def :cimi.agent/backup_ip string?)
-(s/def :cimi.agent/childrenIPs string?)
+(s/def :cimi.agent/childrenIPs (s/coll-of string?))
 
 
 (s/def :cimi/agent
-  (su/only-keys-maps c/common-attrs
-                     {:req-un[:cimi.agent/device_id
-                              :cimi.agent/device_ip
-                              :cimi.agent/leader_id
-                              :cimi.agent/leader_ip
-                              :cimi.agent/authenticated
-                              :cimi.agent/connected
-                              :cimi.agent/isLeader
-                              :cimi.agent/backup_ip
-                              :cimi.agent/childrenIPs
-                               ]
-                       }))
+       (su/only-keys-maps c/common-attrs
+                          {:req-un [:cimi.agent/device_id
+                                     :cimi.agent/device_ip
+                                     :cimi.agent/authenticated
+                                     :cimi.agent/connected
+                                     :cimi.agent/isLeader]
+                           :opt-un [:cimi.agent/leader_id
+                                     :cimi.agent/leader_ip
+                                     :cimi.agent/backup_ip
+                                     :cimi.agent/childrenIPs]}))
