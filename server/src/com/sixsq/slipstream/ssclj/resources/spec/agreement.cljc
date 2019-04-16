@@ -65,9 +65,9 @@
                                                       :cimi.agreement/provider
                                                       :cimi.agreement/client
                                                       :cimi.agreement/creation
-                                                      :cimi.agreement/expiration
                                                       :cimi.agreement/guarantees]
-                                             :opt-un [:cimi.agreement/id]))
+                                             :opt-un [:cimi.agreement/expiration
+                                                      :cimi.agreement/id]))
 
 ; --
 
