@@ -62,9 +62,7 @@
                                                                  ;{:principal "ANON"
                                                                   ;:type      "ROLE"
                                                                   ;:right     "MODIFY"}]}
-							     :user_id           	"user/testuser"
 							     :device_id			    "device/id12345678"
-							     :max_apps              1
                                  :service_consumer      false
                                  :resource_contributor  false}
           resp-test             (-> session-admin

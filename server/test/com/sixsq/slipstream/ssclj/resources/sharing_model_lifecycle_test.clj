@@ -63,14 +63,14 @@
                                                                   ;:type      "ROLE"
                                                                   ;:right     "MODIFY"}]}
                                  ;; sharing model fields
-                                 :user_id              "user/testuser"
 							     :device_id		       "device/id12345678"
                                  :gps_allowed          false
                                  :max_cpu_usage        50
                                  :max_memory_usage     50
                                  :max_storage_usage    50
                                  :max_bandwidth_usage  50
-                                 :battery_limit        50}
+                                 :battery_limit        50
+								 :max_apps             1}
           resp-test             (-> session-admin
                                   (request base-uri
                                            :request-method :post
