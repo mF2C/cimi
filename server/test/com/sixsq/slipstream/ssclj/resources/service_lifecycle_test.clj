@@ -37,9 +37,11 @@
                     :category     0
                     :cpu_arch     "x86-64"
                     :os           "linux"
-                    :memory_min   0
-                    :storage_min  0
-                    :disk         0
+                    :cpu           0
+                    :memory        0
+                    :disk          0
+                    :network       0
+                    :storage_min   0
                     :req_resource ["req_resource_test"]
                     :opt_resource ["opt_resource_test"]
                     })
