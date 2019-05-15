@@ -14,10 +14,10 @@
 (s/def :cimi.service/num_agents nat-int?)
 (s/def :cimi.service/cpu_arch #{"arm" "x86-64"})
 (s/def :cimi.service/os #{"linux" "mac" "windows" "iOS" "android"})
-(s/def :cimi.service/cpu float?)
-(s/def :cimi.service/memory float?)
-(s/def :cimi.service/disk float?)
-(s/def :cimi.service/network float?)
+(s/def :cimi.service/cpu_recommended float?)
+(s/def :cimi.service/memory_recommended float?)
+(s/def :cimi.service/disk_recommended float?)
+(s/def :cimi.service/network_recommended float?)
 (s/def :cimi.service/storage_min nat-int?)
 (s/def :cimi.service/req_resource (s/coll-of string?))
 (s/def :cimi.service/opt_resource (s/coll-of string?))
@@ -41,10 +41,10 @@
                          :cimi.service/num_agents
                          :cimi.service/cpu_arch
                          :cimi.service/os
-                         :cimi.service/cpu
-                         :cimi.service/memory
-                         :cimi.service/disk
-                         :cimi.service/network
+                         :cimi.service/cpu_recommended
+                         :cimi.service/memory_recommended
+                         :cimi.service/disk_recommended
+                         :cimi.service/network_recommended
                          :cimi.service/storage_min
                          :cimi.service/req_resource
                          :cimi.service/opt_resource
