@@ -37,9 +37,11 @@
                     :category     0
                     :cpu_arch     "x86-64"
                     :os           "linux"
-                    :memory_min   0
-                    :storage_min  0
-                    :disk         0
+                    :cpu_recommended            0.0
+                    :memory_recommended         0.0
+                    :disk_recommended           0.0
+                    :network_recommended        0.0
+                    :storage_min   0
                     :req_resource ["req_resource_test"]
                     :opt_resource ["opt_resource_test"]
                     })
@@ -57,9 +59,11 @@
                     \"category\":     0,
                     \"cpu_arch\":     \"x86-64\",
                     \"os\":           \"linux\",
-                    \"memory_min\":   0,
+                    \"cpu_recommended\":  0.0,
+                    \"memory_recommended\":  0.0,
+                    \"disk_recommended\":  0.0,
+                    \"network_recommended\":  0.0,
                     \"storage_min\":  0,
-                    \"disk\":         0,
                     \"req_resource\": [\"req_resource_test\"],
                     \"opt_resource\": [\"opt_resource_test\"]}}"
         })]
@@ -105,9 +109,11 @@
                                          :num_agents    1
                                          :cpu_arch      "x86-64"
                                          :os            "linux"
-                                         :memory_min    0
+                                         :cpu_recommended            0.0
+                                         :memory_recommended         0.0
+                                         :disk_recommended           0.0
+                                         :network_recommended        0.0
                                          :storage_min   0
-                                         :disk          0
                                          :req_resource  ["req_resource_test"]
                                          :opt_resource  ["opt_resource_test"]
                                          :category      0
