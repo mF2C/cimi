@@ -42,24 +42,13 @@ services:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
     command: sh
-  service-manager:
-    image: mf2c/service-manager:1.6.0
-    restart: unless-stopped
-    depends_on:
-      - cimi
-    expose:
-      - 46200
-    ports:
-      - 46200:46200
-    environment:
-      - JAVA_OPTS=-Xms32m -Xmx256m
 
   ####################################
   #  JAVA DATA SERVICES ON DC 1      #
   ####################################
 
   dcproxy:
-    image: mf2c/dataclay-proxy:2.17
+    image: mf2c/dataclay-proxy:2.19
     depends_on:
       - logicmodule1
       - ds1java1
@@ -67,7 +56,7 @@ services:
       - "6472"
 
   logicmodule1:
-    image: mf2c/dataclay-logicmodule:2.17
+    image: mf2c/dataclay-logicmodule:2.19
     ports:
       - "1034:1034"
     env_file:
@@ -80,7 +69,7 @@ services:
       - ./prop/log4j2.xml:/usr/src/dataclay/log4j2.xml:ro
 
   ds1java1:
-    image: mf2c/dataclay-dsjava:2.17
+    image: mf2c/dataclay-dsjava:2.19
     depends_on:
       - logicmodule1
     env_file:

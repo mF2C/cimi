@@ -39,7 +39,7 @@ services:
      - ringcontainerexample:/opt/slipstream/ring-example
     command: sh
   cimi:
-    image: mf2c/cimi-server:2.4-SNAPSHOT
+    image: mf2c/cimi-server:2.19-SNAPSHOT
     depends_on:
       - elasticsearch
     expose:
