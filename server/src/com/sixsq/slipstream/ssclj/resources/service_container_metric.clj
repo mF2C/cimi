@@ -9,10 +9,10 @@
     [com.sixsq.slipstream.ssclj.resources.spec.service-container-metric]
     [superstring.core :as str]))
 
-(def ^:const resource-name "ServiceContainerMetrics")
+(def ^:const resource-name "ServiceContainerMetric")
 (def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
-(def ^:const collection-name "ServiceContainerMetricsCollection")
+(def ^:const collection-name "ServiceContainerMetricCollection")
 
 (def ^:const resource-uri (str c/cimi-schema-uri resource-name))
 (def ^:const collection-uri (str c/cimi-schema-uri collection-name))
