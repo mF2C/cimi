@@ -70,7 +70,7 @@
   ;             {:headers     {"Accept" "application/json"}
   ;               :body request}) )
   ;   response ]
-    (add-impl (assoc request :body (call-sm "http://service-manager:46200/api/service-management" (:body request))) ))
+    (add-impl (assoc request :body (call-sm "http://service-manager:46200/api" (:body request))) ))
      
   ; (add-impl request))
 
