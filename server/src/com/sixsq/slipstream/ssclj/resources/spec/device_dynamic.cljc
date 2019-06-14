@@ -56,7 +56,7 @@
 								:cimi.device-dynamic/wifiAddress
 								:cimi.device-dynamic/ethernetThroughputInfo
 								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/actuatorInfo]
-								;:cimi.device-dynamic/status]
+								:cimi.device-dynamic/actuatorInfo
+								:cimi.device-dynamic/status]
 						:opt-un [:cimi.device-dynamic/sensors]}))
 
