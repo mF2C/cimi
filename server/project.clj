@@ -54,6 +54,9 @@
                                [org.apache.curator/curator-test]
                                [com.sixsq.slipstream/SlipStreamDbTesting-jar ~+slipstream-version+]
                                [com.sixsq.slipstream/SlipStreamCljResourcesTests-jar ~+slipstream-version+]]
+              :env            {:mf2c-aclib-host  "localhost"
+                               :auth-private-key "test-resources/auth_privkey.pem"
+                               :auth-public-key  "test-resources/auth_pubkey.pem"}
               :resource-paths ["test-resources"]
               :aot            :all}})
 
