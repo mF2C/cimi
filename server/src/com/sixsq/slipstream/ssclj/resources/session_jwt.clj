@@ -55,34 +55,32 @@
 ;;
 
 (defmethod p/tpl->session authn-method
-  [{:keys [token instance href redirectURI] :as resource} {:keys [headers] :as request}]
+  [{:keys [token instance href] :as resource} {:keys [headers] :as request}]
   (if token
-    (try
-      (let [{:keys [iss] :as claims} (jwt-utils/extract-claims token)]
-        (log/debug "JWT authentication claims for" instance ":" (pr-str claims))
-        (if iss
-          (if-let [matched-user (ex/match-oidc-username :jwt iss instance)]
-            (let [session-info {:href href, :username matched-user, :redirectURI redirectURI}
-                  {:keys [id] :as session} (sutils/create-session session-info headers authn-method)
-                  claims (cond-> (auth-internal/create-claims matched-user)
-                                 id (assoc :session id)
-                                 id (update :roles #(str id " " %)))
-                  cookie (cookies/claims-cookie claims)
-                  expires (ts/rfc822->iso8601 (:expires cookie))
-                  claims-roles (:roles claims)
-                  session (cond-> (assoc session :expiry expires)
-                                  claims-roles (assoc :roles claims-roles))]
+    (if-let [{:keys [iss]} (jwt-utils/extract-claims token)]
+      (if iss
+        (let [validation-response (jwt-utils/validate-jwt token)]
+          (if (= "OK" validation-response)
+            (if-let [matched-user (ex/match-oidc-username :jwt iss instance)]
+              (let [session-info {:href href, :username matched-user}
+                    {:keys [id] :as session} (sutils/create-session session-info headers authn-method)
+                    claims       (cond-> (auth-internal/create-claims matched-user)
+                                         id (assoc :session id)
+                                         id (update :roles #(str id " " %)))
+                    cookie       (cookies/claims-cookie claims)
+                    expires      (ts/rfc822->iso8601 (:expires cookie))
+                    claims-roles (:roles claims)
+                    session      (cond-> (assoc session :expiry expires)
+                                         claims-roles (assoc :roles claims-roles))]
 
-              (log/debug "JWT cookie token claims for" (u/document-id href) ":" (pr-str claims))
-              (let [cookies {(sutils/cookie-name (:id session)) cookie}]
-                (if redirectURI
-                  [{:status 303, :headers {"Location" redirectURI}, :cookies cookies} session]
-                  [{:cookies cookies} session])))
-            (jwt-utils/throw-inactive-user iss nil))
-          (jwt-utils/throw-no-issuer nil)))
-      (catch Exception e
-        (jwt-utils/throw-invalid-access-code (str e) nil)))
-    (jwt-utils/throw-no-access-token nil)))
+                (log/debug "JWT cookie token claims for" (u/document-id href) ":" (pr-str claims))
+                (let [cookies {(sutils/cookie-name (:id session)) cookie}]
+                  [{:cookies cookies} session]))
+              (jwt-utils/throw-inactive-user iss))
+            (jwt-utils/throw-invalid-jwt (str "token validation error '" validation-response "'"))))
+        (jwt-utils/throw-no-issuer))
+      (jwt-utils/throw-invalid-jwt "cannot parse JWT"))
+    (jwt-utils/throw-no-token)))
 
 
 ;;
