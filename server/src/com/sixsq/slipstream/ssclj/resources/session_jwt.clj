@@ -1,11 +1,8 @@
 (ns com.sixsq.slipstream.ssclj.resources.session-jwt
   (:require
-    [clojure.string :as str]
     [clojure.tools.logging :as log]
     [com.sixsq.slipstream.auth.cookies :as cookies]
-    [com.sixsq.slipstream.auth.external :as ex]
     [com.sixsq.slipstream.auth.internal :as auth-internal]
-    [com.sixsq.slipstream.auth.utils.sign :as sign]
     [com.sixsq.slipstream.auth.utils.timestamp :as ts]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
@@ -61,7 +58,7 @@
       (if iss
         (let [validation-response (jwt-utils/validate-jwt token)]
           (if (= "OK" validation-response)
-            (if-let [matched-user (ex/match-oidc-username :jwt iss instance)]
+            (if-let [matched-user (jwt-utils/match-user iss)]
               (let [session-info {:href href, :username matched-user}
                     {:keys [id] :as session} (sutils/create-session session-info headers authn-method)
                     claims       (cond-> (auth-internal/create-claims matched-user)

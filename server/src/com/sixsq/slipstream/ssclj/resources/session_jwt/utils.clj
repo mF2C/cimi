@@ -1,12 +1,12 @@
 (ns com.sixsq.slipstream.ssclj.resources.session-jwt.utils
   (:require
-    [com.sixsq.slipstream.ssclj.util.log :as logu]
-    [buddy.sign.jws :as jws]
     [aleph.tcp :as tcp]
-    [environ.core :as env]
-    [clojure.edn :as edn]
     [buddy.core.codecs :as codecs]
+    [buddy.sign.jws :as jws]
     [clojure.data.json :as json]
+    [clojure.edn :as edn]
+    [com.sixsq.slipstream.ssclj.util.log :as logu]
+    [environ.core :as env]
     [manifold.stream :as stream]))
 
 
@@ -41,6 +41,9 @@
         (some-> @(stream/try-take! client timeout)
                 codecs/bytes->str)))))
 
+
+;; FIXME: If user matching is needed, the method/contents of the user resource must be defined.
+(def match-user identity)
 
 ;; general exceptions
 
