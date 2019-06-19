@@ -126,180 +126,178 @@
 
   (with-open [server (start-server jwt-utils/aclib-port)]
 
-    (with-redefs [ex/match-oidc-username (constantly "slipstream-username")]
+    (let [app           (ltu/ring-app)
+          session-json  (content-type (session app) "application/json")
+          session-anon  (header session-json authn-info-header "unknown ANON")
+          session-user  (header session-json authn-info-header "user USER")
+          session-admin (header session-json authn-info-header "root ADMIN")]
 
-      (let [app           (ltu/ring-app)
-            session-json  (content-type (session app) "application/json")
-            session-anon  (header session-json authn-info-header "unknown ANON")
-            session-user  (header session-json authn-info-header "user USER")
-            session-admin (header session-json authn-info-header "root ADMIN")]
+      ;;
+      ;; create the session template and the configuration for the tests
+      ;;
 
-        ;;
-        ;; create the session template and the configuration for the tests
-        ;;
+      (let [href         (-> session-admin
+                             (request session-template-base-uri
+                                      :request-method :post
+                                      :body (json/write-str session-template-jwt))
+                             (ltu/body->edn)
+                             (ltu/is-status 201)
+                             (ltu/location))
 
-        (let [href         (-> session-admin
-                               (request session-template-base-uri
-                                        :request-method :post
-                                        :body (json/write-str session-template-jwt))
-                               (ltu/body->edn)
-                               (ltu/is-status 201)
-                               (ltu/location))
+            template-url (str p/service-context href)]
 
-              template-url (str p/service-context href)]
+        ;; verify that the session template exists
+        (-> session-anon
+            (request template-url)
+            (ltu/body->edn)
+            (ltu/is-status 200))
 
-          ;; verify that the session template exists
+        ;; anonymous query should succeed but have no entries
+        (-> session-anon
+            (request base-uri)
+            (ltu/body->edn)
+            (ltu/is-status 200)
+            (ltu/is-count zero?))
+
+        (let [name-attr        "name"
+              description-attr "description"
+              properties-attr  {:a "one", :b "two"}
+
+              valid-create     {:name            name-attr
+                                :description     description-attr
+                                :properties      properties-attr
+                                :sessionTemplate {:href  href
+                                                  :token authn-token}}
+
+              invalid-create   (assoc-in valid-create [:sessionTemplate :invalid] "BAD")]
+
+          ;; invalid create should return a 400
           (-> session-anon
-              (request template-url)
+              (request base-uri
+                       :request-method :post
+                       :body (json/write-str invalid-create))
               (ltu/body->edn)
-              (ltu/is-status 200))
+              (ltu/is-status 400))
 
-          ;; anonymous query should succeed but have no entries
+          ;; no token provided on create
           (-> session-anon
-              (request base-uri)
+              (request base-uri
+                       :request-method :post
+                       :body (json/write-str (assoc-token valid-create nil)))
               (ltu/body->edn)
-              (ltu/is-status 200)
-              (ltu/is-count zero?))
+              (ltu/message-matches #"(?s).*resource does not satisfy defined schema.*")
+              (ltu/is-status 400))
 
-          (let [name-attr        "name"
-                description-attr "description"
-                properties-attr  {:a "one", :b "two"}
+          ;; invalid token provided on create
+          (-> session-anon
+              (request base-uri
+                       :request-method :post
+                       :body (json/write-str (assoc-in valid-create [:sessionTemplate :token] "invalid")))
+              (ltu/body->edn)
+              (ltu/message-matches #"(?s).*cannot parse JWT.*")
+              (ltu/is-status 400))
 
-                valid-create     {:name            name-attr
-                                  :description     description-attr
-                                  :properties      properties-attr
-                                  :sessionTemplate {:href  href
-                                                    :token authn-token}}
+          ;; no iss attribute in token
+          (-> session-anon
+              (request base-uri
+                       :request-method :post
+                       :body (json/write-str (assoc-token valid-create {:sub "no-issuer"})))
+              (ltu/body->edn)
+              (ltu/message-matches #"(?s).*JWT token is missing issuer \(iss\) attribute.*")
+              (ltu/is-status 400))
 
-                invalid-create   (assoc-in valid-create [:sessionTemplate :invalid] "BAD")]
+          ;; validation fails
+          (-> session-anon
+              (request base-uri
+                       :request-method :post
+                       :body (json/write-str (assoc-token valid-create {:iss         "issuer"
+                                                                        :test-result "err1"})))
+              (ltu/body->edn)
+              (ltu/message-matches #"(?s).*token validation error 'err1'.*")
+              (ltu/is-status 400))
 
-            ;; invalid create should return a 400
-            (-> session-anon
-                (request base-uri
-                         :request-method :post
-                         :body (json/write-str invalid-create))
+          (let [resp    (-> session-anon
+                            (request base-uri
+                                     :request-method :post
+                                     :body (json/write-str valid-create))
+                            (ltu/body->edn)
+                            (ltu/is-status 201)
+                            (ltu/is-set-cookie))
+
+                id      (get-in resp [:response :body :resource-id])
+                token   (get-in resp [:response :cookies "com.sixsq.slipstream.cookie" :value :token])
+                claims  (if token (sign/unsign-claims token) {})
+                uri     (-> resp ltu/location)
+                abs-uri (str p/service-context uri)]
+
+            ;; check claims in cookie
+            (is (= "device-id" (:username claims)))
+            (is (= #{"USER" "ANON" id} (some-> claims :roles (str/split #"\s+") set)))
+            (is (= uri (:session claims)))
+            (is (not (nil? (:exp claims))))
+
+            ;; user should not be able to see session without session role
+            (-> session-user
+                (request abs-uri)
                 (ltu/body->edn)
-                (ltu/is-status 400))
+                (ltu/is-status 403))
 
-            ;; no token provided on create
+            ;; anonymous query should succeed but still have no entries
             (-> session-anon
-                (request base-uri
-                         :request-method :post
-                         :body (json/write-str (assoc-token valid-create nil)))
+                (request base-uri)
                 (ltu/body->edn)
-                (ltu/message-matches #"(?s).*resource does not satisfy defined schema.*")
-                (ltu/is-status 400))
+                (ltu/is-status 200)
+                (ltu/is-count zero?))
 
-            ;; invalid token provided on create
-            (-> session-anon
-                (request base-uri
-                         :request-method :post
-                         :body (json/write-str (assoc-in valid-create [:sessionTemplate :token] "invalid")))
+            ;; user query should succeed but have no entries because of missing session role
+            (-> session-user
+                (request base-uri)
                 (ltu/body->edn)
-                (ltu/message-matches #"(?s).*cannot parse JWT.*")
-                (ltu/is-status 400))
+                (ltu/is-status 200)
+                (ltu/is-count zero?))
 
-            ;; no iss attribute in token
-            (-> session-anon
-                (request base-uri
-                         :request-method :post
-                         :body (json/write-str (assoc-token valid-create {:sub "no-issuer"})))
+            ;; admin query should succeed, but see no sessions without the correct session role
+            (-> session-admin
+                (request base-uri)
                 (ltu/body->edn)
-                (ltu/message-matches #"(?s).*JWT token is missing issuer \(iss\) attribute.*")
-                (ltu/is-status 400))
+                (ltu/is-status 200)
+                (ltu/is-count zero?))
 
-            ;; validation fails
-            (-> session-anon
-                (request base-uri
-                         :request-method :post
-                         :body (json/write-str (assoc-token valid-create {:iss         "issuer"
-                                                                          :test-result "err1"})))
+            ;; user should be able to see session with session role
+            (-> (session app)
+                (header authn-info-header (str "user USER " id))
+                (request abs-uri)
                 (ltu/body->edn)
-                (ltu/message-matches #"(?s).*token validation error 'err1'.*")
-                (ltu/is-status 400))
+                (ltu/is-status 200)
+                (ltu/is-id id)
+                (ltu/is-operation-present "delete")
+                (ltu/is-operation-absent "edit"))
 
-            (let [resp    (-> session-anon
-                              (request base-uri
-                                       :request-method :post
-                                       :body (json/write-str valid-create))
-                              (ltu/body->edn)
-                              (ltu/is-status 201)
-                              (ltu/is-set-cookie))
+            ;; check contents of session
+            (let [{:keys [name description properties] :as body} (-> session-user
+                                                                     (header authn-info-header (str "user USER ANON " id))
+                                                                     (request abs-uri)
+                                                                     (ltu/body->edn)
+                                                                     :response
+                                                                     :body)]
+              (is (= name name-attr))
+              (is (= description description-attr))
+              (is (= properties properties-attr)))
 
-                  id      (get-in resp [:response :body :resource-id])
-                  token   (get-in resp [:response :cookies "com.sixsq.slipstream.cookie" :value :token])
-                  claims  (if token (sign/unsign-claims token) {})
-                  uri     (-> resp ltu/location)
-                  abs-uri (str p/service-context uri)]
+            ;; user query with session role should succeed and have one entry
+            (-> (session app)
+                (header authn-info-header (str "user USER " id))
+                (request base-uri)
+                (ltu/body->edn)
+                (ltu/is-status 200)
+                (ltu/is-count 1))
 
-              ;; check claims in cookie
-              (is (= "slipstream-username" (:username claims)))
-              (is (= #{"USER" "ANON" id} (some-> claims :roles (str/split #"\s+") set)))
-              (is (= uri (:session claims)))
-              (is (not (nil? (:exp claims))))
-
-              ;; user should not be able to see session without session role
-              (-> session-user
-                  (request abs-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 403))
-
-              ;; anonymous query should succeed but still have no entries
-              (-> session-anon
-                  (request base-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)
-                  (ltu/is-count zero?))
-
-              ;; user query should succeed but have no entries because of missing session role
-              (-> session-user
-                  (request base-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)
-                  (ltu/is-count zero?))
-
-              ;; admin query should succeed, but see no sessions without the correct session role
-              (-> session-admin
-                  (request base-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)
-                  (ltu/is-count zero?))
-
-              ;; user should be able to see session with session role
-              (-> (session app)
-                  (header authn-info-header (str "user USER " id))
-                  (request abs-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)
-                  (ltu/is-id id)
-                  (ltu/is-operation-present "delete")
-                  (ltu/is-operation-absent "edit"))
-
-              ;; check contents of session
-              (let [{:keys [name description properties] :as body} (-> session-user
-                                                                       (header authn-info-header (str "user USER ANON " id))
-                                                                       (request abs-uri)
-                                                                       (ltu/body->edn)
-                                                                       :response
-                                                                       :body)]
-                (is (= name name-attr))
-                (is (= description description-attr))
-                (is (= properties properties-attr)))
-
-              ;; user query with session role should succeed and have one entry
-              (-> (session app)
-                  (header authn-info-header (str "user USER " id))
-                  (request base-uri)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)
-                  (ltu/is-count 1))
-
-              ;; user with session role can delete resource
-              (-> (session app)
-                  (header authn-info-header (str "user USER " id))
-                  (request abs-uri
-                           :request-method :delete)
-                  (ltu/is-unset-cookie)
-                  (ltu/body->edn)
-                  (ltu/is-status 200)))))))))
+            ;; user with session role can delete resource
+            (-> (session app)
+                (header authn-info-header (str "user USER " id))
+                (request abs-uri
+                         :request-method :delete)
+                (ltu/is-unset-cookie)
+                (ltu/body->edn)
+                (ltu/is-status 200))))))))
 
