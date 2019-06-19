@@ -52,7 +52,7 @@
 ;;
 
 (defmethod p/tpl->session authn-method
-  [{:keys [token instance href] :as resource} {:keys [headers] :as request}]
+  [{:keys [token href] :as resource} {:keys [headers] :as request}]
   (if token
     (if-let [{:keys [iss]} (jwt-utils/extract-claims token)]
       (if iss
