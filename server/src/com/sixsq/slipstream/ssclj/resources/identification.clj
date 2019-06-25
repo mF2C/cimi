@@ -20,10 +20,7 @@
                              :type      "ROLE"}
                      :rules [{:principal "ADMIN"
                               :type      "ROLE"
-                              :right     "ALL"}
-                             {:principal "USER"
-                              :type      "ROLE"
-                              :right     "MODIFY"}]})
+                              :right     "ALL"}]})
 
 
 (defmethod crud/add-acl resource-uri
