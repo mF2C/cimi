@@ -26,11 +26,11 @@
 (s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/actuatorInfo ::cimi-core/nonblank-string)
-;(s/def :cimi.device-dynamic/status ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/status ::cimi-core/nonblank-string)
 (s/def :cimi.device-dynamic/sensorType string?)
 (s/def :cimi.device-dynamic/sensorModel string?)
 (s/def :cimi.device-dynamic/sensorConnection string?)
-(s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
+;(s/def :cimi.device-dynamic/myLeaderID ::cimi-common/resource-link)
 
 (s/def :cimi.device-dynamic/sensor (su/only-keys :req-un [:cimi.device-dynamic/sensorType
 																													:cimi.device-dynamic/sensorConnection
@@ -40,23 +40,23 @@
 
 (s/def :cimi/device-dynamic
 	(su/only-keys-maps c/common-attrs
-					   {:req-un [:cimi.device-dynamic/device
-								; :cimi.device-dynamic/isLeader
-								;:cimi.device-dynamic/ramUnits
-								:cimi.device-dynamic/ramFree
-								:cimi.device-dynamic/ramFreePercent
-								;:cimi.device-dynamic/storageUnits
-								:cimi.device-dynamic/storageFree
-								:cimi.device-dynamic/storageFreePercent
-								:cimi.device-dynamic/cpuFreePercent
-								:cimi.device-dynamic/powerRemainingStatus
-								:cimi.device-dynamic/powerRemainingStatusSeconds
-								:cimi.device-dynamic/powerPlugged
-								:cimi.device-dynamic/ethernetAddress
-								:cimi.device-dynamic/wifiAddress
-								:cimi.device-dynamic/ethernetThroughputInfo
-								:cimi.device-dynamic/wifiThroughputInfo
-								:cimi.device-dynamic/actuatorInfo
-								:cimi.device-dynamic/status]
-						:opt-un [:cimi.device-dynamic/sensors]}))
+										 {:req-un [:cimi.device-dynamic/device
+															 ; :cimi.device-dynamic/isLeader
+															 ;:cimi.device-dynamic/ramUnits
+																:cimi.device-dynamic/ramFree
+																:cimi.device-dynamic/ramFreePercent
+															 ;:cimi.device-dynamic/storageUnits
+																:cimi.device-dynamic/storageFree
+																:cimi.device-dynamic/storageFreePercent
+																:cimi.device-dynamic/cpuFreePercent
+																:cimi.device-dynamic/powerRemainingStatus
+																:cimi.device-dynamic/powerRemainingStatusSeconds
+																:cimi.device-dynamic/powerPlugged
+																:cimi.device-dynamic/ethernetAddress
+																:cimi.device-dynamic/wifiAddress
+																:cimi.device-dynamic/ethernetThroughputInfo
+																:cimi.device-dynamic/wifiThroughputInfo
+																:cimi.device-dynamic/actuatorInfo
+																:cimi.device-dynamic/status]
+											:opt-un [:cimi.device-dynamic/sensors]}))
 
