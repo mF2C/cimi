@@ -6,14 +6,12 @@
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 ; {
-;   "user": string,
 ; 	"idkey": string,
 ; 	"deviceid": string
 ; }
 
 
-(s/def :cimi.identification/user ::cimi-core/nonblank-string)
-(s/def :cimi.identification/idkey string?)
+(s/def :cimi.identification/idkey ::cimi-core/nonblank-string)
 (s/def :cimi.identification/deviceid string?)
 
 
@@ -23,7 +21,6 @@
                          ::cimi-common/acl
                          ::cimi-common/created
                          ::cimi-common/updated
-                         ; user-profile
-                         :cimi.identification/user
+                         ; identification
                          :cimi.identification/idkey
                          :cimi.identification/deviceid]))
