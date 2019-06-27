@@ -26,7 +26,7 @@
 (s/def :cimi.device-dynamic/ethernetThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/wifiThroughputInfo (s/coll-of string?))
 (s/def :cimi.device-dynamic/actuatorInfo ::cimi-core/nonblank-string)
-(s/def :cimi.device-dynamic/status ::cimi-core/nonblank-string)
+(s/def :cimi.device-dynamic/status #{"connected" "disconnected" "unavailable"})
 (s/def :cimi.device-dynamic/sensorType string?)
 (s/def :cimi.device-dynamic/sensorModel string?)
 (s/def :cimi.device-dynamic/sensorConnection string?)
