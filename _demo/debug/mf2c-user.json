@@ -1,0 +1,11 @@
+{
+    "userTemplate" : {
+        "href" : "user-template/direct",
+        "username": "mf2c",
+        "password": "2C32F184A3BDF0459035E12359EDA6A6377AD8BB3B3B52980D51EC7222BC5C3855749F728E1A17908D82331F986A543CF027F97EEFBAB55DC5D527E32F72FC24",
+        "firstName" : "mf2c",
+        "lastName" : "user",
+        "emailAddress" : "mf2c@example.com",
+        "state" : "ACTIVE"
+    }
+}

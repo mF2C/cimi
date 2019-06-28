@@ -1,0 +1,7 @@
+{
+    "sessionTemplate" : {
+        "href" : "session-template/internal",
+        "username": "mf2c",
+        "password": "mf2c-mf2c"
+    }
+}
