@@ -26,5 +26,5 @@
                          ::cimi-common/updated
                          :cimi.service-container-metric/device_id
                          :cimi.service-container-metric/container_id
-                         :cimi.service-container-metric/start_time
-                         :cimi.service-container-metric/stop_time]))
+                         :cimi.service-container-metric/start_time]
+                :opt-un [:cimi.service-container-metric/stop_time]))

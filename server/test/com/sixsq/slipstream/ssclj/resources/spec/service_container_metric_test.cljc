@@ -23,7 +23,7 @@
                                 :device_id {:href "device/d-id"}
                                 :container_id "this-is-a-container-id"
 								:start_time  "2019-08-25T10:00:00.0Z"
-								:stop_time  "2019-08-26T10:00:00.0Z"
                                 }]
     (is (s/valid? :cimi/service-container-metric resource))
+    (is (s/valid? :cimi/service-container-metric (assoc resource :stop_time "2019-08-26T10:00:00.0Z")))
     (is (not (s/valid? :cimi/service-container-metric (assoc resource :bad-field "bla bla bla"))))))
