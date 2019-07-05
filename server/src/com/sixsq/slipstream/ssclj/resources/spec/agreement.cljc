@@ -21,6 +21,14 @@
 ;       "client": { id: string, name: string}
 ;       "creation": dateTime,
 ;       "expiration": dateTime,
+;       "variables": [
+;          "name": string,
+;          "metric": string,
+;          "aggregation": {
+;             type: AVERAGE,
+;             size: int
+;          }
+;       ],
 ;       "guarantees": [
 ;           "name": string
 ;           "constraint": string
@@ -31,15 +39,16 @@
 (s/def :cimi.agreement/state #{"started" "stopped" "terminated"})
 
 ; ASSESSMENT
-(s/def :cimi.agreement/first_execution ::cimi-core/timestamp)
-(s/def :cimi.agreement/last_execution ::cimi-core/timestamp)
-
-(s/def :cimi.agreement/assessment (su/only-keys :req-un [:cimi.agreement/first_execution
-                                                         :cimi.agreement/last_execution]))
+; namespace in sla-assessment
 
 ; DETAILS
 (s/def :cimi.agreement/id string?)
-(s/def :cimi.agreement/type #{"agreement" "template"})
+
+; type is used in details.type and details.variables.aggregation.type
+; The following is better than just using a string without needing to create
+; a new namespace for one of the two usages.
+(s/def :cimi.agreement/type #{"agreement" "template" "average"})
+;(s/def :cimi.agreement/type string?)
 
 (s/def :cimi.agreement/party (su/only-keys :req-un [:cimi.agreement/id ; this could a common/resourceURI in the near future
                                                     ::cimi-common/name]))
@@ -58,6 +67,19 @@
 
 (s/def :cimi.agreement/guarantees (s/coll-of :cimi.agreement/guarantee :kind vector? :distinct true))
 
+; DETAILS/VARIABLES
+(s/def :cimi.agreement/metric string?)
+(s/def :cimi.agreement/window nat-int?)
+(s/def :cimi.agreement/aggregation (su/only-keys :req-un [
+                                            :cimi.agreement/type 
+                                            :cimi.agreement/window]))
+
+(s/def :cimi.agreement/variable (su/only-keys :req-un [::cimi-common/name]
+                                              :opt-un [:cimi.agreement/metric
+                                                       :cimi.agreement/aggregation]))
+
+(s/def :cimi.agreement/variables (s/coll-of :cimi.agreement/variable :kind vector? :distinct true))
+
 ; --
 
 (s/def :cimi.agreement/details (su/only-keys :req-un [:cimi.agreement/type
@@ -67,6 +89,7 @@
                                                       :cimi.agreement/creation
                                                       :cimi.agreement/guarantees]
                                              :opt-un [:cimi.agreement/expiration
+                                                      :cimi.agreement/variables
                                                       :cimi.agreement/id]))
 
 ; --

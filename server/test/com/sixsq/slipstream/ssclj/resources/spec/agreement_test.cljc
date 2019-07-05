@@ -22,6 +22,18 @@
                                    :rules [{:principal "ADMIN"
                                             :type      "ROLE"
                                             :right     "MODIFY"}]}
+        aggregation {
+            :type   "average"
+            :window 600
+        }
+        variable    {
+            :name   "m"
+            :metric "_m"
+            :aggregation aggregation
+        }
+        variables   [
+            variable
+        ]
         agreement-resource     {:id            (str resource-url "/agreement-resource")
                                 :resourceURI    resource-uri
                                 :created        timestamp
@@ -35,6 +47,16 @@
                                     :client     client
                                     :creation   timestamp
                                     :expiration timestamp
+                                    :variables [
+                                        {
+                                            :name "m"
+                                            :metric "_m"
+                                            :aggregation {
+                                                :type "average"
+                                                :window 600
+                                            }
+                                        }
+                                    ]
                                     :guarantees [
                                             { 
                                                 :name   "gt1"
@@ -43,5 +65,6 @@
                                     ]
                                 }
                                 }]
+
     (is (s/valid? :cimi/agreement agreement-resource))
     (is (not (s/valid? :cimi/agreement (assoc agreement-resource :bad-field "bla bla bla"))))))
