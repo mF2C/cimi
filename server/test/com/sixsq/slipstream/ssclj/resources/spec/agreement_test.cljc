@@ -62,6 +62,12 @@
                                                 :name   "gt1"
                                                 :constraint "m > 0"
                                             }
+                                            {
+                                                :name   "gt2"
+                                                :constraint "m2 > 0"
+                                                :scope  "Operation1"
+                                                :schedule   "hourly"
+                                            }
                                     ]
                                 }
                                 }

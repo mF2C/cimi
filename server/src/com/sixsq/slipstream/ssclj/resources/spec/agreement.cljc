@@ -46,6 +46,8 @@
 ;       "guarantees": [
 ;           "name": string
 ;           "constraint": string
+;           "scope": string
+;           "schedule" string
 ;       ]
 ;   }
 ; }
@@ -75,9 +77,13 @@
 
 ; DETAILS/GUARANTEE
 (s/def :cimi.agreement/constraint string?)
+(s/def :cimi.agreement/scope string?)
+(s/def :cimi.agreement/schedule string?)
 
 (s/def :cimi.agreement/guarantee (su/only-keys :req-un [::cimi-common/name
-                                                        :cimi.agreement/constraint]))
+                                                        :cimi.agreement/constraint]
+                                               :opt-un [:cimi.agreement/scope
+                                                        :cimi.agreement/schedule]))
 
 (s/def :cimi.agreement/guarantees (s/coll-of :cimi.agreement/guarantee :kind vector? :distinct true))
 
