@@ -1,6 +1,7 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.agreement
   (:require
     [clojure.spec.alpha :as s]
+    [com.sixsq.slipstream.ssclj.resources.spec.sla-assessment :as sla-assessment]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
@@ -12,6 +13,19 @@
 ;   "assessment": {
 ;       "first_execution": dateTime
 ;       "last_execution": dateTime
+;       "guarantees": {
+;           <gt-name>: {
+;             "first_execution": dateTime
+;             "last_execution": dateTime
+;             "last_values": {
+;                "<var-name>": {
+;                    "key" string
+;                    "value" string
+;                    "datetime" timestamp
+;                }
+;             }
+;           }
+;       }
 ;   }
 ;   "details": {
 ;       "id": string    ; optional
@@ -104,5 +118,5 @@
                          :cimi.agreement/details]
                 :opt-un [::cimi-common/name
                          ::cimi-common/properties
-                         :cimi.agreement/assessment
+                         :cimi.sla-assessment/assessment
                          ::cimi-common/operations]))

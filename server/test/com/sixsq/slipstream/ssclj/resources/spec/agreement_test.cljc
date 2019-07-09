@@ -64,7 +64,25 @@
                                             }
                                     ]
                                 }
-                                }]
+                                }
+        initial-assessment      {:first_execution timestamp
+                                :last_execution timestamp}
+        last        {:m0        {:key "m0"
+                                :value 50.0
+                                :datetime timestamp}
+                    :m1         {:key "m1"
+                                :value 51
+                                :datetime timestamp}}
+        guarantees {:gt0        {:first_execution   timestamp
+                                :last_execution     timestamp
+                                :last_values        last}
+        }
+        assessment  {           :first_execution    timestamp
+                                :last_execution     timestamp
+                                :guarantees         guarantees
+        }]
 
     (is (s/valid? :cimi/agreement agreement-resource))
+    (is (s/valid? :cimi/agreement (assoc agreement-resource :assessment initial-assessment)))
+    (is (s/valid? :cimi/agreement (assoc agreement-resource :assessment assessment)))
     (is (not (s/valid? :cimi/agreement (assoc agreement-resource :bad-field "bla bla bla"))))))
