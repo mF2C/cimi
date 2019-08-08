@@ -42,8 +42,10 @@
                                ;:cimi.device/powerPlugged
                                 :cimi.device/agentType
                                ;:cimi.device/status
-                                :cimi.device/networkingStandards]
-                      :opt-un [:cimi.device/hwloc
-                               :cimi.device/cpuinfo]}))
+                                :cimi.device/networkingStandards
+                                :cimi.device/hwloc
+                                :cimi.device/cpuinfo]}))
+                      ;:opt-un [:cimi.device/hwloc
+                      ;         :cimi.device/cpuinfo]}))
 
 
