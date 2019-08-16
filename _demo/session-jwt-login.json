@@ -1,0 +1,6 @@
+{
+    "sessionTemplate": {
+        "href": "session-template/jwt",
+        "token": "some-valid-token"
+    }
+}
