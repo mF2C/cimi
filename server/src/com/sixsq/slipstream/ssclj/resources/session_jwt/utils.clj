@@ -16,7 +16,7 @@
 (def aclib-port (edn/read-string (env/env :mf2c-aclib-port "46080")))
 
 
-(def timeout 1000)
+(def timeout 20000)
 
 
 ;; WARNING: Private functions are used. May break with buddy version updates!
@@ -35,11 +35,23 @@
 
 (defn validate-jwt
   [token]
-  (with-open [client @(tcp/client {:host aclib-host, :port aclib-port})]
-    (let [msg (str (json/write-str {:typ "jwt", :token token}) "\n")]
-      (when @(stream/try-put! client msg timeout)
-        (some-> @(stream/try-take! client timeout)
-                codecs/bytes->str)))))
+  (try
+    (with-open [client @(tcp/client {:host aclib-host, :port aclib-port})]
+      (let [msg (str (json/write-str {:typ "jwt", :token token}) "\n")]
+        (let [put-response @(stream/try-put! client msg timeout :timeout)]
+          (if (true? put-response)
+            (let [take-response @(stream/try-take! client :error timeout :timeout)]
+              (case take-response
+                :timeout (logu/log-and-throw 500 (format "take from %s:%s timed out after %s ms" aclib-host aclib-port timeout))
+                :error (logu/log-and-throw 500 (format "take from %s:%s failed" aclib-host aclib-port))
+                (codecs/bytes->str take-response)))
+            (if (= put-response :timeout)
+              (logu/log-and-throw 500 (format "put to %s:%s timed out after %s ms" aclib-host aclib-port timeout))
+              (logu/log-and-throw 500 (format "failed to send message to %s:%s" aclib-host aclib-port)))))))
+    (catch Exception e
+      (if (ex-data e)
+        (throw e)
+        (logu/log-and-throw 500 (format "error when connecting to %s:%s: %s" aclib-host aclib-port (str e)))))))
 
 
 ;; FIXME: If user matching is needed, the method/contents of the user resource must be defined.
