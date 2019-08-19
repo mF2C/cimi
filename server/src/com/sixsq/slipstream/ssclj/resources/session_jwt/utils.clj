@@ -10,7 +10,7 @@
     [manifold.stream :as stream]))
 
 
-(def aclib-host (env/env :mf2c-aclib-host "localhost"))
+(def aclib-host (env/env :mf2c-aclib-host "aclib"))
 
 
 (def aclib-port (edn/read-string (env/env :mf2c-aclib-port "46080")))
