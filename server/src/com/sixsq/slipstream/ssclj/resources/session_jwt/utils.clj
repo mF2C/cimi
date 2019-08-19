@@ -7,7 +7,8 @@
     [clojure.edn :as edn]
     [com.sixsq.slipstream.ssclj.util.log :as logu]
     [environ.core :as env]
-    [manifold.stream :as stream]))
+    [manifold.stream :as stream]
+    [clojure.string :as str]))
 
 
 (def aclib-host (env/env :mf2c-aclib-host "aclib"))
@@ -44,7 +45,7 @@
               (case take-response
                 :timeout (logu/log-and-throw 500 (format "take from %s:%s timed out after %s ms" aclib-host aclib-port timeout))
                 :error (logu/log-and-throw 500 (format "take from %s:%s failed" aclib-host aclib-port))
-                (codecs/bytes->str take-response)))
+                (str/trim (codecs/bytes->str take-response))))
             (if (= put-response :timeout)
               (logu/log-and-throw 500 (format "put to %s:%s timed out after %s ms" aclib-host aclib-port timeout))
               (logu/log-and-throw 500 (format "failed to send message to %s:%s" aclib-host aclib-port)))))))

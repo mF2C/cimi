@@ -74,7 +74,7 @@
                 (let [cookies {(sutils/cookie-name (:id session)) cookie}]
                   [{:cookies cookies} session]))
               (jwt-utils/throw-inactive-user iss))
-            (jwt-utils/throw-invalid-jwt (str "token validation error '" validation-response "'"))))
+            (jwt-utils/throw-invalid-jwt (format "token validation error '%s'" validation-response))))
         (jwt-utils/throw-no-issuer))
       (jwt-utils/throw-invalid-jwt "cannot parse JWT"))
     (jwt-utils/throw-no-token)))
