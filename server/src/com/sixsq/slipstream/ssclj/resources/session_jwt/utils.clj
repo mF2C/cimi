@@ -5,10 +5,10 @@
     [buddy.sign.jws :as jws]
     [clojure.data.json :as json]
     [clojure.edn :as edn]
+    [clojure.string :as str]
     [com.sixsq.slipstream.ssclj.util.log :as logu]
     [environ.core :as env]
-    [manifold.stream :as stream]
-    [clojure.string :as str]))
+    [manifold.stream :as stream]))
 
 
 (def aclib-host (env/env :mf2c-aclib-host "aclib"))
