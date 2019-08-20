@@ -35,7 +35,7 @@ services:
      - ringcontainer:/opt/slipstream/ring-container
      - ringcontainerexample:/opt/slipstream/ring-example
   rc:
-    image: sixsq/ring-container:3.53-SNAPSHOT
+    image: sixsq/ring-container:3.67
     expose:
      - "5000"
     volumes:
