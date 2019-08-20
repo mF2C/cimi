@@ -34,7 +34,7 @@
 
 
 (def authn-token (sign/sign-claims {:iss         "device-id"
-                                    :test-result "OK"}))
+                                    :test-result "OK\n"}))
 
 
 (def session-template-jwt {:method      jwt/authn-method
@@ -106,19 +106,19 @@
     (with-open [server (start-server aclib/port)
                 client @(tcp/client {:host aclib/host, :port aclib/port})]
 
-      (let [token  (sign/sign-claims {:test-result "OK"})
+      (let [token  (sign/sign-claims {:test-result "OK\n"})
             msg    (str (json/write-str {:typ "jwt", :token token}) "\n")
             result (when @(stream/try-put! client msg timeout)
                      (some-> @(stream/try-take! client timeout)
                              (codecs/bytes->str)))]
-        (is (= "OK" result)))
+        (is (= "OK\n" result)))
 
-      (let [token  (sign/sign-claims {:test-result "err1"})
+      (let [token  (sign/sign-claims {:test-result "err1\n"})
             msg    (str (json/write-str {:typ "jwt", :token token}) "\n")
             result (when @(stream/try-put! client msg timeout)
                      (some-> @(stream/try-take! client timeout)
                              (codecs/bytes->str)))]
-        (is (= "err1" result))))))
+        (is (= "err1\n" result))))))
 
 
 (deftest lifecycle
@@ -145,13 +145,13 @@
 
             template-url (str p/service-context href)]
 
-        ;; verify that the session template exists
+        ;; verify that the session template exists and is visible to anyone
         (-> session-anon
             (request template-url)
             (ltu/body->edn)
             (ltu/is-status 200))
 
-        ;; anonymous query should succeed but have no entries
+        ;; anonymous query of session collection should succeed but have no entries
         (-> session-anon
             (request base-uri)
             (ltu/body->edn)
@@ -210,7 +210,7 @@
               (request base-uri
                        :request-method :post
                        :body (json/write-str (assoc-token valid-create {:iss         "issuer"
-                                                                        :test-result "err1"})))
+                                                                        :test-result "err1\n"})))
               (ltu/body->edn)
               (ltu/message-matches #"(?s).*token validation error 'err1'.*")
               (ltu/is-status 400))
