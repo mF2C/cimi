@@ -7,6 +7,7 @@
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.session :as p]
+    [com.sixsq.slipstream.ssclj.resources.session-jwt.aclib :as aclib]
     [com.sixsq.slipstream.ssclj.resources.session-jwt.utils :as jwt-utils]
     [com.sixsq.slipstream.ssclj.resources.session-template-api-key :as tpl]
     [com.sixsq.slipstream.ssclj.resources.session.utils :as sutils]
@@ -56,7 +57,7 @@
   (if token
     (if-let [{:keys [iss]} (jwt-utils/extract-claims token)]
       (if iss
-        (let [validation-response (jwt-utils/validate-jwt token)]
+        (let [validation-response (aclib/validate-jwt token)]
           (if (= "OK" validation-response)
             (if-let [matched-user (jwt-utils/match-user iss)]
               (let [session-info {:href href, :username matched-user}

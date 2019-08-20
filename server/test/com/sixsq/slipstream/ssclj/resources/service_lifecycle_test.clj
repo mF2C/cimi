@@ -3,9 +3,9 @@
     :license   "http://www.apache.org/licenses/LICENSE-2.0"}
   com.sixsq.slipstream.ssclj.resources.service-lifecycle-test
   (:require
+    [clj-http.client :as http]
     [clojure.data.json :as json]
     [clojure.test :refer :all]
-    [clj-http.client :as http]
     [com.sixsq.slipstream.ssclj.app.params :as p]
     [com.sixsq.slipstream.ssclj.middleware.authn-info-header :refer [authn-info-header]]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]

@@ -1,10 +1,10 @@
 (ns com.sixsq.slipstream.db.dataclay.loader-direct
   (:refer-clojure :exclude [load])
   (:require
-    [com.sixsq.dataclay.handler :as proxy]
-    [com.sixsq.slipstream.db.dataclay.binding :as dataclay]
+    [clojure.edn :as edn]
     [clojure.tools.logging :as log]
-    [clojure.edn :as edn]))
+    [com.sixsq.dataclay.handler :as proxy]
+    [com.sixsq.slipstream.db.dataclay.binding :as dataclay]))
 
 
 (defn send-fn

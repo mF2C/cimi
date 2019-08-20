@@ -1,15 +1,15 @@
 (ns
   com.sixsq.slipstream.ssclj.resources.agent
   (:require
+    [clj-time.core :as time]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
+    [com.sixsq.slipstream.ssclj.resources.event :as event]
     [com.sixsq.slipstream.ssclj.resources.spec.agent]
     [com.sixsq.slipstream.util.response :as r]
-    [clj-time.core :as time]
-    [com.sixsq.slipstream.ssclj.resources.event :as event]
     [superstring.core :as str]))
 
 (def ^:const resource-name "Agent")

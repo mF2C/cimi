@@ -1,25 +1,24 @@
 (ns com.sixsq.slipstream.ssclj.resources.session-jwt-lifecycle-test
   (:require
+    [aleph.tcp :as tcp]
+    [buddy.core.codecs :as codecs]
     [clojure.data.json :as json]
     [clojure.string :as str]
     [clojure.test :refer [deftest is use-fixtures]]
-    [com.sixsq.slipstream.auth.external :as ex]
     [com.sixsq.slipstream.auth.utils.sign :as sign]
     [com.sixsq.slipstream.ssclj.app.params :as p]
     [com.sixsq.slipstream.ssclj.middleware.authn-info-header :refer [authn-info-header]]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
     [com.sixsq.slipstream.ssclj.resources.lifecycle-test-utils :as ltu]
     [com.sixsq.slipstream.ssclj.resources.session :as session]
+    [com.sixsq.slipstream.ssclj.resources.session-jwt.aclib :as aclib]
+    [com.sixsq.slipstream.ssclj.resources.session-jwt.utils :as jwt-utils]
     [com.sixsq.slipstream.ssclj.resources.session-template :as ct]
     [com.sixsq.slipstream.ssclj.resources.session-template :as st]
     [com.sixsq.slipstream.ssclj.resources.session-template-jwt :as jwt]
-    [peridot.core :refer :all]
-    [com.sixsq.slipstream.ssclj.resources.session-jwt.utils :as jwt-utils]
-    [aleph.tcp :as tcp]
-    [manifold.stream :as stream]
-    [clojure.tools.logging :as log]
     [manifold.deferred :as d]
-    [buddy.core.codecs :as codecs]))
+    [manifold.stream :as stream]
+    [peridot.core :refer :all]))
 
 
 (use-fixtures :each ltu/with-test-server-fixture)
@@ -35,7 +34,7 @@
 
 
 (def authn-token (sign/sign-claims {:iss         "device-id"
-                                    :test-result "OK"}))
+                                    :test-result "OK\n"}))
 
 
 (def session-template-jwt {:method      jwt/authn-method
@@ -104,27 +103,27 @@
 
 (deftest sanity-check-test-aclib-server
   (let [timeout 1000]
-    (with-open [server (start-server jwt-utils/aclib-port)
-                client @(tcp/client {:host jwt-utils/aclib-host, :port jwt-utils/aclib-port})]
+    (with-open [server (start-server aclib/port)
+                client @(tcp/client {:host aclib/host, :port aclib/port})]
 
-      (let [token  (sign/sign-claims {:test-result "OK"})
+      (let [token  (sign/sign-claims {:test-result "OK\n"})
             msg    (str (json/write-str {:typ "jwt", :token token}) "\n")
             result (when @(stream/try-put! client msg timeout)
                      (some-> @(stream/try-take! client timeout)
                              (codecs/bytes->str)))]
-        (is (= "OK" result)))
+        (is (= "OK\n" result)))
 
-      (let [token  (sign/sign-claims {:test-result "err1"})
+      (let [token  (sign/sign-claims {:test-result "err1\n"})
             msg    (str (json/write-str {:typ "jwt", :token token}) "\n")
             result (when @(stream/try-put! client msg timeout)
                      (some-> @(stream/try-take! client timeout)
                              (codecs/bytes->str)))]
-        (is (= "err1" result))))))
+        (is (= "err1\n" result))))))
 
 
 (deftest lifecycle
 
-  (with-open [server (start-server jwt-utils/aclib-port)]
+  (with-open [server (start-server aclib/port)]
 
     (let [app           (ltu/ring-app)
           session-json  (content-type (session app) "application/json")
@@ -146,13 +145,13 @@
 
             template-url (str p/service-context href)]
 
-        ;; verify that the session template exists
+        ;; verify that the session template exists and is visible to anyone
         (-> session-anon
             (request template-url)
             (ltu/body->edn)
             (ltu/is-status 200))
 
-        ;; anonymous query should succeed but have no entries
+        ;; anonymous query of session collection should succeed but have no entries
         (-> session-anon
             (request base-uri)
             (ltu/body->edn)
@@ -211,7 +210,7 @@
               (request base-uri
                        :request-method :post
                        :body (json/write-str (assoc-token valid-create {:iss         "issuer"
-                                                                        :test-result "err1"})))
+                                                                        :test-result "err1\n"})))
               (ltu/body->edn)
               (ltu/message-matches #"(?s).*token validation error 'err1'.*")
               (ltu/is-status 400))
