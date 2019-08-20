@@ -1,14 +1,14 @@
 (ns
   com.sixsq.slipstream.ssclj.resources.device-dynamic
   (:require
+    [clj-time.core :as time]
     [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
     [com.sixsq.slipstream.ssclj.resources.common.utils :as u]
-    [com.sixsq.slipstream.ssclj.resources.spec.device-dynamic]
     [com.sixsq.slipstream.ssclj.resources.event :as event]
-    [clj-time.core :as time]
+    [com.sixsq.slipstream.ssclj.resources.spec.device-dynamic]
     [superstring.core :as str]))
 
 (def ^:const resource-name "DeviceDynamic")

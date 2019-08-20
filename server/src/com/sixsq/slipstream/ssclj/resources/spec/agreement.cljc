@@ -1,9 +1,9 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.agreement
   (:require
     [clojure.spec.alpha :as s]
-    [com.sixsq.slipstream.ssclj.resources.spec.sla-assessment :as sla-assessment]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]
+    [com.sixsq.slipstream.ssclj.resources.spec.sla-assessment :as sla-assessment]
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 ; {

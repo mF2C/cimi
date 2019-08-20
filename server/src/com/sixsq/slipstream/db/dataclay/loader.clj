@@ -2,10 +2,10 @@
   (:refer-clojure :exclude [load])
   (:require
     [clojure.core.async :refer [<!!]]
+    [clojure.tools.logging :as log]
     [com.sixsq.slipstream.db.dataclay.binding :as dataclay]
     [environ.core :as env]
-    [kvlt.chan :as kvlt]
-    [clojure.tools.logging :as log]))
+    [kvlt.chan :as kvlt]))
 
 
 (defn send-command

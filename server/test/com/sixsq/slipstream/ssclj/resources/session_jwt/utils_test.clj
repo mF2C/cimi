@@ -4,11 +4,11 @@
   com.sixsq.slipstream.ssclj.resources.session-jwt.utils-test
   (:require
     [clojure.test :refer [are deftest is]]
-    [com.sixsq.slipstream.ssclj.resources.session-jwt.utils :as t]
-    [com.sixsq.slipstream.auth.utils.sign :as sign]))
+    [com.sixsq.slipstream.auth.utils.sign :as sign]
+    [com.sixsq.slipstream.ssclj.resources.session-jwt.utils :as t]))
 
 
-(deftest check-jwt-parsing
+(deftest check-extract-claims
 
   (is (nil? (t/extract-claims nil)))
   (is (nil? (t/extract-claims "invalid")))

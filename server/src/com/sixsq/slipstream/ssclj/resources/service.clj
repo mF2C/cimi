@@ -1,11 +1,11 @@
 (ns
   com.sixsq.slipstream.ssclj.resources.service
   (:require
-    [clojure.pprint :as pp]
-    [com.sixsq.slipstream.auth.acl :as a]
     [clj-http.client :as http]
     [clojure.data.json :as json]
+    [clojure.pprint :as pp]
     [clojure.walk :refer [keywordize-keys]]
+    [com.sixsq.slipstream.auth.acl :as a]
     [com.sixsq.slipstream.ssclj.resources.common.crud :as crud]
     [com.sixsq.slipstream.ssclj.resources.common.schema :as c]
     [com.sixsq.slipstream.ssclj.resources.common.std-crud :as std-crud]
