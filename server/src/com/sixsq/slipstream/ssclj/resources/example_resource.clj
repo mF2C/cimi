@@ -94,13 +94,13 @@
 
 (defmethod crud/set-operations resource-uri
   [{:keys [id resourceURI] :as resource} request]
-  (let [href (str id "/execute")
+  (let [href        (str id "/execute")
         collection? (u/cimi-collection? resourceURI)
         modifiable? (a/modifiable? resource request)
-        ops (cond-> []
-                    (and collection? modifiable?) (conj {:rel (:add c/action-uri) :href id})
-                    (and (not collection?) modifiable?) (conj {:rel (:delete c/action-uri) :href id})
-                    (and (not collection?) (utils/executable? resource)) (conj {:rel (:execute c/action-uri) :href href}))]
+        ops         (cond-> []
+                            (and collection? modifiable?) (conj {:rel (:add c/action-uri) :href id})
+                            (and (not collection?) modifiable?) (conj {:rel (:delete c/action-uri) :href id})
+                            (and (not collection?) (utils/executable? resource)) (conj {:rel (:execute c/action-uri) :href href}))]
     (if (empty? ops)
       (dissoc resource :operations)
       (assoc resource :operations ops))))

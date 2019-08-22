@@ -41,7 +41,7 @@
                          :cimi.sharing-model/max_storage_usage
                          :cimi.sharing-model/max_bandwidth_usage
                          :cimi.sharing-model/battery_limit
-						 :cimi.sharing-model/max_apps]
+                         :cimi.sharing-model/max_apps]
                 :opt-un [::cimi-common/name
                          ::cimi-common/description
                          ::cimi-common/properties

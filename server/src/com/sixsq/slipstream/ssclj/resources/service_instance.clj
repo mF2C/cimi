@@ -9,7 +9,7 @@
     [com.sixsq.slipstream.ssclj.resources.spec.service-instance]
     [superstring.core :as str]))
 
-(def ^:const resource-name "ServiceInstance")    
+(def ^:const resource-name "ServiceInstance")
 (def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
 (def ^:const collection-name "ServiceInstanceCollection")

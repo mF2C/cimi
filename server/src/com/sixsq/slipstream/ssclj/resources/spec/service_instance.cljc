@@ -36,15 +36,15 @@
 ; }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(s/def :cimi.service-instance/user ::cimi-core/nonblank-string)       ; the user that launches the service
-(s/def :cimi.service-instance/device_id ::cimi-core/nonblank-string)  ; the device ID that gets the "submit" request
-(s/def :cimi.service-instance/device_ip ::cimi-core/nonblank-string)  ; the device IP address that gets the "submit" request
+(s/def :cimi.service-instance/user ::cimi-core/nonblank-string) ; the user that launches the service
+(s/def :cimi.service-instance/device_id ::cimi-core/nonblank-string) ; the device ID that gets the "submit" request
+(s/def :cimi.service-instance/device_ip ::cimi-core/nonblank-string) ; the device IP address that gets the "submit" request
 (s/def :cimi.service-instance/parent_device_id ::cimi-core/nonblank-string) ; the leader device ID
 (s/def :cimi.service-instance/parent_device_ip ::cimi-core/nonblank-string) ; the leader device IP address
-(s/def :cimi.service-instance/service ::cimi-core/nonblank-string)    ; service
-(s/def :cimi.service-instance/agreement ::cimi-core/nonblank-string)  ; sla
-(s/def :cimi.service-instance/status ::cimi-core/nonblank-string)     ; status of the service (instance): running, error...
-(s/def :cimi.service-instance/service_type ::cimi-core/nonblank-string)     ; type of service: docker, docker-compose, docker-swarm, kubernetes
+(s/def :cimi.service-instance/service ::cimi-core/nonblank-string) ; service
+(s/def :cimi.service-instance/agreement ::cimi-core/nonblank-string) ; sla
+(s/def :cimi.service-instance/status ::cimi-core/nonblank-string) ; status of the service (instance): running, error...
+(s/def :cimi.service-instance/service_type ::cimi-core/nonblank-string) ; type of service: docker, docker-compose, docker-swarm, kubernetes
 ; agent fileds:
 (s/def :cimi.service-instance/url ::cimi-core/nonblank-string)
 (s/def :cimi.service-instance/ports (s/coll-of ::cimi-core/port))

@@ -20,7 +20,7 @@
 
 
 
-(s/def :cimi.agent/device_id ::cimi-core/nonblank-string) ; device_id
+(s/def :cimi.agent/device_id ::cimi-core/nonblank-string)   ; device_id
 (s/def :cimi.agent/device_ip string?)
 (s/def :cimi.agent/leader_id string?)
 (s/def :cimi.agent/leader_ip string?)
@@ -32,13 +32,13 @@
 
 
 (s/def :cimi/agent
-       (su/only-keys-maps c/common-attrs
-                          {:req-un [:cimi.agent/device_id
-                                     :cimi.agent/device_ip
-                                     :cimi.agent/authenticated
-                                     :cimi.agent/connected
-                                     :cimi.agent/isLeader]
-                           :opt-un [:cimi.agent/leader_id
-                                     :cimi.agent/leader_ip
-                                     :cimi.agent/backup_ip
-                                     :cimi.agent/childrenIPs]}))
+  (su/only-keys-maps c/common-attrs
+                     {:req-un [:cimi.agent/device_id
+                               :cimi.agent/device_ip
+                               :cimi.agent/authenticated
+                               :cimi.agent/connected
+                               :cimi.agent/isLeader]
+                      :opt-un [:cimi.agent/leader_id
+                               :cimi.agent/leader_ip
+                               :cimi.agent/backup_ip
+                               :cimi.agent/childrenIPs]}))

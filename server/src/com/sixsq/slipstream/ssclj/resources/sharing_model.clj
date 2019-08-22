@@ -8,7 +8,7 @@
     [com.sixsq.slipstream.ssclj.resources.spec.sharing-model]
     [superstring.core :as str]))
 
-(def ^:const resource-name "SharingModel")    
+(def ^:const resource-name "SharingModel")
 (def ^:const resource-tag (keyword (str (str/camel-case resource-name) "s")))
 (def ^:const resource-url (u/de-camelcase resource-name))
 (def ^:const collection-name "SharingModelCollection")

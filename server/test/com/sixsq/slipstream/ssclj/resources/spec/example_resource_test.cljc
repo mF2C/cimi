@@ -16,7 +16,7 @@
 
 
 (deftest check-example-resource-schema
-  (let [timestamp "1964-08-25T10:00:00.0Z"
+  (let [timestamp        "1964-08-25T10:00:00.0Z"
         example-resource {:id          (str t/resource-url "/test-example-resource")
                           :resourceURI t/resource-uri
                           :created     timestamp

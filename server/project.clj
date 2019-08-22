@@ -1,5 +1,5 @@
 (def +version+ "2.27-SNAPSHOT")
-(def +slipstream-version+ "3.67")
+(def +slipstream-version+ "3.53")
 
 (defproject eu.mf2c-project.cimi/server "2.27-SNAPSHOT"
 
@@ -37,7 +37,7 @@
 
   :pom-location "target/"
 
-  :dependencies [[com.sixsq.dataclay/proxy "2.4"]]
+  :dependencies [[com.sixsq.dataclay/proxy "2.23"]]
 
   :profiles {:provided
              {:dependencies [[org.clojure/clojure]

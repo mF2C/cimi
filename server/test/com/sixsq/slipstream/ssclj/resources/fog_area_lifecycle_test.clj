@@ -16,12 +16,12 @@
 (def base-uri (str p/service-context (u/de-camelcase fog-area/resource-url)))
 
 (deftest lifecycle
-  (let [session (-> (ltu/ring-app)
-                    session
-                    (content-type "application/json"))
+  (let [session       (-> (ltu/ring-app)
+                          session
+                          (content-type "application/json"))
         session-admin (header session authn-info-header "root ADMIN USER ANON")
-        session-user (header session authn-info-header "jane USER ANON")
-        session-anon (header session authn-info-header "unknown ANON")]
+        session-user  (header session authn-info-header "jane USER ANON")
+        session-anon  (header session authn-info-header "unknown ANON")]
 
 
     ;; admin collection query should succeed but be empty
@@ -40,58 +40,58 @@
         (request base-uri)
         (ltu/body->edn)
         ;(ltu/is-status 403)
-    )
+        )
 
     ;; anonymous collection query should not succeed
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
         (ltu/is-status 403)
-    )
+        )
 
     ;; create a callback as an admin
-    (let [resource-name         "FogArea"
-          resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id                    (str resource-url "/fog-area-resource")
-                                 :resourceURI           base-uri
+    (let [resource-name        "FogArea"
+          resource-url         (u/de-camelcase resource-name)
+          create-test-callback {:id                           (str resource-url "/fog-area-resource")
+                                :resourceURI                  base-uri
                                 ;  :acl                   {:owner {:principal "ADMIN"
                                 ;                                  :type      "ROLE"}
                                 ;                          :rules [{:principal "ADMIN"
                                 ;                                   :type      "ROLE"
                                 ;                                   :right     "ALL"}]}
-                                                                 ;{:principal "ANON"
-                                                                  ;:type      "ROLE"
-                                                                  ;:right     "MODIFY"}]}
-                                 ;; sharing model fields
+                                ;{:principal "ANON"
+                                ;:type      "ROLE"
+                                ;:right     "MODIFY"}]}
+                                ;; sharing model fields
                                 ;  :user_id              "user/1230958abdef"
-                                  :leaderDevice                               {:href "device/887766345qws"}
-                                  :numDevices                                 12
-                                  :ramTotal                                   5225.359375
-                                  :ramMax                                     66.4
-                                  :ramMin                                     211712.4765625
-                                  :storageTotal                               95.1
-                                  :storageMax                                 50.4
-                                  :storageMin                                 50.4
-                                  :avgProcessingCapacityPercent               78.0
-                                  :cpuMaxPercent                              92.8
-                                  :cpuMinPercent                              68.8
-                                  :avgPhysicalCores                           4
-                                  :physicalCoresMax                           8
-                                  :physicalCoresMin                           2
-                                  :avgLogicalCores                            6
-                                  :logicalCoresMax                            8
-                                  :logicalCoresMin                            4
-                                  :powerRemainingMax                       "Device has unlimited power source"
-                                  :powerRemainingMin                       "97.2"}
-          resp-test             (-> session-admin
-                                  (request base-uri
-                                           :request-method :post
-                                           :body (json/write-str create-test-callback))
-                                  (ltu/body->edn)
-                                  (ltu/is-status 201))
-          id-test               (get-in resp-test [:response :body :resource-id])
-          location-test         (str p/service-context (-> resp-test ltu/location))
-          test-uri              (str p/service-context id-test)]
+                                :leaderDevice                 {:href "device/887766345qws"}
+                                :numDevices                   12
+                                :ramTotal                     5225.359375
+                                :ramMax                       66.4
+                                :ramMin                       211712.4765625
+                                :storageTotal                 95.1
+                                :storageMax                   50.4
+                                :storageMin                   50.4
+                                :avgProcessingCapacityPercent 78.0
+                                :cpuMaxPercent                92.8
+                                :cpuMinPercent                68.8
+                                :avgPhysicalCores             4
+                                :physicalCoresMax             8
+                                :physicalCoresMin             2
+                                :avgLogicalCores              6
+                                :logicalCoresMax              8
+                                :logicalCoresMin              4
+                                :powerRemainingMax            "Device has unlimited power source"
+                                :powerRemainingMin            "97.2"}
+          resp-test            (-> session-admin
+                                   (request base-uri
+                                            :request-method :post
+                                            :body (json/write-str create-test-callback))
+                                   (ltu/body->edn)
+                                   (ltu/is-status 201))
+          id-test              (get-in resp-test [:response :body :resource-id])
+          location-test        (str p/service-context (-> resp-test ltu/location))
+          test-uri             (str p/service-context id-test)]
 
       (is (= location-test test-uri))
 
@@ -103,7 +103,7 @@
           (ltu/is-operation-present "delete")
           ;(ltu/is-operation-absent "edit")
           ;(ltu/is-operation-present (:execute c/action-uri))
-      )
+          )
 
       ;; user cannot directly see the callback
       (-> session-user
@@ -112,12 +112,12 @@
           (ltu/is-status 403))
 
       ;; check contents and editing
-      (let [reread-test-callback (-> session-admin
-                                     (request test-uri)
-                                     (ltu/body->edn)
-                                     (ltu/is-status 200)
-                                     :response
-                                     :body)
+      (let [reread-test-callback       (-> session-admin
+                                           (request test-uri)
+                                           (ltu/body->edn)
+                                           (ltu/is-status 200)
+                                           :response
+                                           :body)
             original-updated-timestamp (:updated reread-test-callback)]
 
         ;(is (= (ltu/strip-unwanted-attrs reread-test-callback)

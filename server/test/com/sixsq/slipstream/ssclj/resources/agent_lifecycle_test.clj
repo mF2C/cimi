@@ -16,12 +16,12 @@
 (def base-uri (str p/service-context (u/de-camelcase agent/resource-url)))
 
 (deftest lifecycle
-  (let [session (-> (ltu/ring-app)
-                    session
-                    (content-type "application/json"))
+  (let [session       (-> (ltu/ring-app)
+                          session
+                          (content-type "application/json"))
         session-admin (header session authn-info-header "root ADMIN USER ANON")
-        session-user (header session authn-info-header "jane USER ANON")
-        session-anon (header session authn-info-header "unknown ANON")]
+        session-user  (header session authn-info-header "jane USER ANON")
+        session-anon  (header session authn-info-header "unknown ANON")]
 
 
     ;; admin collection query should succeed but be empty
@@ -40,50 +40,50 @@
         (request base-uri)
         (ltu/body->edn)
         ;(ltu/is-status 403)
-    )
+        )
 
     ;; anonymous collection query should not succeed
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
         (ltu/is-status 403)
-    )
+        )
 
     ;; create a callback as an admin
-    (let [resource-name         "Agent"
-          resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id          (str resource-url "/agent-resource")
-                                 :resourceURI base-uri
-                                 ;  :acl                   {:owner {:principal "ADMIN"
-                                 ;                                  :type      "ROLE"}
-                                 ;                          :rules [{:principal "ADMIN"
-                                 ;                                   :type      "ROLE"
-                                 ;                                   :right     "ALL"}]}
-                                 ;{:principal "ANON"
-                                 ;:type      "ROLE"
-                                 ;:right     "MODIFY"}]}
+    (let [resource-name        "Agent"
+          resource-url         (u/de-camelcase resource-name)
+          create-test-callback {:id            (str resource-url "/agent-resource")
+                                :resourceURI   base-uri
+                                ;  :acl                   {:owner {:principal "ADMIN"
+                                ;                                  :type      "ROLE"}
+                                ;                          :rules [{:principal "ADMIN"
+                                ;                                   :type      "ROLE"
+                                ;                                   :right     "ALL"}]}
+                                ;{:principal "ANON"
+                                ;:type      "ROLE"
+                                ;:right     "MODIFY"}]}
 
-                                 ;:user_id           	"user/testuser"
+                                ;:user_id           	"user/testuser"
 
-                                 :device_id         "device/id12345678"
-                                 :device_ip         "127.0.0.1"
-                                 :leader_id         "somelongstringhere"
-                                 :leader_ip         "127.0.0.1"
-                                 :authenticated     true
-                                 :connected         true
-                                 :isLeader          false
-                                 :backup_ip         "0.0.0.0"
-                                 :childrenIPs       ["127.0.0.1"]
-                                 }
-          resp-test             (-> session-admin
-                                  (request base-uri
-                                           :request-method :post
-                                           :body (json/write-str create-test-callback))
-                                  (ltu/body->edn)
-                                  (ltu/is-status 201))
-          id-test               (get-in resp-test [:response :body :resource-id])
-          location-test         (str p/service-context (-> resp-test ltu/location))
-          test-uri              (str p/service-context id-test)]
+                                :device_id     "device/id12345678"
+                                :device_ip     "127.0.0.1"
+                                :leader_id     "somelongstringhere"
+                                :leader_ip     "127.0.0.1"
+                                :authenticated true
+                                :connected     true
+                                :isLeader      false
+                                :backup_ip     "0.0.0.0"
+                                :childrenIPs   ["127.0.0.1"]
+                                }
+          resp-test            (-> session-admin
+                                   (request base-uri
+                                            :request-method :post
+                                            :body (json/write-str create-test-callback))
+                                   (ltu/body->edn)
+                                   (ltu/is-status 201))
+          id-test              (get-in resp-test [:response :body :resource-id])
+          location-test        (str p/service-context (-> resp-test ltu/location))
+          test-uri             (str p/service-context id-test)]
 
       (is (= location-test test-uri))
 
@@ -95,7 +95,7 @@
           (ltu/is-operation-present "delete")
           ;(ltu/is-operation-absent "edit")
           ;(ltu/is-operation-present (:execute c/action-uri))
-      )
+          )
 
       ;; user cannot directly see the callback
       (-> session-user
@@ -104,12 +104,12 @@
           (ltu/is-status 403))
 
       ;; check contents and editing
-      (let [reread-test-callback (-> session-admin
-                                     (request test-uri)
-                                     (ltu/body->edn)
-                                     (ltu/is-status 200)
-                                     :response
-                                     :body)
+      (let [reread-test-callback       (-> session-admin
+                                           (request test-uri)
+                                           (ltu/body->edn)
+                                           (ltu/is-status 200)
+                                           :response
+                                           :body)
             original-updated-timestamp (:updated reread-test-callback)]
 
         ;(is (= (ltu/strip-unwanted-attrs reread-test-callback)

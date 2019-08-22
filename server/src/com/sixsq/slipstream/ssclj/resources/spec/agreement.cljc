@@ -91,8 +91,8 @@
 (s/def :cimi.agreement/metric string?)
 (s/def :cimi.agreement/window nat-int?)
 (s/def :cimi.agreement/aggregation (su/only-keys :req-un [
-                                            :cimi.agreement/type 
-                                            :cimi.agreement/window]))
+                                                          :cimi.agreement/type
+                                                          :cimi.agreement/window]))
 
 (s/def :cimi.agreement/variable (su/only-keys :req-un [::cimi-common/name]
                                               :opt-un [:cimi.agreement/metric
