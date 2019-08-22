@@ -52,7 +52,7 @@
                   <alias>cimi-server</alias>
                   <name>mf2c/cimi-server:${project.version}</name>
                   <build>
-                    <from>sixsq/cimi:${slipstream.version}-SNAPSHOT</from>
+                    <from>sixsq/cimi:${slipstream.version}</from>
                     <optimise>true</optimise>
                     <assembly>
                       <targetDir>/</targetDir>
