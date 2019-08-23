@@ -33,21 +33,21 @@
 
 
 (s/def :cimi.sla-assessment/metricvalue (su/only-keys
-        :req-un [:cimi.sla-assessment/key
-                :cimi.sla-assessment/value
-                :cimi.sla-assessment/datetime]))
+                                          :req-un [:cimi.sla-assessment/key
+                                                   :cimi.sla-assessment/value
+                                                   :cimi.sla-assessment/datetime]))
 
 (s/def :cimi.sla-assessment/last_values (su/constrained-map keyword? :cimi.sla-assessment/metricvalue))
 
 (s/def :cimi.sla-assessment/guarantee (su/only-keys
-        :req-un [:cimi.sla-assessment/first_execution
-                :cimi.sla-assessment/last_execution]
-        :opt-un [:cimi.sla-assessment/last_values]))
+                                        :req-un [:cimi.sla-assessment/first_execution
+                                                 :cimi.sla-assessment/last_execution]
+                                        :opt-un [:cimi.sla-assessment/last_values]))
 
 (s/def :cimi.sla-assessment/guarantees (su/constrained-map keyword? :cimi.sla-assessment/guarantee))
 
 (s/def :cimi.sla-assessment/assessment (su/only-keys
-        :req-un [:cimi.sla-assessment/first_execution
-                :cimi.sla-assessment/last_execution]
-        :opt-un [:cimi.sla-assessment/guarantees]))
+                                         :req-un [:cimi.sla-assessment/first_execution
+                                                  :cimi.sla-assessment/last_execution]
+                                         :opt-un [:cimi.sla-assessment/guarantees]))
 

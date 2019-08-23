@@ -7,23 +7,23 @@
 
 
 (deftest check-user-profile-resource-schema
-  (let [resource-name             "UserProfileResource"
-        resource-url              (u/de-camelcase resource-name)
-        resource-uri              (str schema/slipstream-schema-uri resource-name)
-        timestamp                 "1964-08-25T10:00:00.0Z"
-        valid-acl                 {:owner {:principal "ADMIN"
-                                           :type      "ROLE"}
-                                   :rules [{:principal "ADMIN"
-                                            :type      "ROLE"
-                                            :right     "MODIFY"}]}
-        user-profile-resource     {:id            (str resource-url "/user-profile-resource")
-                              :resourceURI    resource-uri
-                              :created        timestamp
-                              :updated        timestamp
-                              :acl            valid-acl
-                              ;; profiling fields
-							  :device_id			  "device/id12345678"
-                              :service_consumer       false
-                              :resource_contributor   false}]
+  (let [resource-name         "UserProfileResource"
+        resource-url          (u/de-camelcase resource-name)
+        resource-uri          (str schema/slipstream-schema-uri resource-name)
+        timestamp             "1964-08-25T10:00:00.0Z"
+        valid-acl             {:owner {:principal "ADMIN"
+                                       :type      "ROLE"}
+                               :rules [{:principal "ADMIN"
+                                        :type      "ROLE"
+                                        :right     "MODIFY"}]}
+        user-profile-resource {:id                   (str resource-url "/user-profile-resource")
+                               :resourceURI          resource-uri
+                               :created              timestamp
+                               :updated              timestamp
+                               :acl                  valid-acl
+                               ;; profiling fields
+                               :device_id            "device/id12345678"
+                               :service_consumer     false
+                               :resource_contributor false}]
     (is (s/valid? :cimi/user-profile user-profile-resource))
     (is (not (s/valid? :cimi/user-profile (assoc user-profile-resource :bad-field "bla bla bla"))))))

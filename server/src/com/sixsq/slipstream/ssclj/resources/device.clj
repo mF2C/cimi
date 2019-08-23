@@ -54,11 +54,11 @@
 
 (defn create-event [deviceID type acl]
   (let [event-request {:params   {:resource-name event/resource-url}
-                       :body     {:type         type
-                                  :content {:resource {:href deviceID} :state "DELETED"}
-                                  :severity "low"
+                       :body     {:type      type
+                                  :content   {:resource {:href deviceID} :state "DELETED"}
+                                  :severity  "low"
                                   :timestamp (u/unparse-timestamp-datetime (time/now))
-                                  :acl acl}
+                                  :acl       acl}
                        :identity {:current         "INTERNAL"
                                   :authentications {"INTERNAL" {:identity "INTERNAL"
                                                                 :roles    ["ADMIN"]}}}}

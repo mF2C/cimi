@@ -16,12 +16,12 @@
 (def base-uri (str p/service-context (u/de-camelcase service-instance/resource-url)))
 
 (deftest lifecycle
-  (let [session (-> (ltu/ring-app)
-                    session
-                    (content-type "application/json"))
+  (let [session       (-> (ltu/ring-app)
+                          session
+                          (content-type "application/json"))
         session-admin (header session authn-info-header "root ADMIN USER ANON")
-        session-user (header session authn-info-header "jane USER ANON")
-        session-anon (header session authn-info-header "unknown ANON")]
+        session-user  (header session authn-info-header "jane USER ANON")
+        session-anon  (header session authn-info-header "unknown ANON")]
 
 
     ;; admin collection query should succeed but be empty
@@ -40,45 +40,45 @@
         (request base-uri)
         (ltu/body->edn)
         ;(ltu/is-status 403)
-    )
+        )
 
     ;; anonymous collection query should not succeed
     (-> session-anon
         (request base-uri)
         (ltu/body->edn)
         (ltu/is-status 403)
-    )
+        )
 
     ;; create a callback as an admin
-    (let [resource-name         "ServiceInstanceResource"
-          resource-url          (u/de-camelcase resource-name)
-          create-test-callback  {:id              (str resource-url "/service-instance-resource")
-                                 :resourceURI     base-uri
-                                 ;; service instance fields
-                                 :user         	  "user/testuser"
-                								 :device_id			  "device/id12345678"
-                								 :device_ip			  "192.168.242.5"
-                								 :parent_device_id	"device/id024681214"
-                								 :parent_device_ip	"192.168.242.15"
-                								 :service_type		"docker"
-                                 :service      	  "service/71230958abdef9"
-                                 :agreement    	  "agreement/a1230958abdef0"
-                                 :status          "running"
-                                 :agents          [{:ports [31111],  :compss_app_id "asdasd-asdasda", :device_id "device/id12345678",
+    (let [resource-name        "ServiceInstanceResource"
+          resource-url         (u/de-camelcase resource-name)
+          create-test-callback {:id               (str resource-url "/service-instance-resource")
+                                :resourceURI      base-uri
+                                ;; service instance fields
+                                :user             "user/testuser"
+                                :device_id        "device/id12345678"
+                                :device_ip        "192.168.242.5"
+                                :parent_device_id "device/id024681214"
+                                :parent_device_ip "192.168.242.15"
+                                :service_type     "docker"
+                                :service          "service/71230958abdef9"
+                                :agreement        "agreement/a1230958abdef0"
+                                :status           "running"
+                                :agents           [{:ports  [31111], :compss_app_id "asdasd-asdasda", :device_id "device/id12345678",
                                                     :status "running", :container_id "asdasd-asdasda", :allow true,
-                                                    :url "192.168.1.31", :master_compss true :app_type "docker"}
-                                                   {:ports [31111],  :device_id "device/i123345628",
+                                                    :url    "192.168.1.31", :master_compss true :app_type "docker"}
+                                                   {:ports  [31111], :device_id "device/i123345628",
                                                     :status "running", :container_id "asdasd-hasdagsa", :allow false,
-                                                    :url "192.168.1.32", :master_compss false :app_type "docker"}]}
-          resp-test             (-> session-admin
-                                  (request base-uri
-                                           :request-method :post
-                                           :body (json/write-str create-test-callback))
-                                  (ltu/body->edn)
-                                  (ltu/is-status 201))
-          id-test               (get-in resp-test [:response :body :resource-id])
-          location-test         (str p/service-context (-> resp-test ltu/location))
-          test-uri              (str p/service-context id-test)]
+                                                    :url    "192.168.1.32", :master_compss false :app_type "docker"}]}
+          resp-test            (-> session-admin
+                                   (request base-uri
+                                            :request-method :post
+                                            :body (json/write-str create-test-callback))
+                                   (ltu/body->edn)
+                                   (ltu/is-status 201))
+          id-test              (get-in resp-test [:response :body :resource-id])
+          location-test        (str p/service-context (-> resp-test ltu/location))
+          test-uri             (str p/service-context id-test)]
 
       (is (= location-test test-uri))
 
@@ -90,7 +90,7 @@
           (ltu/is-operation-present "delete")
           ;(ltu/is-operation-absent "edit")
           ;(ltu/is-operation-present (:execute c/action-uri))
-      )
+          )
 
       ;; user cannot directly see the callback
       (-> session-user
@@ -99,12 +99,12 @@
           (ltu/is-status 403))
 
       ;; check contents and editing
-      (let [reread-test-callback (-> session-admin
-                                     (request test-uri)
-                                     (ltu/body->edn)
-                                     (ltu/is-status 200)
-                                     :response
-                                     :body)
+      (let [reread-test-callback       (-> session-admin
+                                           (request test-uri)
+                                           (ltu/body->edn)
+                                           (ltu/is-status 200)
+                                           :response
+                                           :body)
             original-updated-timestamp (:updated reread-test-callback)]
 
         ;(is (= (ltu/strip-unwanted-attrs reread-test-callback)

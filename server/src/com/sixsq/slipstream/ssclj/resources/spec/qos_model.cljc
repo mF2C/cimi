@@ -1,6 +1,6 @@
 (ns com.sixsq.slipstream.ssclj.resources.spec.qos-model
-  (:require 
-    [clojure.spec.alpha :as s] 
+  (:require
+    [clojure.spec.alpha :as s]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as cimi-common]
     [com.sixsq.slipstream.ssclj.resources.spec.common :as c]
     [com.sixsq.slipstream.ssclj.resources.spec.core :as cimi-core]

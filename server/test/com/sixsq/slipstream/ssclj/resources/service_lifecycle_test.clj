@@ -26,30 +26,30 @@
                          :type      "ROLE"
                          :right     "MODIFY"}]})
 
-(def resource-body {:id           (str callback/resource-url "/example-service")
-                    :resourceURI  callback/resource-uri
-                    :acl          valid-acl
-                    :name         "name_test"
-                    :exec         "exec_name_test"
-                    :exec_type    "docker"
-                    :exec_ports   [8080]
-                    :agent_type   "normal"
-                    :category     0
-                    :cpu_arch     "x86-64"
-                    :os           "linux"
-                    :cpu_recommended            0.0
-                    :memory_recommended         0.0
-                    :disk_recommended           0.0
-                    :network_recommended        0.0
-                    :storage_min   0
-                    :req_resource ["req_resource_test"]
-                    :opt_resource ["opt_resource_test"]
+(def resource-body {:id                  (str callback/resource-url "/example-service")
+                    :resourceURI         callback/resource-uri
+                    :acl                 valid-acl
+                    :name                "name_test"
+                    :exec                "exec_name_test"
+                    :exec_type           "docker"
+                    :exec_ports          [8080]
+                    :agent_type          "normal"
+                    :category            0
+                    :cpu_arch            "x86-64"
+                    :os                  "linux"
+                    :cpu_recommended     0.0
+                    :memory_recommended  0.0
+                    :disk_recommended    0.0
+                    :network_recommended 0.0
+                    :storage_min         0
+                    :req_resource        ["req_resource_test"]
+                    :opt_resource        ["opt_resource_test"]
                     })
 
 (deftest lifecycle
-    (with-redefs [http/post (fn [_ _]
-        {
-        :body "{\"service\": {
+  (with-redefs [http/post (fn [_ _]
+                            {
+                             :body "{\"service\": {
                     \"resourceURI\":  \"callback/resource-uri\",
                     \"name\":         \"name_test\",
                     \"exec\":         \"exec_name_test\",
@@ -66,169 +66,169 @@
                     \"storage_min\":  0,
                     \"req_resource\": [\"req_resource_test\"],
                     \"opt_resource\": [\"opt_resource_test\"]}}"
-        })]
+                             })]
 
-        (let [session (-> (ltu/ring-app)
-                          session
-                          (content-type "application/json"))
-              session-admin (header session authn-info-header "root ADMIN USER ANON")
-              session-user (header session authn-info-header "jane USER ANON")
-              session-anon (header session authn-info-header "unknown ANON")]
+    (let [session       (-> (ltu/ring-app)
+                            session
+                            (content-type "application/json"))
+          session-admin (header session authn-info-header "root ADMIN USER ANON")
+          session-user  (header session authn-info-header "jane USER ANON")
+          session-anon  (header session authn-info-header "unknown ANON")]
 
-             (-> session-admin
-                 (request base-uri)
-                 (ltu/body->edn)
-                 (ltu/is-status 200)
-                 (ltu/is-count zero?)
-                 (ltu/is-operation-present "add")
-                 (ltu/is-operation-absent "delete")
-                 (ltu/is-operation-absent "edit"))
+      (-> session-admin
+          (request base-uri)
+          (ltu/body->edn)
+          (ltu/is-status 200)
+          (ltu/is-count zero?)
+          (ltu/is-operation-present "add")
+          (ltu/is-operation-absent "delete")
+          (ltu/is-operation-absent "edit"))
 
-             ; user collection query should succeed
-             (-> session-user
-                 (request base-uri)
-                 (ltu/body->edn)
-                 (ltu/is-status 200))
+      ; user collection query should succeed
+      (-> session-user
+          (request base-uri)
+          (ltu/body->edn)
+          (ltu/is-status 200))
 
-             ;; anonymous collection query should not succeed
-             (-> session-anon
-                 (request base-uri)
-                 (ltu/body->edn)
-                 (ltu/is-status 403))
+      ;; anonymous collection query should not succeed
+      (-> session-anon
+          (request base-uri)
+          (ltu/body->edn)
+          (ltu/is-status 403))
 
-             ;; create a callback as an admin
-             (let [create-test-callback {:id            (str callback/resource-url "/example-service")
-                                         :resourceURI   callback/resource-uri
-                                         :acl           valid-acl
-                                         :name          "name_test"
-                                         :exec          "exec_name_test"
-                                         :exec_type     "docker"
-                                         :exec_ports    [8080]
-                                         :agent_type    "normal"
-                                         :sla_templates [{:href "sla-template/sla-template-id-1"}, {:href "sla-template/sla-template-id-2"}]
-                                         :num_agents    1
-                                         :cpu_arch      "x86-64"
-                                         :os            "linux"
-                                         :cpu_recommended            0.0
-                                         :memory_recommended         0.0
-                                         :disk_recommended           0.0
-                                         :network_recommended        0.0
-                                         :storage_min   0
-                                         :req_resource  ["req_resource_test"]
-                                         :opt_resource  ["opt_resource_test"]
-                                         :category      0
-                                         }
+      ;; create a callback as an admin
+      (let [create-test-callback {:id                  (str callback/resource-url "/example-service")
+                                  :resourceURI         callback/resource-uri
+                                  :acl                 valid-acl
+                                  :name                "name_test"
+                                  :exec                "exec_name_test"
+                                  :exec_type           "docker"
+                                  :exec_ports          [8080]
+                                  :agent_type          "normal"
+                                  :sla_templates       [{:href "sla-template/sla-template-id-1"}, {:href "sla-template/sla-template-id-2"}]
+                                  :num_agents          1
+                                  :cpu_arch            "x86-64"
+                                  :os                  "linux"
+                                  :cpu_recommended     0.0
+                                  :memory_recommended  0.0
+                                  :disk_recommended    0.0
+                                  :network_recommended 0.0
+                                  :storage_min         0
+                                  :req_resource        ["req_resource_test"]
+                                  :opt_resource        ["opt_resource_test"]
+                                  :category            0
+                                  }
 
-                   resp-test (-> session-admin
-                                 (request base-uri
-                                          :request-method :post
-                                          :body (json/write-str create-test-callback))
-                                 (ltu/body->edn)
-                                 (ltu/is-status 201))
+            resp-test            (-> session-admin
+                                     (request base-uri
+                                              :request-method :post
+                                              :body (json/write-str create-test-callback))
+                                     (ltu/body->edn)
+                                     (ltu/is-status 201))
 
-                   id-test (get-in resp-test [:response :body :resource-id])
+            id-test              (get-in resp-test [:response :body :resource-id])
 
-                   location-test (str p/service-context (-> resp-test ltu/location))
+            location-test        (str p/service-context (-> resp-test ltu/location))
 
-                   test-uri (str p/service-context id-test)]
+            test-uri             (str p/service-context id-test)]
 
-                  (is (= location-test test-uri))
+        (is (= location-test test-uri))
 
-                  ;; admin should be able to see the callback
-                  (-> session-admin
-                      (request test-uri)
-                      (ltu/body->edn)
-                      (ltu/is-status 200)
-                      (ltu/is-operation-present "delete")
-                      ; (ltu/is-operation-absent "edit")
-                      ; (ltu/is-operation-present (:execute c/action-uri)))
-                  )
+        ;; admin should be able to see the callback
+        (-> session-admin
+            (request test-uri)
+            (ltu/body->edn)
+            (ltu/is-status 200)
+            (ltu/is-operation-present "delete")
+            ; (ltu/is-operation-absent "edit")
+            ; (ltu/is-operation-present (:execute c/action-uri)))
+            )
 
-                  ;; user cannot directly see the callback
-                  (-> session-user
-                      (request test-uri)
-                      (ltu/body->edn)
-                      (ltu/is-status 403))
+        ;; user cannot directly see the callback
+        (-> session-user
+            (request test-uri)
+            (ltu/body->edn)
+            (ltu/is-status 403))
 
-                  ;; check contents and editing
-                  (let [reread-test-callback (-> session-admin
-                                                 (request test-uri)
-                                                 (ltu/body->edn)
-                                                 (ltu/is-status 200)
-                                                 :response
-                                                 :body)
-                        original-updated-timestamp (:updated reread-test-callback)]
+        ;; check contents and editing
+        (let [reread-test-callback       (-> session-admin
+                                             (request test-uri)
+                                             (ltu/body->edn)
+                                             (ltu/is-status 200)
+                                             :response
+                                             :body)
+              original-updated-timestamp (:updated reread-test-callback)]
 
-                       ;(is (= (ltu/strip-unwanted-attrs reread-test-callback)
-                       ;       (ltu/strip-unwanted-attrs (assoc create-test-callback :state "WAITING"))))
+          ;(is (= (ltu/strip-unwanted-attrs reread-test-callback)
+          ;       (ltu/strip-unwanted-attrs (assoc create-test-callback :state "WAITING"))))
 
-                       ;; mark callback as failed
-                       (utils/callback-failed! id-test)
-                       (let [callback (-> session-admin
-                                          (request test-uri)
-                                          (ltu/body->edn)
-                                          (ltu/is-status 200)
-                                          (ltu/is-operation-absent (:execute c/action-uri))
-                                          :response
-                                          :body)]
-                            ;(is (= "FAILED" (:state callback)))
-                            ;(is (not= original-updated-timestamp (:updated callback)))
-                            )
+          ;; mark callback as failed
+          (utils/callback-failed! id-test)
+          (let [callback (-> session-admin
+                             (request test-uri)
+                             (ltu/body->edn)
+                             (ltu/is-status 200)
+                             (ltu/is-operation-absent (:execute c/action-uri))
+                             :response
+                             :body)]
+            ;(is (= "FAILED" (:state callback)))
+            ;(is (not= original-updated-timestamp (:updated callback)))
+            )
 
-                       ;; mark callback as succeeded
-                       (utils/callback-succeeded! id-test)
-                       (let [callback (-> session-admin
-                                          (request test-uri)
-                                          (ltu/body->edn)
-                                          (ltu/is-status 200)
-                                          (ltu/is-operation-absent (:execute c/action-uri))
-                                          :response
-                                          :body)]
-                            ;(is (= "SUCCEEDED" (:state callback)))
-                            ;(is (not= original-updated-timestamp (:updated callback)))
-                            )
-                       )
+          ;; mark callback as succeeded
+          (utils/callback-succeeded! id-test)
+          (let [callback (-> session-admin
+                             (request test-uri)
+                             (ltu/body->edn)
+                             (ltu/is-status 200)
+                             (ltu/is-operation-absent (:execute c/action-uri))
+                             :response
+                             :body)]
+            ;(is (= "SUCCEEDED" (:state callback)))
+            ;(is (not= original-updated-timestamp (:updated callback)))
+            )
+          )
 
-                  ;; put
-                  (-> session-admin
-                      (request base-uri
-                               :request-method :put
-                               :body (json/write-str {}))
-                      (ltu/body->edn)
-                      (ltu/is-count 1)
-                      (ltu/is-status 200))
+        ;; put
+        (-> session-admin
+            (request base-uri
+                     :request-method :put
+                     :body (json/write-str {}))
+            (ltu/body->edn)
+            (ltu/is-count 1)
+            (ltu/is-status 200))
 
-                  ;; delete
-                  (-> session-anon
-                      (request test-uri
-                               :request-method :delete)
-                      (ltu/body->edn)
-                      (ltu/is-status 403))
+        ;; delete
+        (-> session-anon
+            (request test-uri
+                     :request-method :delete)
+            (ltu/body->edn)
+            (ltu/is-status 403))
 
-                  (-> session-user
-                      (request test-uri
-                               :request-method :delete)
-                      (ltu/body->edn)
-                      (ltu/is-status 403))
+        (-> session-user
+            (request test-uri
+                     :request-method :delete)
+            (ltu/body->edn)
+            (ltu/is-status 403))
 
-                  (-> session-admin
-                      (request test-uri
-                               :request-method :delete)
-                      (ltu/body->edn)
-                      (ltu/is-status 200))
+        (-> session-admin
+            (request test-uri
+                     :request-method :delete)
+            (ltu/body->edn)
+            (ltu/is-status 200))
 
-                  ;; callback must be deleted
-                  (-> session-admin
-                      (request test-uri
-                               :request-method :delete)
-                      (ltu/body->edn)
-                      (ltu/is-status 404))))))
+        ;; callback must be deleted
+        (-> session-admin
+            (request test-uri
+                     :request-method :delete)
+            (ltu/body->edn)
+            (ltu/is-status 404))))))
 
 
 (deftest bad-methods
-        (let [resource-uri (str p/service-context (u/new-resource-id callback/resource-name))]
-             (ltu/verify-405-status [[base-uri :options]
-                                     [base-uri :delete]
-                                     [resource-uri :options]
-                                     [resource-uri :put]
-                                     [resource-uri :post]])))
+  (let [resource-uri (str p/service-context (u/new-resource-id callback/resource-name))]
+    (ltu/verify-405-status [[base-uri :options]
+                            [base-uri :delete]
+                            [resource-uri :options]
+                            [resource-uri :put]
+                            [resource-uri :post]])))

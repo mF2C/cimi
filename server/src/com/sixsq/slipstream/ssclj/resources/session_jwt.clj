@@ -36,7 +36,7 @@
 ;; multimethods for validation
 ;;
 
-(def validate-fn (u/create-spec-validation-fn ::session/session))
+(def validate-fn (u/create-spec-validation-fn :cimi/session))
 (defmethod p/validate-subtype authn-method
   [resource]
   (validate-fn resource))
@@ -87,4 +87,4 @@
 
 (defn initialize
   []
-  (std-crud/initialize p/resource-url ::session/session))
+  (std-crud/initialize p/resource-url :cimi/session))

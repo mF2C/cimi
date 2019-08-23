@@ -11,7 +11,7 @@
 
 (deftest check-executable?
   (let [future (-> 2 weeks from-now u/unparse-timestamp-datetime)
-        past (-> 2 weeks ago u/unparse-timestamp-datetime)]
+        past   (-> 2 weeks ago u/unparse-timestamp-datetime)]
     (are [expected arg] (= expected (t/executable? arg))
                         true {:state "WAITING", :expires future}
                         false {:state "WAITING", :expires past}
