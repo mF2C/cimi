@@ -7,7 +7,7 @@
     [com.sixsq.slipstream.ssclj.util.spec :as su]))
 
 (s/def :cimi.service/exec ::cimi-core/nonblank-string)
-(s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose" "docker-swarm" "kubernetes"})
+(s/def :cimi.service/exec_type #{"docker" "compss" "docker-compose" "docker-swarm" "kubernetes" "docker-compose-swarm"})
 (s/def :cimi.service/exec_ports (s/coll-of ::cimi-core/port))
 (s/def :cimi.service/agent_type #{"cloud" "normal" "micro"})
 (s/def :cimi.service/sla_templates (s/coll-of ::cimi-common/resource-link))
